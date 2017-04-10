@@ -18,6 +18,10 @@ class Employees_model extends CI_Model
 		$sql = "INSERT INTO employee (empNo,lname,fname,mname,ename,designation) VALUES (".$this->db->escape($empno).",".$this->db->escape($lname).",".$this->db->escape($fname).",".$this->db->escape($mname).",".$this->db->escape($extension).",".$this->db->escape($designation).")";
 		$this->db->query($sql);
 				
+		$sqlselect = $this->db->query("SELECT MAX(eid) AS lastid FROM employee");
+		$lastidinserted = $sqlselect->result_array();
+		$currentid = $lastidinserted[0]['lastid'];
+		echo $currentid;
 		
 	}
 	

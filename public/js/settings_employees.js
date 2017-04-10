@@ -14,7 +14,9 @@ function saveemployee(){
 		data: {empno: empno,lname:lname,fname:fname,mname:mname,extension:extension,designation:designation},
 		success: function(response) {
 			//console.log(response);
-			location.reload();
+			//location.reload();
+			var lastid = JSON.parse(response);
+			window.location.href = "employees/details/"+lastid;
 			
 		}
 	});

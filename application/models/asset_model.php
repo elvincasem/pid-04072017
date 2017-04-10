@@ -144,6 +144,8 @@ class Asset_model extends CI_Model
 	}
 	
 	
+	
+	
 }
 
 ?>
