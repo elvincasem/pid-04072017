@@ -48,26 +48,37 @@
         
          <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/> 
       </form> 
-                                            <div class="col-xs-5 push-inner-top-bottom border-right">
-                                                <h3 class="widget-heading"><small>Position:<strong>
+                                            <div class="col-xs-12">
+                                                <h3 class="widget-heading"><small>Position<br> <strong>
 												
-												<select class="form-control">
-													<option>Education Supervisor II</option>
+												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+													<?php
+														echo "<option value='".$employee_profile['designation']."'>".$employee_profile['designation']."</option>";
+													?>
 												</select>
-												</strong></small></h3>
+												</strong> </small></h3>
                                             </div>
-                                            <div class="col-xs-7 push-inner-top-bottom">
+                                            <div class="col-xs-12">
                                                 <h3 class="widget-heading"><small>Salary (Monthly): <strong>
 												
-												<select id="aprno" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
 													<option>SG 18 Step 1 (35,693.00)</option>
 												</select>
 												</strong> </small></h3>
                                             </div>
                                         </div>
-                                    </div>
+										
+										
+										 <div class="block full">
+											<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php //echo $scholarapplicant_profile['applicantid'];?>)">Save</button>
+											
+										</div>
+										
+                                    
+									
+									</div> <!-- end bottom -->
 									 
-									 
+									
                                     
                                 </div>
                             </div>
@@ -89,156 +100,7 @@
 
                                     <!-- Tabs Content -->
                                     <div class="tab-content">
-			<!-- Voucher -->
-	<div class="tab-pane" id="voucher">
-		<div class="timeline block-content-full">
-         <div class="block">
-                            <!-- Table Styles Title -->
-                            <div class="block-title clearfix">
-                                <!-- Changing classes functionality initialized in js/pages/tablesGeneral.js -->
-                                
-                                
-                                <h2><span class="hidden-xs">Voucher List</span></h2>
-								<a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add Voucher</a>
-                            </div>                                      
- <div class="table-responsive">
- <table id="voucherlist-table" class="table table-striped table-bordered table-vcenter table-condensed table-hover">
-                                    <thead>
-                                        <tr>
-                                            
-                                            <th>Cluster</th>
-                                            <th>Date</th>
-                                            <th>DV No</th>
-											<th>ORS No</th>
-											<th>Amount</th>
-											<th>Semester</th>
-											<th>SY</th>
-											
-                                            <th class="text-center"><i class="fa fa-flash"></i></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									<?php
-				/*
-				foreach ($scholar_voucher as $voucher):
-					echo "<tr>";
-                                            
-						echo "<td>".$voucher['fundcluster']."</td>";
-						echo "<td>".$voucher['voucherdate']."</td>";
-						echo "<td>".$voucher['dvno']."</td>";
-						echo "<td>".$voucher['orsno']."</td>";
-						echo "<td>".$voucher['amount']."</td>";
-						echo "<td>".$voucher['vouchersemester']."</td>";
-						echo "<td>".$voucher['vouchersy']."</td>";
-						
-					
-						
-						echo "<td class='text-center'>
-							<a onclick='editpayment(".$voucher['voucherid'].");' href='#modal-voucher' data-toggle='modal' title='Edit Payment' class='btn btn-effect-ripple btn-sm btn-success'><i class='fa fa-pencil' ></i></a>
-							<!--<a href='javascript:void(0)' data-toggle='tooltip' title='Cancel Payment' class='btn btn-effect-ripple btn-sm btn-danger' ><i class='fa fa-times'></i></a> -->
-						</td>";
-					echo "</tr>";
-				
-				
-				endforeach;
-				*/
-				?>
-                                       
-                                        
-                                    </tbody>
-                                </table>
- </div>
-</div>
-
-
-											   
-                                            </div>
-                                        </div>
-                                        <!-- END Voucher -->
-									
-									
-									
-									
-                                        <!-- Payments -->
-                                        <div class="tab-pane" id="profile-activity">
-                                            <div class="timeline block-content-full">
-         <div class="block">
-                            <!-- Table Styles Title -->
-                            <div class="block-title clearfix">
-                                <!-- Changing classes functionality initialized in js/pages/tablesGeneral.js -->
-                                
-                                
-                                <h2><span class="hidden-xs">Payment List</span></h2>
-								<a href="#modal-regular" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addpayment();">Add Payment</a>
-                            </div>                                      
- <div class="table-responsive">
- <table id="general-table" class="table table-striped table-bordered table-vcenter table-condensed table-hover">
-                                    <thead>
-                                        <tr>
-                                            
-                                            <th>Semester</th>
-                                            <th>SY</th>
-                                            <th>Check #</th>
-											<th>Amount</th>
-											<th>Remarks</th>
-											<th>CY</th>
-											<th>Status</th>
-                                            <th class="text-center"><i class="fa fa-flash"></i></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-									<?php
-				/*
-				foreach ($scholar_payment as $payment):
-					echo "<tr>";
-                                            
-						echo "<td>".$payment['semester']."</td>";
-						echo "<td>".$payment['schoolyear']."</td>";
-						echo "<td>".$payment['checkno']."</td>";
-						echo "<td>".$payment['amount']."</td>";
-						echo "<td>".$payment['remarks']."</td>";
-						echo "<td>".$payment['cy']."</td>";
-						if($payment['status']=="Available"){
-							echo "<td><a href='#' class='label label-success'>".$payment['status']."</a>";
-								
-						}
-						if($payment['status']=="Cancelled"){
-							echo "<td><a href='#' class='label label-danger'>".$payment['status']."</a>";
-								
-						}
-						if($payment['status']=="Received"){
-							echo "<td><a href='#' class='label label-info'>".$payment['status']."</a>";
-								
-						}
-						if($payment['status']=="Stale"){
-							echo "<td><a href='#' class='label label-warning'>".$payment['status']."</a>";
-								
-						}
-					
-						
-						echo "<td class='text-center'>
-							<a onclick='editpayment(".$payment['spaymentid'].");' href='#modal-regular' data-toggle='modal' title='Edit Payment' class='btn btn-effect-ripple btn-sm btn-success'><i class='fa fa-pencil' ></i></a>
-							<!--<a href='javascript:void(0)' data-toggle='tooltip' title='Cancel Payment' class='btn btn-effect-ripple btn-sm btn-danger' ><i class='fa fa-times'></i></a> -->
-						</td>";
-					echo "</tr>";
-				
-				
-				endforeach;
-				*/
-				?>
-                                       
-                                        
-                                    </tbody>
-                                </table>
- </div>
-</div>
-
-
-											   
-                                            </div>
-                                        </div>
-                                        <!-- END Activity -->
-
+			
                                         <!-- Gallery -->
                                         <div class="tab-pane  active" id="profile-gallery">
                                             <div class="row">
@@ -246,17 +108,17 @@
 										<div class="form-group">
                                             <label class="col-md-3 control-label" for="state-normal">Contact Name *</label>
 							<div class="col-md-6">
-								<input type="text" id="lastname" class="form-control" placeholder="Lastname" value="<?php //echo $scholarapplicant_profile['lastname'];?>" >
-								<input type="text" id="firstname" class="form-control" placeholder="Firstname" value="<?php //echo$scholarapplicant_profile['firstname'];?>" >
-								<input type="text" id="middlename" class="form-control" placeholder="Middlename" value="<?php //echo$scholarapplicant_profile['middlename'];?>" >
-								<input type="text" id="extension" class="form-control" placeholder="Extension" value="<?php //echo $scholarapplicant_profile['extension'];?>" >
+								<input type="text" id="lastname" class="form-control" placeholder="Lastname" value="<?php echo $employee_profile['lname'];?>" >
+								<input type="text" id="firstname" class="form-control" placeholder="Firstname" value="<?php echo $employee_profile['fname'];?>" >
+								<input type="text" id="middlename" class="form-control" placeholder="Middlename" value="<?php echo $employee_profile['mname'];?>" >
+								<input type="text" id="extension" class="form-control" placeholder="Extension" value="<?php echo $employee_profile['ename'];?>" >
 							</div>
                                         </div>
 								<div class="row"></div>		
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Date of Birth</label>
 							<div class="col-md-8">
-								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php //echo $scholarapplicant_profile['dateofbirth'];?>" >
+								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $employee_profile['dob'];?>" >
 								
 							</div>
 						</div>
@@ -264,7 +126,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Place of Birth</label>
 							<div class="col-md-8">
-								<input type="text" id="placeofbirth" class="form-control" placeholder="" value="" >
+								<input type="text" id="placeofbirth" class="form-control" placeholder="" value="<?php echo $employee_profile['pob'];?>" >
 								
 							</div>
 						</div>
@@ -273,22 +135,22 @@
 							<label class="col-md-3 control-label" for="state-normal">Sex</label>
 							
 							<?php
-							/*
-								if($scholarapplicant_profile['gender']=="Female"){
+							
+								if($employee_profile['gender']=="FEMALE"){
 									$selectedf = "checked='checked'";
 									$selectedm = "";
 								}else{
 									$selectedm = "checked='checked'";
 									$selectedf = "";
 								}
-							*/
+							
 							?>
 							<div class="col-md-8">
 								<label class="radio-inline" for="example-inline-radio1">
-								<input type="radio" id="genderm" name="example-inline-radios" value="Male" <?php //echo $selectedm;?>> Male
+								<input type="radio" id="genderm" name="example-inline-radios" value="MALE" <?php echo $selectedm;?>> Male
 							</label>
 							<label class="radio-inline" for="example-inline-radio2">
-								<input type="radio" id="genderf" name="example-inline-radios" value="Female" <?php //echo $selectedf;?>> Female
+								<input type="radio" id="genderf" name="example-inline-radios" value="FEMALE" <?php echo $selectedf;?>> Female
 							</label>
 							
 								
@@ -299,23 +161,23 @@
 						
 						
 							<?php
-							/*
-								if($scholarapplicant_profile['civilstatus']=="Single"){
+							
+								if($employee_profile['civil_status']=="SINGLE"){
 									$civils = "checked='checked'";
 									$civilm = "";
 								}else{
 									$civilm = "checked='checked'";
 									$civils = "";
 								}
-							*/
+							
 							?>
 							<label class="col-md-3 control-label" for="state-normal">Civil Status</label>
 							<div class="col-md-8">
 								<label class="radio-inline" for="example-inline-radio1">
-								<input type="radio" id="civilstatuss" name="example-inline-radios2" value="Single" <?php //echo $civils;?>> Single
+								<input type="radio" id="civilstatuss" name="example-inline-radios2" value="SINGLE" <?php echo $civils;?>> Single
 							</label>
 							<label class="radio-inline" for="example-inline-radio2">
-								<input type="radio" id="civilstatusm" name="example-inline-radios2" value="Married" <?php //echo $civilm;?>> Married
+								<input type="radio" id="civilstatusm" name="example-inline-radios2" value="MARRIED" <?php echo $civilm;?>> Married
 							</label>
 							
 								
@@ -325,27 +187,27 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Citizenship</label>
 							<div class="col-md-8">
-								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php //echo $scholarapplicant_profile['citizenship'];?>" >
+								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php echo $employee_profile['citizenship'];?>" >
 								
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Heigth(m)</label>
 							<div class="col-md-2">
-								<input type="number" id="citizenship" class="form-control" placeholder="" value="<?php //echo $scholarapplicant_profile['citizenship'];?>" >
+								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php echo $employee_profile['height'];?>" >
 								
 							</div>
-							<label class="col-md-2 control-label" for="state-normal">Weight(k)</label>
+							<label class="col-sm-1 control-label" for="state-normal">Weight (kg)</label>
 							<div class="col-md-2">
-								<input type="number" id="citizenship" class="form-control" placeholder="" value="<?php //echo $scholarapplicant_profile['citizenship'];?>" >
+								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php echo $employee_profile['weight'];?>" >
 								
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label class="col-md-1 control-label" for="state-normal">Blood Type</label>
-							<div class="col-md-1">
-								<input type="text" id="contactno" class="form-control" placeholder="" value="<?php //echo $scholarapplicant_profile['contactno'];?>" >
+							<div class="col-md-2">
+								<input type="text" id="contactno" class="form-control" placeholder="" value="<?php echo $employee_profile['blood_type'];?>" >
 								
 							</div>
 						</div>
@@ -353,7 +215,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Mobile Number</label>
 							<div class="col-md-8">
-								<input type="text" id="contactno" class="form-control" placeholder="" value="<?php //echo $scholarapplicant_profile['contactno'];?>" >
+								<input type="text" id="contactno" class="form-control" placeholder="" value="<?php echo $employee_profile['mobile_number'];?>" >
 								
 							</div>
 						</div>
@@ -361,7 +223,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Email</label>
 							<div class="col-md-8">
-								<input type="text" id="email" class="form-control" placeholder="" value="<?php //echo $scholarapplicant_profile['email'];?>" >
+								<input type="text" id="email" class="form-control" placeholder="" value="<?php echo $employee_profile['email_address'];?>" >
 								
 							</div>
 						</div>
@@ -370,19 +232,19 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Address</label>
 							<div class="col-md-2">
-								<input type="text" id="barangay" class="form-control" placeholder="Barangay" value="<?php //echo$scholarapplicant_profile['barangay'];?>" >
+								<input type="text" id="barangay" class="form-control" placeholder="Barangay" value="<?php echo $employee_profile['a_barangay'];?>" >
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="towncity" class="form-control" placeholder="Town/City" value="<?php //echo $scholarapplicant_profile['towncity'];?>" >
+								<input type="text" id="towncity" class="form-control" placeholder="Town/City" value="<?php echo $employee_profile['a_towncity'];?>" >
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="province" class="form-control" placeholder="Province" value="<?php //echo $scholarapplicant_profile['province'];?>" >
+								<input type="text" id="province" class="form-control" placeholder="Province" value="<?php echo $employee_profile['a_province'];?>" >
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="province" class="form-control" placeholder="Zip Code" value="<?php //echo $scholarapplicant_profile['province'];?>" >
+								<input type="text" id="province" class="form-control" placeholder="Zip Code" value="<?php echo $employee_profile['a_zipcode'];?>" >
 								
 							</div>
 						</div>
@@ -398,7 +260,7 @@
 							<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Date Hired</label>
 							<div class="col-md-4">
-								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php //echo $scholarapplicant_profile['dateofbirth'];?>" >
+								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $employee_profile['date_hired'];?>" >
 								
 							</div>
 							
@@ -409,7 +271,7 @@
 							
 				</div>
 							<div class="col-md-8">
-								<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php //echo $scholarapplicant_profile['applicantid'];?>)">Save</button>
+								<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php echo $eid;?>)">Save</button>
 								
 							</div>
 							</div>
@@ -429,48 +291,48 @@
 			<div class="form-group">
 						<label class="col-md-3 control-label" for="state-normal">Spouse's Name</label>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="lastname">
+								<input type="text" id="father" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['spouse_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="firstname">
+								<input type="text" id="father" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['spouse_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control"  placeholder="middlename">
+								<input type="text" id="father" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['spouse_mname'];?>">
 								
 							</div>
 							
 							<label class="col-md-3 control-label" for="state-normal">Father's Name</label>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="lastname">
+								<input type="text" id="father" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['father_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="firstname">
+								<input type="text" id="father" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['father_fname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control"  placeholder="middlename">
+								<input type="text" id="father" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['father_mname'];?>">
 								
 							</div>
 							
 							<label class="col-md-3 control-label" for="state-normal">Mother's Maiden Name</label>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="lastname">
+								<input type="text" id="father" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['mother_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="firstname">
+								<input type="text" id="father" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['mother_fname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control"  placeholder="middlename">
+								<input type="text" id="father" class="form-control"  placeholder="middlename" <?php echo $employee_profile['mother_mname'];?>">
 								
 							</div>
 							
 							
-							<label class="col-md-3 control-label" for="state-normal">Number of Siblings</label>
+							<label class="col-md-3 control-label" for="state-normal">Name of Children</label>
 							<div class="col-md-4">
 								<input type="text" id="siblingno" class="form-control" placeholder="fullname" value="<?php //echo $scholarapplicant_profile['siblingno'];?>" >
 								
@@ -502,9 +364,18 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td></td><td></td><td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+								
+								<?php
+									foreach($e_children as $childlist):
+										echo "<tr>";
+										echo "<td>".$childlist['children_name']."</td>";
+										echo "<td>".$childlist['children_bdate']."</td>";
+										echo "<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
 								</tbody>
 							</table>
 								
@@ -549,8 +420,8 @@
 											<li><a href="#leave-credits">Leave Credits</a></li>
                                             <li><a href="#request-approvals">Request/Approvals</a></li>
                                             <li><a href="#authority-to-travel">Authority to Travel</a></li>
-                                            <li><a href="#daily-time-record">Daily Time Record</a></li>
-                                            <li><a href="#block-tabs-settings" data-toggle="tooltip" title="Settings"><i class="gi gi-settings"></i></a></li>
+                                            <li class="hidden"><a href="#daily-time-record">Daily Time Record</a></li>
+                                            <li class="hidden"><a href="#block-tabs-settings" data-toggle="tooltip" title="Settings"><i class="gi gi-settings"></i></a></li>
                                         </ul>
                                     </div>
                                     <!-- END Block Tabs Title -->
@@ -558,7 +429,7 @@
 			<!-- Tabs Content -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="block-tabs-home">
-					<h4><b>EDUCATIONAL BACKGROUND</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>EDUCATIONAL BACKGROUND</b></h4> <a href="#educational-background" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -576,21 +447,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Tertiary</td>
-										<td>AMA Computer Collge - La Union</td>
-										<td>Bachelor of Science in Information Technology</td>
-										<td>June 1, 2005 - March 30, 2008</td>
-										<td>College</td>
-										<td>2008</td>
-										<td>NONE</td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+									<?php
+									foreach($e_background as $background):
+										echo "<tr>";
+										echo "<td>".$background['level']."</td>";
+										echo "<td>".$background['name_of_school']."</td>";
+										echo "<td>".$background['basic_education']."</td>";
+										echo "<td>".$background['period_from']." to ".$background['period_to']."</td>";
+										echo "<td>".$background['highest_level']."</td>";
+										echo "<td>".$background['year_graduated']."</td>";
+										echo "<td>".$background['scholar_received']."</td>";
+										
+										echo "<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
 								</tbody>
 							</table>
 					
 					<div class="row"></div>
-					<h4><b>CIVIL SERVICE ELIGIBILITY</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>CIVIL SERVICE ELIGIBILITY</b></h4> <a href="#civil-service" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -608,19 +486,29 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Career Service - Professional</td>
-										<td>99.9</td>
-										<td>April 1, 2012</td>
-										<td>Saint Louis College - San Fernando City, La Union</td>
-										<td>128419058884</td>
-										<td>April 1, 2012</td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+								<?php
+									foreach($e_careerservice as $careerservice):
+										echo "<tr>";
+										echo "<td>".$careerservice['career_description']."</td>";
+										echo "<td>".$careerservice['career_rating']."</td>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($careerservice['career_date']))."</td>";
+										echo "<td>".$careerservice['career_place']."</td>";
+										echo "<td>".$careerservice['career_number']."</td>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($careerservice['career_validity']))."</td>";
+										
+										
+										
+										echo "<td><button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+								
+									
 								</tbody>
 							</table>
 						<div class="row"></div>
-					<h4><b>WORK EXPERIENCE / SERVICE RECORD</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+					<h4><b>WORK EXPERIENCE / SERVICE RECORD</b></h4> <a href="#work-experience" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
 					
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
@@ -661,7 +549,7 @@
 					
 
 <div class="row"></div>
-					<h4><b>TRAINING</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>TRAINING</b></h4> <a href="#training" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -688,28 +576,24 @@
 								</tbody>
 							</table>
 <div class="row"></div>
-					<h4><b>AWARD/S RECEIVED</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>AWARD/S RECEIVED</b></h4> <a href="#awards-received" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Inclusive Dates</th>
-										<th>Position Title</th>
-										<th>Department/Agency/Office/Company</th>
-										<th>Monthly Salary</th>
-										<th>Salary/Job/Pay Grade</th>
-										<th>Status of Appointment</th>
-										<th>Gov't Service(Y/N)</th>
+										<th>Award Date</th>
 										
+										<th>Department/Agency/Office/Company</th>
+										<th>Description</th>
+																				
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td></td><td></td>
-										<td></td><td></td>
+										
 										<td></td><td></td><td></td>
 										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
@@ -719,7 +603,7 @@
 
 							
 							<div class="row"></div>
-					<h4><b>OTHER INFORMATION</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>OTHER INFORMATION</b></h4> <a href="#other-information" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -753,39 +637,14 @@
 									</tr>
 								</tbody>
 							</table>	
-					<h4><b>REFERENCES</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Name</th>
-										<th>Address</th>
-										<th>Tel. No.</th>
-										
-										
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>ELVIN CASEM</td>
-										<td>San Fernando City, La Union</td>
-										<td>09468147457</td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
-								</tbody>
-							</table>		
-												
+							
 				
 				
 				</div><!-- end first tab -->
 				
 				<div class="tab-pane" id="block-tabs-profile">
 				
-				<h4><b>201 Files</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+				<h4><b>201 Files</b></h4> <a href="#201-files" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -815,7 +674,7 @@
 				
 				<div class="tab-pane" id="request-approvals">
 				
-					<h4><b>Application for Leave</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>Application for Leave</b></h4> <a href="#application-for-leave-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -853,7 +712,7 @@
 				
 				</div><!-- end fourth tab -->
 				<div class="tab-pane" id="authority-to-travel">
-					<h4><b>Authority to Travel</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>Authority to Travel</b></h4> <a href="#authority-travel-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -876,7 +735,7 @@
 										<td>To monitor HEI's</td>
 										<td>Christianne Lynnette Cabanban, Arnold Ancheta, Marvin Mendoza</td>
 										
-										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
+										<td><button class='btn btn-success notification' title='Employee' id='notification'><i class="fa fa-user-plus"></i></button> <button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -884,17 +743,15 @@
 				
 				</div><!-- end of authority to travel tab -->
 				<div class="tab-pane" id="rating">
-					<h4><b>Performance Rating</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>Performance Rating</b></h4> <a href="#performance-rating" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Inclusive Dates</th>
-										<th>Location</th>
-										<th>Description</th>
-										<th>Employees</th>
+										<th>Rating Period</th>
+										<th>Rating</th>
 										
 										
 										<th></th>
@@ -904,8 +761,7 @@
 									<tr>
 										<td></td>
 										<td></td>
-										<td></td>
-										<td></td>
+										
 										
 										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
@@ -916,7 +772,7 @@
 				
 				</div>
 				<div class="tab-pane" id="leave-credits">
-						<h4><b>Leave Credits</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a title="Print Leave Credit Card" href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+						<h4><b>Leave Credits</b></h4> <a href="#leave-credits-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a title="Print Leave Credit Card" href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -1002,165 +858,770 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
   <!-- END Page Content -->
 					
 				
-					
-<!-- Regular Modal -->
-			<div id="modal-regular" class="modal" role="dialog" aria-hidden="true">
+		<!-- Regular Modal -->
+			<div id="educational-background" class="modal" role="dialog" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><strong>Add Payment Details</strong></h3>
+							<h3 class="modal-title"><strong>Educational Background</strong></h3>
 						</div>
 						<div class="modal-body">
-							
-							<div>
-                                <!-- Input States Block -->
-                                <div class="block">
-                                    
-
-                                    <!-- Input States Content -->
-                                    <form action="page_forms_components.html" method="post" class="form-horizontal" onsubmit="return false;">
-									<input type="hidden" id="spaymentid">
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Semester</label>
-                                            <div class="col-md-6">
-                                                <select class="form-control" id="semester">
-												<option value="1st">1st</option>
-												<option value="2nd">2nd</option>
-												</select>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">School Year</label>
-                                            <div class="col-md-6">
-                                                <select class="form-control" id="schoolyear">
-												<option value="2012-2013">2012-2013</option>
-												<option value="2013-2014">2013-2014</option>
-												<option value="2014-2015">2014-2015</option>
-												<option value="2015-2016">2015-2016</option>
-												<option selected="selected" value="2016-2017">2016-2017</option>
-												<option value="2017-2018">2017-2018</option>
-												<option value="2018-2019">2018-2019</option>
-												<option value="2019-2020">2019-2020</option>
-												<option value="2020-2021">2020-2021</option>
-												
-												</select>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Fund Cluster</label>
-                                            <div class="col-md-6">
-                                               <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Date</label>
-                                            <div class="col-md-6">
-                                              <input type="text" id="paymentdate" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Check #</label>
-                                            <div class="col-md-6">
-                                               <input type="text" name="state-normal" class="form-control" id="checkno">
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Amount</label>
-                                            <div class="col-md-6">
-                                                <input type="text" name="state-normal" class="form-control" id="amount">
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Particulars</label>
-                                            <div class="col-md-6">
-                                                
-												<textarea class="form-control" id="remarks"></textarea>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">CY</label>
-                                            <div class="col-md-6">
-                                                <select class="form-control" id="cy">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-												
-												
-												</select>
-                                            </div>
-                                        </div>
-										<div class="form-group">
-                                            <label class="col-md-3 control-label" for="state-normal">Status</label>
-                                            <div class="col-md-6">
-                                                <select class="form-control" id="status">
-												<option value="Available">Available</option>
-												<option value="Received">Received</option>
-												<option value="Stale">Stale</option>
-												<option value="Cancelled">Cancelled</option>
-												
-												
-												</select>
-                                            </div>
-                                        </div>
-										
-										
-									
-                                        
-                                        
-                                    </form>
-                                    <!-- END Input States Content -->
-                                </div>
-                                <!-- END Input States Block -->
-							
-							
-							
+						<input type="hidden" id="spaymentid">
+						<label class="col-md-3 control-label" for="state-normal">Level</label>
+						<div class="col-md-3">
+								<select class="form-control" id="semester">
+									<option value="Tertiary">Tertiary</option>
+									<option value="Secondary">Secondary</option>
+								</select>
 						</div>
+						<div class="row"></div>
+						 <label class="col-md-3 control-label" for="state-normal">Name of School</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Basic Education/ Degree/ Course</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Period of Attendance</label>
+							<div class="col-md-9">
+							   <div class="input-group input-daterange" data-date-format="mm/dd/yyyy">
+									<input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+									<input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+								</div>
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Highest Level/ Units Earned</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Year Graduated</label>
+							<div class="col-md-3">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Scholarship/ Academic Honors Received</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						
+							
+							 <div class="row"></div>
+						
+							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savepayment(<?php echo $scholarapplicant_profile['scholarid'];?>);" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
 							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
 							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- END Regular Modal -->				
+						
 
 		</div>
-			<!-- END Modal -->				
+		<!-- END Regular Modal -->				
+			
+	<!-- Civil Service Modal -->
+			<div id="civil-service" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>CIVIL SERVICE ELIGIBILITY</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						 <label class="col-md-12 control-label" for="state-normal">Career Service/ Ra 1080 (Board/ Bar) Under Special Laws/CES/CSEE/Barangay Eligibility / Driver's License</label>
+							<div class="col-md-12">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Rating</label>
+							<div class="col-md-3">
+							   <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Date Of Examination / Conferment</label>
+							<div class="col-md-8">
+							   <input type="text" id="example-datepicker" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Place Of Examination / Conferment</label>
+							<div class="col-md-8">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">License Number</label>
+							<div class="col-md-8">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Date of Validity</label>
+							<div class="col-md-8">
+							   <input type="text" id="example-datepicker" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							</div>
+						
+							
+							 <div class="row"></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->							
 					
-					
-		
-									
+	<!-- Work Experience Modal -->
+			<div id="work-experience" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>WORK EXPERIENCE</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						 <label class="col-md-3 control-label" for="state-normal">Inclusive Dates</label>
+							<div class="col-md-9">
+							   <div class="input-group input-daterange" data-date-format="mm/dd/yyyy">
+									<input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+									<input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+								</div>
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Position/Designation</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Salary/Job/Pay Grade</label>
+							<div class="col-md-9">
+							   <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Station/Place of Assignment</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Branch</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Leave w/o Pay</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Separation Date / Cause</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						
+						
+							
+							 <div class="row"></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->		
 	
+	<!-- Training Modal -->
+			<div id="training" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>TRAINING</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						 <label class="col-md-12 control-label" for="state-normal">Title Of Learning And Development Interventions/Training Programs</label>
+							<div class="col-md-12">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+							
+						 <label class="col-md-4 control-label" for="state-normal">Inclusive Dates Of Attendance</label>
+							<div class="col-md-8">
+							   <div class="input-group input-daterange" data-date-format="mm/dd/yyyy">
+									<input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+									<input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+								</div>
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Number of Hours</label>
+							<div class="col-md-4">
+							   <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Type of LD( Managerial/ Supervisory/Technical/etc)</label>
+							<div class="col-md-8">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Conducted/ Sponsored By</label>
+							<div class="col-md-8">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+						
+						
+						
+							
+							 <div class="row"></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->	
+									
+	<!-- Awards Received Modal -->
+			<div id="awards-received" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>AWARD/S RECEIVED</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						
+							
+						 <label class="col-md-4 control-label" for="state-normal">Award Date</label>
+							<div class="col-md-8">
+							   <input type="text" id="example-datepicker" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Department/ Agency/ Office/Company</label>
+							<div class="col-md-8">
+							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Description</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+						
+						
+						
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->	
+		
+<!-- Other Information Modal -->
+			<div id="other-information" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>OTHER INFORMATION</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						
+							
+						 <label class="col-md-4 control-label" for="state-normal">Information Type</label>
+							<div class="col-md-8">
+							  <select class="form-control">
+								<option>Special Skills and Hobbies</option>
+								<option>Non-Academic Distinctions / Recognition</option>
+								<option>Membership In Association/Organization</option>
+							  </select>
+							</div>
+						
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Description</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+						
+						
+						
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->			
 					
+<!-- 201 files Modal -->
+			<div id="201-files" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>201 Files</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						
+							
+						 <label class="col-md-4 control-label" for="state-normal">Document Type</label>
+							<div class="col-md-8">
+							  <select class="form-control">
+								<option>Special Skills and Hobbies</option>
+								<option>Non-Academic Distinctions / Recognition</option>
+								<option>Membership In Association/Organization</option>
+							  </select>
+							</div>
+						
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Description</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Date</label>
+							<div class="col-md-8">
+								<input type="text" id="paymentdate" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">File Attachment</label>
+							<div class="col-md-8">
+								<input type = "file" name = "assetimage" id = "assetimage" size = "10" class="col-md-8" /> 
+							   
+							</div>
+							
+						
+						
+						
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->	
+<!-- Performance Rating Modal -->
+			<div id="performance-rating" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>Performance Rating</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						
+							
+						 
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Rating Period</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment" placeholder="2016-2017">
+							   
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Rating</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+							
+												
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->	
+		
+<!-- Leave Credits Modal -->
+			<div id="leave-credits-modal" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>Leave Credits</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						
+							
+						 <label class="col-md-4 control-label" for="state-normal">Period</label>
+							<div class="col-md-8">
+									<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+                                                    <input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+                                                    <span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+                                                    <input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+                                                </div>
+							</div> 
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Particular</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Earned</label>
+							<div class="col-md-4">
+								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Absences Undertime w/ Pay</label>
+							<div class="col-md-8">
+								<input type="text" id="paymentdate" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Balance</label>
+							<div class="col-md-4">
+								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Earned</label>
+							<div class="col-md-4">
+								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">ABS.UND.W/P.</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Balance</label>
+							<div class="col-md-4">
+								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Total Leave Credits Earned</label>
+							<div class="col-md-4">
+								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Date & Action Taken on Appln for Leave</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+						
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->						
+	
+<!-- application for leave Modal -->
+			<div id="application-for-leave-modal" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>Application for Leave</strong></h3>
+						</div>
+						<div class="modal-body">
+						<input type="hidden" id="spaymentid">
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Type of Leave</label>
+							<div class="col-md-8">
+								<select class="form-control" id="cy">
+												<option value="VACATION LEAVE">VACATION LEAVE</option>
+												<option value="SICK LEAVE">SICK LEAVE</option>
+												
+												</select>
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Location</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						
+						 <label class="col-md-4 control-label" for="state-normal">Inclusive Dates</label>
+							<div class="col-md-8">
+									<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+                                                    <input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+                                                    <span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+                                                    <input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+                                                </div>
+							</div> 
+						
+							
+						
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Recommendation</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Status</label>
+							<div class="col-md-8">
+								<select class="form-control" id="cy">
+												<option value="PENDING">PENDING</option>
+												<option value="APPROVED">APPROVED</option>
+												<option value="DECLINED">DECLINED</option>
+												
+												</select>
+							   
+							</div>
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->		
 					
+	<!-- Authority to travel Modal -->
+			<div id="authority-travel-modal" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					<input type="hidden" id="spaymentid">
 					
-					
-					
-					
-					
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>Authority to Travel</strong></h3>
+						</div>
+						<div class="modal-body">
+						
+						
+						
+							
+						
+						<label class="col-md-4 control-label" for="state-normal">Inclusive Dates</label>
+							<div class="col-md-8">
+									<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+                                                    <input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+                                                    <span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+                                                    <input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+                                                </div>
+							</div> 
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Location</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   
+							</div>
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Description</label>
+							<div class="col-md-8">
+								<textarea class="form-control" name="state-normal"  ></textarea>
+							   
+							</div>
+							
+							
+						
+						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">Employee</label>
+							<div class="col-md-6">
+								<select id="supplierid" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+												<option value="VACATION LEAVE">Christianne Lynnette Cabanban</option>
+												<option value="SICK LEAVE">SICK LEAVE</option>
+												
+												</select>
+							  
+							</div>
+							<div class="col-md-1">
+								 <button style="float:left;" type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton"><i class="fa fa-plus"></i></button>
+							</div>
+						
+						
+						<div class="row" style="margin-top:10px;"></div>
+							
+							<div class="col-md-12">
+									<div class="table-responsive">
+									<table class="table table-striped table-bordered table-vcenter table-hover">
+										<thead>
+											<tr style="text-align:center;">
+												
+												<!-- <th style="width:100px;">Delivery ID</th>-->
+												<th>Employee</th>
+												
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Lynnette Cabanban</td>
+												<td>X</td>
+											</tr>
+										
+										</tbody>
+										</table>
+									</div>
+							</div>
+						
+						 
+							
+						
+						
+						
+							
+						
+							
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->					
 					
 					
 					

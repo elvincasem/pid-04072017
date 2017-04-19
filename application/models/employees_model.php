@@ -25,6 +25,36 @@ class Employees_model extends CI_Model
 		
 	}
 	
+	public function getprofile($id)
+	{
+		$itemlist = $this->db->query("SELECT * from employee where eid=".$this->db->escape($id)."");
+		$singlerow = $itemlist->result_array();
+		return $singlerow[0];
+		
+		
+	}
+	public function getechildren($id)
+	{
+		$sql = $this->db->query("SELECT * from employee_children where eid=".$this->db->escape($id)."");
+		return $sql->result_array();
+		
+		
+	}
+	public function getebackground($id)
+	{
+		$sql = $this->db->query("SELECT * from employee_educational_background where eid=".$this->db->escape($id)."");
+		return $sql->result_array();
+		
+		
+	}
+	public function getecareerservice($id)
+	{
+		$sql = $this->db->query("SELECT * from employee_career_service where eid=".$this->db->escape($id)."");
+		return $sql->result_array();
+		
+		
+	}
+	
 	
 }
 

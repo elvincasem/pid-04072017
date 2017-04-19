@@ -77,7 +77,12 @@ class Employees extends CI_Controller
         }
         curl_close($ch);
 		
-		//display delivery
+		$data['eid'] = $id;
+		$data['employee_profile'] = $this->employees_model->getprofile($id);
+		$data['e_children'] = $this->employees_model->getechildren($id);
+		$data['e_background'] = $this->employees_model->getebackground($id);
+		$data['e_careerservice'] = $this->employees_model->getecareerservice($id);
+
 		$this->load->view('inc/header_view');
 		$this->load->view('employee/employeeprofile_view',$data);
 		$this->load->view('inc/footer_view',$js);

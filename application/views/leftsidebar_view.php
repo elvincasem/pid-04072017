@@ -58,7 +58,7 @@
                                     <ul>
 										
 										<li>
-                                            <a class="<?php echo $suppliersclass;?>" href="<?=base_url()?>suppliers" ><i class="fa fa-cubes sidebar-nav-icon"></i>Position/Designation</a>
+                                            <a class="<?php echo $suppliersclass;?>" href="<?=base_url()?>position" ><i class="fa fa-cubes sidebar-nav-icon"></i>Position/Designation</a>
                                         </li>
 									
 										
