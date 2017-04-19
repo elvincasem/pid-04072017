@@ -48,7 +48,7 @@
         
          <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/> 
       </form> 
-                                            <div class="col-xs-6 push-inner-top-bottom border-right">
+                                            <div class="col-xs-5 push-inner-top-bottom border-right">
                                                 <h3 class="widget-heading"><small>Position:<strong>
 												
 												<select class="form-control">
@@ -56,8 +56,13 @@
 												</select>
 												</strong></small></h3>
                                             </div>
-                                            <div class="col-xs-6 push-inner-top-bottom">
-                                                <h3 class="widget-heading"><small>Salary (Monthly): <strong><input type="text" placeholder="0.00" class="form-control"></strong> </small></h3>
+                                            <div class="col-xs-7 push-inner-top-bottom">
+                                                <h3 class="widget-heading"><small>Salary (Monthly): <strong>
+												
+												<select id="aprno" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+													<option>SG 18 Step 1 (35,693.00)</option>
+												</select>
+												</strong> </small></h3>
                                             </div>
                                         </div>
                                     </div>
@@ -540,9 +545,11 @@
                                         <ul class="nav nav-tabs" data-toggle="tabs">
                                             <li class="active"><a href="#block-tabs-home">PDS Related Files</a></li>
                                             <li><a href="#block-tabs-profile">201 Files</a></li>
+											<li><a href="#rating">Rating</a></li>
+											<li><a href="#leave-credits">Leave Credits</a></li>
                                             <li><a href="#request-approvals">Request/Approvals</a></li>
                                             <li><a href="#authority-to-travel">Authority to Travel</a></li>
-                                            <li><a href="#rating">Rating</a></li>
+                                            <li><a href="#daily-time-record">Daily Time Record</a></li>
                                             <li><a href="#block-tabs-settings" data-toggle="tooltip" title="Settings"><i class="gi gi-settings"></i></a></li>
                                         </ul>
                                     </div>
@@ -613,7 +620,8 @@
 								</tbody>
 							</table>
 						<div class="row"></div>
-					<h4><b>WORK EXPERIENCE</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>WORK EXPERIENCE / SERVICE RECORD</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+					
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -621,12 +629,15 @@
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
 										<th>Inclusive Dates</th>
-										<th>Position Title</th>
-										<th>Department/Agency/Office/Company</th>
-										<th>Monthly Salary</th>
+										<th>Position/Designation</th>
+										<th>Status</th>
 										<th>Salary/Job/Pay Grade</th>
-										<th>Status of Appointment</th>
-										<th>Gov't Service(Y/N)</th>
+										
+										<th>Station/Place of Assignment</th>
+										<th>Branch</th>
+										
+										<th>Leave w/o Pay</th>
+										<th>Separation<br>Date / Cause</th>
 										
 										<th></th>
 									</tr>
@@ -635,44 +646,20 @@
 									<tr>
 										<td>January 1, 2010 - December 31, 2015</td>
 										<td>Instructor I</td>
-										<td>DMMMSU-SLUC College of Computer Science</td>
-										<td></td>
-										<td>SG 12</td>
 										<td>PERMANENT</td>
-										<td>Y</td>
+										<td>150,000.00</td>
+										<td>DMMMSU-SLUC College of Computer Science</td>
+										<td>Private</td>
+										
+										
+										<td>None</td>
+										<td>First Day of Service (SG20 Step 1)</td>
 										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
 								</tbody>
 							</table>		
 					
-<div class="row"></div>
-					<h4><b>VOLUNTARY WORK</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Inclusive Dates</th>
-										<th>Position Title</th>
-										<th>Department/Agency/Office/Company</th>
-										<th>Monthly Salary</th>
-										<th>Salary/Job/Pay Grade</th>
-										<th>Status of Appointment</th>
-										<th>Gov't Service(Y/N)</th>
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td></td><td></td>
-										<td></td><td></td>
-										<td></td><td></td><td></td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
-								</tbody>
-							</table>	
+
 <div class="row"></div>
 					<h4><b>TRAINING</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
@@ -699,7 +686,38 @@
 										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
 								</tbody>
+							</table>
+<div class="row"></div>
+					<h4><b>AWARD/S RECEIVED</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+							<table class="table table-striped table-bordered table-vcenter table-hover">
+								<thead>
+									<tr style="text-align:center;">
+										
+										<!-- <th style="width:100px;">Delivery ID</th>-->
+										
+										<th>Inclusive Dates</th>
+										<th>Position Title</th>
+										<th>Department/Agency/Office/Company</th>
+										<th>Monthly Salary</th>
+										<th>Salary/Job/Pay Grade</th>
+										<th>Status of Appointment</th>
+										<th>Gov't Service(Y/N)</th>
+										
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td><td></td>
+										<td></td><td></td>
+										<td></td><td></td><td></td>
+										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
+									</tr>
+								</tbody>
 							</table>	
+
+
+							
 							<div class="row"></div>
 					<h4><b>OTHER INFORMATION</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
@@ -718,19 +736,19 @@
 									<tr>
 										<td>Special Skills and Hobbies</td>
 										<td>Graphic Design / Web Development</td>
-										<td></td>
+										
 										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
 									<tr>
 										<td>Non-Academic Distinctions / Recognition</td>
 										<td>Google Education Innovator</td>
-										<td></td>
+										
 										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
 									<tr>
 										<td>Membership In Association/Organization</td>
 										<td>Hukbong Litratista ng La Union</td>
-										<td></td>
+										
 										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
 									</tr>
 								</tbody>
@@ -897,6 +915,80 @@
 				
 				
 				</div>
+				<div class="tab-pane" id="leave-credits">
+						<h4><b>Leave Credits</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a title="Print Leave Credit Card" href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+							<table class="table table-striped table-bordered table-vcenter table-hover">
+								<thead>
+									<tr style="text-align:center;">
+										
+										<!-- <th style="width:100px;">Delivery ID</th>-->
+										
+										<th>Period</th>
+										<th>Particular</th>
+										<th>Earned</th>
+										<th>Absences Undertime w/ Pay</th>
+										<th>Balance</th>
+										<th>ABS.UND.WOP.</th>
+										<th>Earned</th>
+										<th>ABS.UND.W/P.</th>
+										<th>Balance</th>
+										<th>ABS.UND.WOP.</th>
+										<th>Total Leave Credits Earned</th>
+										<th>Date & Action Taken on Appln for Leave</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>January 1, 2017 - January 30, 2017</td>
+										<td>NA</td>
+										<td>1.25</td>
+										<td>January 1, 2017</td>
+										<td>26.923</td>
+										<td></td>
+										<td>1.25</td>
+										<td></td>
+										<td>71.24</td>
+										<td></td>
+										<td>99.413</td>
+										<td></td>
+										
+										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
+									</tr>
+								</tbody>
+							</table>
+							
+				</div><!-- end leave credits-->
+				<div class="tab-pane" id="daily-time-record">
+					<h4><b>Daily Time Record</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+							<table class="table table-striped table-bordered table-vcenter table-hover">
+								<thead>
+									<tr style="text-align:center;">
+										
+										<!-- <th style="width:100px;">Delivery ID</th>-->
+										
+										<th>Inclusive Dates</th>
+										<th>Location</th>
+										<th>Description</th>
+										<th>Employees</th>
+										
+										
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										
+										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
+									</tr>
+								</tbody>
+							</table>
+				
+				</div> <!-- daily time record-->
 				<div class="tab-pane" id="block-tabs-settings">Settings..</div>
 			</div>
 			<!-- END Tabs Content -->
