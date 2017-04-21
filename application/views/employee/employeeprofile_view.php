@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-md-5 col-lg-4">
 				<div class="widget">
-					<div class="widget-image widget-image-sm">
+					<div class="widget-image widget-image-sm" id="image_container">
 						<img src="<?=base_url()?>public/img/placeholders/photos/photo1@2x.jpg" alt="image">
 						<div class="widget-image-content text-center">
 						<?php
@@ -38,15 +38,17 @@
                                     <div class="widget-content widget-content-full border-bottom">
                                         <div class="row text-center">
 										
-			<?php //echo form_open_multipart('scholarshipapplicants/image_upload');?> 
-	   <form action = "" method = "">
-		 <input type="hidden" id="fileid" name="fileid" value="<?php //echo $applicantid;?>">
+			<?php //echo form_open_multipart('employees/uploadprofile');?> 
+	   <form action="" method = "post" id="form_uploadprofile" enctype="multipart/form-data">
+		 <input type="hidden" id="fileid" name="fileid" value="<?php echo $eid;?>">
 		 
 		 
 		 
-         <input type = "file" name = "assetimage" id = "assetimage" size = "10" class="col-md-8" /> 
+         <input type = "file" name="profileimage" id="profileimage" size = "10" class="col-md-8" /> 
         
-         <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/> 
+        <!-- <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/>  -->
+		 
+		 <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button>
       </form> 
                                             <div class="col-xs-12">
                                                 <h3 class="widget-heading"><small>Position<br> <strong>
@@ -54,6 +56,12 @@
 												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
 													<?php
 														echo "<option value='".$employee_profile['designation']."'>".$employee_profile['designation']."</option>";
+													?>
+													<?php
+														foreach($position_designation as $posdes):
+															echo "<option value='".$posdes['position_designation']."'>".$posdes['position_designation']."</option>";
+														endforeach;
+													
 													?>
 												</select>
 												</strong> </small></h3>
@@ -139,8 +147,13 @@
 								if($employee_profile['gender']=="FEMALE"){
 									$selectedf = "checked='checked'";
 									$selectedm = "";
-								}else{
+								}
+								elseif($employee_profile['gender']=="FEMALE"){
 									$selectedm = "checked='checked'";
+									$selectedf = "";
+								}
+								else{
+									$selectedm = "";
 									$selectedf = "";
 								}
 							
@@ -165,8 +178,11 @@
 								if($employee_profile['civil_status']=="SINGLE"){
 									$civils = "checked='checked'";
 									$civilm = "";
-								}else{
+								}elseif($employee_profile['civil_status']=="SINGLE"){
 									$civilm = "checked='checked'";
+									$civils = "";
+								}else{
+									$civilm = "";
 									$civils = "";
 								}
 							
@@ -194,12 +210,12 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Heigth(m)</label>
 							<div class="col-md-2">
-								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php echo $employee_profile['height'];?>" >
+								<input type="text" id="height" class="form-control" placeholder="" value="<?php echo $employee_profile['height'];?>">
 								
 							</div>
 							<label class="col-sm-1 control-label" for="state-normal">Weight (kg)</label>
 							<div class="col-md-2">
-								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php echo $employee_profile['weight'];?>" >
+								<input type="text" id="weight" class="form-control" placeholder="" value="<?php echo $employee_profile['weight'];?>" >
 								
 							</div>
 						</div>
@@ -207,7 +223,7 @@
 						<div class="form-group">
 							<label class="col-md-1 control-label" for="state-normal">Blood Type</label>
 							<div class="col-md-2">
-								<input type="text" id="contactno" class="form-control" placeholder="" value="<?php echo $employee_profile['blood_type'];?>" >
+								<input type="text" id="bloodtype" class="form-control" placeholder="" value="<?php echo $employee_profile['blood_type'];?>" >
 								
 							</div>
 						</div>
@@ -215,7 +231,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Mobile Number</label>
 							<div class="col-md-8">
-								<input type="text" id="contactno" class="form-control" placeholder="" value="<?php echo $employee_profile['mobile_number'];?>" >
+								<input type="text" id="mobileno" class="form-control" placeholder="" value="<?php echo $employee_profile['mobile_number'];?>" >
 								
 							</div>
 						</div>
@@ -244,7 +260,7 @@
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="province" class="form-control" placeholder="Zip Code" value="<?php echo $employee_profile['a_zipcode'];?>" >
+								<input type="text" id="zipcode" class="form-control" placeholder="Zip Code" value="<?php echo $employee_profile['a_zipcode'];?>" >
 								
 							</div>
 						</div>
@@ -260,7 +276,7 @@
 							<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Date Hired</label>
 							<div class="col-md-4">
-								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $employee_profile['date_hired'];?>" >
+								<input type="text" id="datehired"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $employee_profile['date_hired'];?>" >
 								
 							</div>
 							
@@ -271,7 +287,7 @@
 							
 				</div>
 							<div class="col-md-8">
-								<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php echo $eid;?>)">Save</button>
+								<button type="button" class="btn btn-primary" onclick="updateemployee(<?php echo $eid;?>)">update</button>
 								
 							</div>
 							</div>
@@ -291,59 +307,64 @@
 			<div class="form-group">
 						<label class="col-md-3 control-label" for="state-normal">Spouse's Name</label>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['spouse_lname'];?>">
+								<input type="text" id="spouse_lname" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['spouse_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['spouse_lname'];?>">
+								<input type="text" id="spouse_fname" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['spouse_fname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['spouse_mname'];?>">
+								<input type="text" id="spouse_mname" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['spouse_mname'];?>">
 								
 							</div>
 							
 							<label class="col-md-3 control-label" for="state-normal">Father's Name</label>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['father_lname'];?>">
+								<input type="text" id="father_lname" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['father_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['father_fname'];?>">
+								<input type="text" id="father_fname" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['father_fname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['father_mname'];?>">
+								<input type="text" id="father_mname" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['father_mname'];?>">
 								
 							</div>
 							
 							<label class="col-md-3 control-label" for="state-normal">Mother's Maiden Name</label>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['mother_lname'];?>">
+								<input type="text" id="mother_lname" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['mother_lname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['mother_fname'];?>">
+								<input type="text" id="mother_fname" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['mother_fname'];?>">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="father" class="form-control"  placeholder="middlename" <?php echo $employee_profile['mother_mname'];?>">
+								<input type="text" id="mother_mname" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['mother_mname'];?>">
 								
 							</div>
-							
+							<div class="row"></div>
+							<div class="col-md-8">
+								<button type="button" class="btn btn-primary" onclick="updateemployeefamily(<?php echo $eid;?>)">Update</button>
+								
+							</div>
+							<h4 class="sub-header"></h4>
 							
 							<label class="col-md-3 control-label" for="state-normal">Name of Children</label>
 							<div class="col-md-4">
-								<input type="text" id="siblingno" class="form-control" placeholder="fullname" value="<?php //echo $scholarapplicant_profile['siblingno'];?>" >
+								<input type="text" id="children_name" class="form-control" placeholder="fullname">
 								
 							</div>
 							<div class="col-md-3">
-								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="Birthdate: yyyy-mm-dd" value="<?php //echo $scholarapplicant_profile['dateofbirth'];?>" >
+								<input type="text" id="children_dob"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="Birthdate: yyyy-mm-dd">
 								
 								
 							</div>
 							<div class="col-md-2">
-								<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php //echo $scholarapplicant_profile['applicantid'];?>)">Add</button>
+								<button type="button" class="btn btn-primary" onclick="addchildren(<?php echo $eid;?>)">Add</button>
 								
 							</div>
 							
@@ -351,7 +372,7 @@
 							<div class="row">&nbsp;<br></div>
 							<div class="row"></div>
 							
-							<div class="col-md-11">
+							<div class="col-md-11" id="children_table">
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -370,7 +391,7 @@
 										echo "<tr>";
 										echo "<td>".$childlist['children_name']."</td>";
 										echo "<td>".$childlist['children_bdate']."</td>";
-										echo "<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletechildren(".$childlist['childrenid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -380,11 +401,7 @@
 							</table>
 								
 							</div>
-							<div class="row"></div>
-							<div class="col-md-8">
-								<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php //echo $scholarapplicant_profile['applicantid'];?>)">Save</button>
-								
-							</div>
+							
 			</div>
 						
 			</div><!-- end row -->
@@ -458,7 +475,7 @@
 										echo "<td>".$background['year_graduated']."</td>";
 										echo "<td>".$background['scholar_received']."</td>";
 										
-										echo "<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -498,7 +515,7 @@
 										
 										
 										
-										echo "<td><button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -531,19 +548,27 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>January 1, 2010 - December 31, 2015</td>
-										<td>Instructor I</td>
-										<td>PERMANENT</td>
-										<td>150,000.00</td>
-										<td>DMMMSU-SLUC College of Computer Science</td>
-										<td>Private</td>
+								<?php
+									foreach($e_servicerecord as $servicerecord):
+										echo "<tr>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($servicerecord['service_from']))." ".mdate('%F %d, %Y',strtotime($servicerecord['service_to']))."</td>";
+										echo "<td>".$servicerecord['service_position']."</td>";
+										echo "<td>".$servicerecord['service_status']."</td>";
+										echo "<td>".$servicerecord['service_salary']."</td>";
+										echo "<td>".$servicerecord['service_station']."</td>";
+										echo "<td>".$servicerecord['service_branch']."</td>";
+										echo "<td>".$servicerecord['service_leave']."</td>";
+										echo "<td>".$servicerecord['service_separation']."</td>";
 										
 										
-										<td>None</td>
-										<td>First Day of Service (SG20 Step 1)</td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+										
+										
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+								
 								</tbody>
 							</table>		
 					
@@ -567,12 +592,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td></td><td></td>
-										<td></td><td></td>
-										<td></td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+									<?php
+									foreach($e_training as $training):
+										echo "<tr>";
+										echo "<td>".$training['training_title']."</td>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($training['training_from']))." ".mdate('%F %d, %Y',strtotime($training['training_to']))."</td>";
+										echo "<td>".$training['training_hours']."</td>";
+										echo "<td>".$training['training_type']."</td>";
+										echo "<td>".$training['training_by']."</td>";
+
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
 								</tbody>
 							</table>
 <div class="row"></div>
@@ -592,11 +625,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+								<?php
+									foreach($e_award as $award):
+										echo "<tr>";
 										
-										<td></td><td></td><td></td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+										echo "<td>".mdate('%F %d, %Y',strtotime($award['award_date']))."</td>";
+										echo "<td>".$award['award_department']."</td>";
+										echo "<td>".$award['award_description']."</td>";
+										
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
 								</tbody>
 							</table>	
 
@@ -617,24 +659,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Special Skills and Hobbies</td>
-										<td>Graphic Design / Web Development</td>
+									<?php
+									foreach($e_others as $others):
+										echo "<tr>";
 										
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
-									<tr>
-										<td>Non-Academic Distinctions / Recognition</td>
-										<td>Google Education Innovator</td>
 										
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
-									<tr>
-										<td>Membership In Association/Organization</td>
-										<td>Hukbong Litratista ng La Union</td>
+										echo "<td>".$others['information_type']."</td>";
+										echo "<td>".$others['information_description']."</td>";
 										
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
 								</tbody>
 							</table>	
 							
@@ -660,13 +698,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Service Contract</td>
-										<td>Contract Document</td>
-										<td>April 1, 2017</td>
-										<td><a href="#">Service Contract - 04012017</a></td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+								<?php
+									foreach($e_files as $files):
+										echo "<tr>";
+										
+										
+										echo "<td>".$files['file_document_type']."</td>";
+										echo "<td>".$files['file_description']."</td>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($files['file_date']))."</td>";
+										echo "<td><a href='#'>".$files['file_name']."</a></td>";
+										
+										
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
 								</tbody>
 							</table>
 							
@@ -686,33 +734,48 @@
 										<th>Inclusive Dates</th>
 										<th>Recommendaton</th>
 										<th>Status</th>
+										<th>File</th>
 										
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Vacation</td>
-										<td>Within the Philippines</td>
-										<td>April 1, 2017 to April 1, 2017</td>
-										<td>Approval</td>
-										<td><span class='label label-danger'>PENDING</span></td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
-									<tr>
-										<td>Vacation</td>
-										<td>Within the Philippines</td>
-										<td>April 2, 2017 to April 2, 2017</td>
-										<td>Approval</td>
-										<td><span class='label label-success'>APPROVED</span></td>
-										<td><button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+								
+								<?php
+									foreach($e_leaveapp as $leaveapp):
+									
+										if($leaveapp['appleave_status']=="APPROVED"){
+											$labelstyle = "label-success";
+										}elseif($leaveapp['appleave_status']=="CANCELLED"){
+											$labelstyle = "label-default";
+										}
+										else{
+											$labelstyle = "label-danger";
+										}
+										
+										echo "<tr>";
+										echo "<td>".$leaveapp['appleave_type']."</td>";
+										echo "<td>".$leaveapp['appleave_location']."</td>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($leaveapp['appleave_from']))." - ".mdate('%F %d, %Y',strtotime($leaveapp['appleave_to']))."</td>";
+										echo "<td>".$leaveapp['appleave_recommendation']."</td>";
+										
+										echo "<td><span class='label $labelstyle'>".$leaveapp['appleave_status']."</span></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
+										
+										
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>  <a title='Print Application for Leave' href='#modal-voucher' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick=''><i class='fa fa-print'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+								
+									
 								</tbody>
 							</table>
 				
 				</div><!-- end fourth tab -->
 				<div class="tab-pane" id="authority-to-travel">
-					<h4><b>Authority to Travel</b></h4> <a href="#authority-travel-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>Authority to Travel</b></h4> <a href="#authority-travel-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>  
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -723,20 +786,53 @@
 										<th>Location</th>
 										<th>Description</th>
 										<th>Employees</th>
+										<th>File</th>
 										
 										
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>April 1, 2017 - April 2, 2017</td>
-										<td>Dagupan, Pangasinan</td>
-										<td>To monitor HEI's</td>
-										<td>Christianne Lynnette Cabanban, Arnold Ancheta, Marvin Mendoza</td>
+								
+								<?php
+									foreach($e_travel as $travel):
+									
 										
-										<td><button class='btn btn-success notification' title='Employee' id='notification'><i class="fa fa-user-plus"></i></button> <button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+										
+										echo "<tr>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($travel['travel_from']))." - ".mdate('%F %d, %Y',strtotime($travel['travel_to']))."</td>";
+										echo "<td>".$travel['travel_location']."</td>";
+										echo "<td>".$travel['travel_description']."</td>";
+										
+										$travelid = $travel['authtravelid'];
+										$travelemployees = $this->employees_model->getetravelemployees($travelid);
+										$numberofemployee = count($travelemployees);
+										$comma = 1;
+										$employees="";
+										
+											foreach($travelemployees as $temployee):
+											
+												
+												if($comma < $numberofemployee){
+													$employees .= "<a href='".$temployee['eid']."'>".$temployee['employee_name']."</a>, ";
+													
+												}else{
+													$employees .= "<a href='".$temployee['eid']."'>".$temployee['employee_name']."</a>";
+												}
+												$comma++;
+											endforeach;
+										
+										echo "<td>".$employees."</td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
+										
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>  <a title='Print Authority' href='#modal-voucher' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick=''><i class='fa fa-print'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+								
+									
+									
 								</tbody>
 							</table>
 				
@@ -758,13 +854,19 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td></td>
-										<td></td>
+								<?php
+									foreach($e_rating as $rating):
+										echo "<tr>";
+										
+										echo "<td>".mdate('%F %d, %Y',strtotime($rating['rating_from']))." - ".mdate('%F %d, %Y',strtotime($rating['rating_to']))."</td>";
+										echo "<td>".$rating['rating']."</td>";
 										
 										
-										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
 								</tbody>
 							</table>
 				
@@ -795,22 +897,30 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>January 1, 2017 - January 30, 2017</td>
-										<td>NA</td>
-										<td>1.25</td>
-										<td>January 1, 2017</td>
-										<td>26.923</td>
-										<td></td>
-										<td>1.25</td>
-										<td></td>
-										<td>71.24</td>
-										<td></td>
-										<td>99.413</td>
-										<td></td>
+								<?php
+									foreach($e_leavecredits as $leavecredits):
+										echo "<tr>";
 										
-										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
+										echo "<td>".mdate('%F %d, %Y',strtotime($leavecredits['leave_from']))." - ".mdate('%F %d, %Y',strtotime($leavecredits['leave_to']))."</td>";
+										echo "<td>".$leavecredits['leave_particular']."</td>";
+										echo "<td>".$leavecredits['leave_earned']."</td>";
+										echo "<td>".$leavecredits['leave_absences']."</td>";
+										echo "<td>".$leavecredits['leave_balance']."</td>";
+										echo "<td>".$leavecredits['leave_abswop']."</td>";
+										echo "<td>".$leavecredits['sick_earned']."</td>";
+										echo "<td>".$leavecredits['sick_abswp']."</td>";
+										echo "<td>".$leavecredits['sick_balance']."</td>";
+										echo "<td>".$leavecredits['sick_abswop']."</td>";
+										echo "<td>".$leavecredits['total_leave']."</td>";
+										echo "<td>".$leavecredits['sick_action']."</td>";
+										
+										
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button>  <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
 								</tbody>
 							</table>
 							
