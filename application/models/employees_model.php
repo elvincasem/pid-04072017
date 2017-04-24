@@ -235,10 +235,28 @@ class Employees_model extends CI_Model
 		
 		
 	}
-	public function saveleavecredit($eid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action)
+	public function saveleavecredit($eid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action,$leave_balance,$sick_balance)
 	{
 		
-		$sql = "INSERT INTO employee_leave_credits(leave_from,leave_to,leave_particular,leave_earned,leave_absences,leave_abswop,sick_earned,sick_abswp,sick_abswop,sick_action,eid) VALUES (".$this->db->escape($leave_from).",".$this->db->escape($leave_to).",".$this->db->escape($leave_particular).",".$this->db->escape($leave_earned).",".$this->db->escape($leave_absences).",".$this->db->escape($leave_abswop).",".$this->db->escape($sick_earned).",".$this->db->escape($sick_abswp).",".$this->db->escape($sick_abswop).",".$this->db->escape($sick_action).",".$this->db->escape($eid).")";
+		$sql = "INSERT INTO employee_leave_credits(leave_from,leave_to,leave_particular,leave_earned,leave_absences,leave_balance,leave_abswop,sick_earned,sick_abswp,sick_balance,sick_abswop,sick_action,eid) VALUES (".$this->db->escape($leave_from).",".$this->db->escape($leave_to).",".$this->db->escape($leave_particular).",".$this->db->escape($leave_earned).",".$this->db->escape($leave_absences).",".$this->db->escape($leave_balance).",".$this->db->escape($leave_abswop).",".$this->db->escape($sick_earned).",".$this->db->escape($sick_abswp).",".$this->db->escape($sick_balance).",".$this->db->escape($sick_abswop).",".$this->db->escape($sick_action).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function saveappleave($eid,$appleave_type,$appleave_location,$appleave_from,$appleave_to,$appleave_recommendation,$appleave_status,$appleave_commutation)
+	{
+		
+		$sql = "INSERT INTO employee_leave_application(appleave_type,appleave_location,appleave_from,appleave_to,appleave_commutation,appleave_recommendation,appleave_status,eid) VALUES (".$this->db->escape($appleave_type).",".$this->db->escape($appleave_location).",".$this->db->escape($appleave_from).",".$this->db->escape($appleave_to).",".$this->db->escape($appleave_commutation).",".$this->db->escape($appleave_recommendation).",".$this->db->escape($appleave_status).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function saveauth($eid,$travel_from,$travel_to,$travel_location,$travel_description)
+	{
+		
+		$sql = "INSERT INTO employee_travel(travel_from,travel_to,travel_location,travel_description,eid) VALUES (".$this->db->escape($travel_from).",".$this->db->escape($travel_to).",".$this->db->escape($travel_location).",".$this->db->escape($travel_description).",".$this->db->escape($eid).")";
 		$this->db->query($sql);
 				
 		

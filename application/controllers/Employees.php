@@ -93,6 +93,7 @@ class Employees extends CI_Controller
 		$data['e_leavecredits'] = $this->employees_model->geteleavecredits($id);
 		$data['e_leaveapp'] = $this->employees_model->geteleaveapp($id);
 		$data['e_travel'] = $this->employees_model->getetravel($id);
+		$data['employee_list'] = $this->employees_model->getemployeeslist($id);
 		
 
 		$this->load->view('inc/header_view');
@@ -399,14 +400,60 @@ class Employees extends CI_Controller
 		$sick_abswp = $this->input->post('sick_abswp');
 		$sick_abswop = $this->input->post('sick_abswop');
 		$sick_action = $this->input->post('sick_action');
+		$leave_balance = $this->input->post('leave_balance');
+		$sick_balance = $this->input->post('sick_balance');
 		
 		
-		$this->employees_model->saveleavecredit($eid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action);
+		$this->employees_model->saveleavecredit($eid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action,$leave_balance,$sick_balance);
 	}
 	
 	public function deleteleavecredit(){
 		$leavecreditsid = $this->input->post('leavecreditsid');
 		$this->db->delete('employee_leave_credits', array('leavecreditsid' => $leavecreditsid));
+		
+	}
+	
+	public function saveappleave(){
+		$eid = $this->input->post('eid');
+		$appleave_type = $this->input->post('appleave_type');
+		$appleave_location = $this->input->post('appleave_location');
+		$appleave_from = $this->input->post('appleave_from');
+		$appleave_to = $this->input->post('appleave_to');
+		$appleave_recommendation = $this->input->post('appleave_recommendation');
+		$appleave_status = $this->input->post('appleave_status');
+		$sick_earned = $this->input->post('sick_earned');
+		$sick_abswp = $this->input->post('sick_abswp');
+		$sick_abswop = $this->input->post('sick_abswop');
+		$sick_action = $this->input->post('sick_action');
+		$leave_balance = $this->input->post('leave_balance');
+		$sick_balance = $this->input->post('sick_balance');
+		$appleave_commutation = $this->input->post('appleave_commutation');
+		
+		
+		$this->employees_model->saveappleave($eid,$appleave_type,$appleave_location,$appleave_from,$appleave_to,$appleave_recommendation,$appleave_status,$appleave_commutation);
+	}
+	
+	public function deleteappleave(){
+		$appleaveid = $this->input->post('appleaveid');
+		$this->db->delete('employee_leave_application', array('appleaveid' => $appleaveid));
+		
+	}
+	
+	public function saveauth(){
+		$eid = $this->input->post('eid');
+		$travel_from = $this->input->post('travel_from');
+		$travel_to = $this->input->post('travel_to');
+		$travel_location = $this->input->post('travel_location');
+		$travel_description = $this->input->post('travel_description');
+		
+		
+		
+		$this->employees_model->saveauth($eid,$travel_from,$travel_to,$travel_location,$travel_description);
+	}
+	
+	public function deleteauth(){
+		$authtravelid = $this->input->post('authtravelid');
+		$this->db->delete('employee_travel', array('authtravelid' => $authtravelid));
 		
 	}
 

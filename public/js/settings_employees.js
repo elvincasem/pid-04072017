@@ -793,16 +793,18 @@ function saveleavecredit(){
 	var sick_abswp = document.getElementById("sick_abswp").value;
 	var sick_abswop = document.getElementById("sick_abswop").value;
 	var sick_action = document.getElementById("sick_action").value;
+	var leave_balance = document.getElementById("leave_balance").value;
+	var sick_balance = document.getElementById("sick_balance").value;
 	
 	
 	$.ajax({
 		url: '../saveleavecredit',
 		type: 'post',
-		data: {eid: eid,leave_from:rating_from,leave_to:leave_to,leave_particular:leave_particular,leave_earned:leave_earned,leave_absences:leave_absences,leave_abswop:leave_abswop,sick_earned:sick_earned,sick_abswp:sick_abswp,sick_abswop:sick_abswop,sick_action:sick_action},
+		data: {eid: eid,leave_from:leave_from,leave_to:leave_to,leave_particular:leave_particular,leave_earned:leave_earned,leave_absences:leave_absences,leave_abswop:leave_abswop,sick_earned:sick_earned,sick_abswp:sick_abswp,sick_abswop:sick_abswop,sick_action:sick_action,leave_balance:leave_balance,sick_balance:sick_balance},
 		success: function(response) {
 			console.log(response);
 			//location.reload();
-			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Leave Credit Added!</p>', {
 				type: 'success',
 				delay: 3000,
 				allow_dismiss: true,
@@ -847,5 +849,144 @@ function deleteleavecredit(id){
         //txt = "You pressed Cancel!";
 		
     }
+	
+}
+
+function saveappleave(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var appleave_type = document.getElementById("appleave_type").value;
+	var appleave_location = document.getElementById("appleave_location").value;
+	var appleave_from = document.getElementById("appleave_from").value;
+	var appleave_to = document.getElementById("appleave_to").value;
+	var appleave_recommendation = document.getElementById("appleave_recommendation").value;
+	var appleave_status = document.getElementById("appleave_status").value;
+	var appleave_commutation = document.getElementById("appleave_commutation").value;
+
+	
+	
+	$.ajax({
+		url: '../saveappleave',
+		type: 'post',
+		data: {eid: eid,appleave_type:appleave_type,appleave_location:appleave_location,appleave_from:appleave_from,appleave_to:appleave_to,appleave_recommendation:appleave_recommendation,appleave_status:appleave_status,appleave_commutation:appleave_commutation},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Leave Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("appleaveclosebutton").click();
+			$('#request-approvals').load(document.URL +  ' #request-approvals');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deleteappleave(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteappleave',
+                    type: 'post',
+                    data: {appleaveid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#request-approvals').load(document.URL +  ' #request-approvals');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+function saveauth(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var travel_from = document.getElementById("travel_from").value;
+	var travel_to = document.getElementById("travel_to").value;
+	var travel_location = document.getElementById("travel_location").value;
+	var travel_description = document.getElementById("travel_description").value;
+	
+	
+	
+	$.ajax({
+		url: '../saveauth',
+		type: 'post',
+		data: {eid: eid,travel_from:travel_from,travel_to:travel_to,travel_location:travel_location,travel_description:travel_description},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Travel Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("saveauthclosebutton").click();
+			$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deleteauth(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteauth',
+                    type: 'post',
+                    data: {authtravelid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+function addemployeetolist($autid){
 	
 }
