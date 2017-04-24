@@ -32,29 +32,29 @@ CREATE TABLE `employee` (
   `citizenship` varchar(500) DEFAULT 'NONE',
   `height` varchar(500) DEFAULT '0',
   `weight` varchar(500) DEFAULT '0',
-  `blood_type` varchar(500) DEFAULT 'NONE',
-  `mobile_number` varchar(500) DEFAULT 'NONE',
-  `email_address` varchar(500) DEFAULT 'NONE',
-  `a_barangay` varchar(500) DEFAULT 'NONE',
-  `a_towncity` varchar(500) DEFAULT 'NONE',
-  `a_province` varchar(500) DEFAULT 'NONE',
-  `a_zipcode` varchar(500) DEFAULT 'NONE',
+  `blood_type` varchar(500) DEFAULT NULL,
+  `mobile_number` varchar(500) DEFAULT NULL,
+  `email_address` varchar(500) DEFAULT NULL,
+  `a_barangay` varchar(500) DEFAULT NULL,
+  `a_towncity` varchar(500) DEFAULT NULL,
+  `a_province` varchar(500) DEFAULT NULL,
+  `a_zipcode` varchar(500) DEFAULT NULL,
   `date_hired` date DEFAULT NULL,
-  `spouse_lname` varchar(500) DEFAULT 'NONE',
-  `spouse_fname` varchar(500) DEFAULT 'NONE',
-  `spouse_mname` varchar(500) DEFAULT 'NONE',
-  `father_lname` varchar(500) DEFAULT 'NONE',
-  `father_fname` varchar(500) DEFAULT 'NONE',
-  `father_mname` varchar(500) DEFAULT 'NONE',
-  `mother_lname` varchar(500) DEFAULT 'NONE',
-  `mother_fname` varchar(500) DEFAULT 'NONE',
-  `mother_mname` varchar(500) DEFAULT 'NONE',
+  `spouse_lname` varchar(500) DEFAULT NULL,
+  `spouse_fname` varchar(500) DEFAULT NULL,
+  `spouse_mname` varchar(500) DEFAULT NULL,
+  `father_lname` varchar(500) DEFAULT NULL,
+  `father_fname` varchar(500) DEFAULT NULL,
+  `father_mname` varchar(500) DEFAULT NULL,
+  `mother_lname` varchar(500) DEFAULT NULL,
+  `mother_fname` varchar(500) DEFAULT NULL,
+  `mother_mname` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 /*Data for the table `employee` */
 
-insert  into `employee`(`eid`,`empNo`,`lname`,`fname`,`mname`,`ename`,`designation`,`salary`,`dob`,`pob`,`gender`,`civil_status`,`citizenship`,`height`,`weight`,`blood_type`,`mobile_number`,`email_address`,`a_barangay`,`a_towncity`,`a_province`,`a_zipcode`,`date_hired`,`spouse_lname`,`spouse_fname`,`spouse_mname`,`father_lname`,`father_fname`,`father_mname`,`mother_lname`,`mother_fname`,`mother_mname`) values (12,'','ANCHETA-DIEGO','CHERRIE MELANIE','','','Director IV',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(13,'','CASIPIT','MA. GERALDINE','F','','Supervising Education Program Specialist',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(14,'','BUENIO','NYMPHA','N','','Chief Administrative Officer',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(15,'','ADQUILEN','EVELYN','C','','Administrative Officer III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(16,'','AGCAOILI','REYNALDO','D','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(17,'','AGLUGUB','RODOLFO','E','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(18,'','ANCHETA','ARNOLD','V','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(19,'','BOSE','DANILO','B','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(20,'','CABANBAN','CHRISTIANNE LYNNETTE','G','MIT','EDUCATION SUPERVISOR II','SG 18 Step 1 (35,693.00)','1987-12-03','CABA LA UNION','FEMALE','SINGLE','FILIPINO','5\'0\"','60','B+','09175187911','clcabanban@ched.gov.ph','GANA','CABA','LA UNION','2503','2015-11-01','NONE','NONE','NONE','CABANBAN','REYNALDO','','GATBONTON','EILEEN',''),(21,'','CANTOR','MARK ANTHONY','L','','Administrative Aide VI',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(22,'','CHAN','CATHERINE','C','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(23,'','DOLORES','ANGELICA','Q','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(24,'','DULUEÃ‘A','PERFECTO','A','','Administrative Aide VI',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(25,'','FERRER','ANGELA','F','','Education Program Specialist II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(26,'','GALERA JR.','ROGELIO','T','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(27,'','INIGO','KRIZZANE','C','','Administrative Assistant III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(28,'','MENDOZA','MARVIN','I','','Administrative Aide IV',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(29,'','MINA','MYRELLE FAITH','D','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(30,'','MOLINA','FLORANTE','F','','Administrative Aide III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(31,'','MONTEMAYOR','DIANNE JOYCE','B','','Administrative Officer III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(32,'','OLI','CORNELIO','T','','Administrative Aide III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(33,'','QUEZON','MAYROSE','L','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(34,'','NARCEDA','ARGIELYN','','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(35,'','PASCUA','CHARLES VINCENT','','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(36,'','TACTACAN','CIELITO','','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(37,'','VALENCIA','NASTASHA','A','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(38,'','YAMSON','VIC','','','Guard',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(39,'','OLPINDO','AUDIE','','','Guard',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(40,'','ESCAÃ‘O','MELODY','G','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(41,'','ANCHETA','MELQUIDES','','','PTS III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(42,'','JONARD\r\n','GAVO\r\n','','','OJT',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(43,'','FRANCIA\r\n','POLIDO\r\n','','','OJT',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(44,'','CASEM','ELVIN','E','','PTS III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE'),(46,'','juan','connect','','','',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','NONE','NONE','NONE','NONE','NONE','NONE','NONE',NULL,'NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE','NONE');
+insert  into `employee`(`eid`,`empNo`,`lname`,`fname`,`mname`,`ename`,`designation`,`salary`,`dob`,`pob`,`gender`,`civil_status`,`citizenship`,`height`,`weight`,`blood_type`,`mobile_number`,`email_address`,`a_barangay`,`a_towncity`,`a_province`,`a_zipcode`,`date_hired`,`spouse_lname`,`spouse_fname`,`spouse_mname`,`father_lname`,`father_fname`,`father_mname`,`mother_lname`,`mother_fname`,`mother_mname`) values (12,'','ANCHETA-DIEGO','CHERRIE MELANIE','','','Director IV',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(13,'','CASIPIT','MA. GERALDINE','F','','Supervising Education Program Specialist',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(14,'','BUENIO','NYMPHA','N','','Chief Administrative Officer',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(15,'','ADQUILEN','EVELYN','C','','Administrative Officer III',NULL,'0000-11-30','','FEMALE','MARRIED','FILIPINO','0','0','','NONE','NONE','','','','','0000-00-00','','','','','','','','',''),(16,'','AGCAOILI','REYNALDO','D','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(17,'','AGLUGUB','RODOLFO','E','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(18,'','ANCHETA','ARNOLD','V','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(19,'','BOSE','DANILO','B','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(20,'','CABANBAN','CHRISTIANNE LYNNETTE','G','MIT','EDUCATION SUPERVISOR II','SG 18 Step 1 (35,693.00)','1987-12-03','CABA LA UNION','FEMALE','SINGLE','FILIPINO','5\'0\"','60','','09175187911','clcabanban@ched.gov.ph','','','','','2015-11-01','','','','CABANBAN','REYNALDO','','GATBONTON','EILEEN',''),(21,'','CANTOR','MARK ANTHONY','L','','Administrative Aide VI',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(22,'','CHAN','CATHERINE','C','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(24,'','DULUEÃ‘A','PERFECTO','A','','Administrative Aide VI',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(25,'','FERRER','ANGELA','F','','Education Program Specialist II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(26,'','GALERA JR.','ROGELIO','T','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(27,'','INIGO','KRIZZANE','C','','Administrative Assistant III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(28,'','MENDOZA','MARVIN','I','','Administrative Aide IV',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(29,'','MINA','MYRELLE FAITH','D','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(30,'','MOLINA','FLORANTE','F','','Administrative Aide III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(31,'','MONTEMAYOR','DIANNE JOYCE','B','','Administrative Officer III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(32,'','OLI','CORNELIO','T','','Administrative Aide III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(33,'','QUEZON','MAYROSE','L','','Education Supervisor II',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(34,'','NARCEDA','ARGIELYN','','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(35,'','PASCUA','CHARLES VINCENT','','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(36,'','TACTACAN','CIELITO','M','','Job Order',NULL,'1980-01-01','','Male','Single','FILIPINO','0','0','','NONE','NONE','','','','','2013-01-01','','','','','','','','',''),(37,'','VALENCIA','NASTASHA','A','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(38,'','YAMSON','VIC','','','Guard',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(39,'','OLPINDO','AUDIE','','','Guard',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(40,'','ESCAÃ‘O','MELODY','G','','Job Order',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(41,'','ANCHETA','MELQUIDES','','','PTS III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(42,'','JONARD\r\n','GAVO\r\n','','','OJT',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(43,'','FRANCIA\r\n','POLIDO\r\n','','','OJT',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(44,'','CASEM','ELVIN','E','','PTS III',NULL,NULL,NULL,NULL,NULL,NULL,'0','0','','NONE','NONE','','','','',NULL,'','','','','','','','',''),(47,'23','last','first','middle','','','NONE','0000-00-00','',NULL,NULL,'','0','0','','NONE','NONE','','','','','0000-00-00','','','','','','','','',''),(48,'','Munar','Immanuel','M','','job order','NONE','0000-00-00','NONE',NULL,NULL,'NONE','0','0','','','','','','','','2017-03-01',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `employee_award` */
 
@@ -67,9 +67,11 @@ CREATE TABLE `employee_award` (
   `award_description` text,
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`awardid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_award` */
+
+insert  into `employee_award`(`awardid`,`award_date`,`award_department`,`award_description`,`eid`) values (1,'2016-12-12','DEPARTMENT','Award description',20);
 
 /*Table structure for table `employee_career_service` */
 
@@ -101,11 +103,11 @@ CREATE TABLE `employee_children` (
   `children_name` varchar(500) DEFAULT NULL,
   `children_bdate` date DEFAULT NULL,
   PRIMARY KEY (`childrenid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_children` */
 
-insert  into `employee_children`(`childrenid`,`eid`,`children_name`,`children_bdate`) values (1,20,'Children 1','2018-01-01');
+insert  into `employee_children`(`childrenid`,`eid`,`children_name`,`children_bdate`) values (4,20,'Juan De La Cruz','1990-01-01');
 
 /*Table structure for table `employee_educational_background` */
 
@@ -138,12 +140,14 @@ CREATE TABLE `employee_files` (
   `file_document_type` varchar(500) DEFAULT NULL,
   `file_description` varchar(500) DEFAULT NULL,
   `file_date` date DEFAULT NULL,
-  `file_name` varchar(500) DEFAULT NULL,
+  `file_name` varchar(500) DEFAULT 'NONE',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`filesid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_files` */
+
+insert  into `employee_files`(`filesid`,`file_document_type`,`file_description`,`file_date`,`file_name`,`eid`) values (1,'Service Contract','CONTRACT DOCUMENT','2017-04-01','sc20_123456.pdf',20),(2,'CSC FORM 212','cscs','2017-04-24','NONE',20);
 
 /*Table structure for table `employee_leave_application` */
 
@@ -155,13 +159,16 @@ CREATE TABLE `employee_leave_application` (
   `appleave_location` varchar(500) DEFAULT 'NONE',
   `appleave_from` date DEFAULT NULL,
   `appleave_to` date DEFAULT NULL,
+  `appleave_commutation` varchar(500) DEFAULT NULL,
   `appleave_recommendation` text,
   `appleave_status` varchar(500) DEFAULT 'PENDING',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`appleaveid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_leave_application` */
+
+insert  into `employee_leave_application`(`appleaveid`,`appleave_type`,`appleave_location`,`appleave_from`,`appleave_to`,`appleave_commutation`,`appleave_recommendation`,`appleave_status`,`eid`) values (5,'VACATION LEAVE','','0000-00-00','0000-00-00','REQUESTED','','PENDING',20);
 
 /*Table structure for table `employee_leave_credits` */
 
@@ -182,10 +189,13 @@ CREATE TABLE `employee_leave_credits` (
   `sick_abswop` varchar(500) DEFAULT 'NONE',
   `sick_action` text,
   `eid` bigint(20) DEFAULT NULL,
+  `leave_time_stamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`leavecreditsid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_leave_credits` */
+
+insert  into `employee_leave_credits`(`leavecreditsid`,`leave_from`,`leave_to`,`leave_particular`,`leave_earned`,`leave_absences`,`leave_balance`,`leave_abswop`,`sick_earned`,`sick_abswp`,`sick_balance`,`sick_abswop`,`sick_action`,`eid`,`leave_time_stamp`) values (5,'2017-04-01','2017-04-30','BALANCE BROUGHT FORWARD',0.000,'0000-00-00',30.000,'',0.000,'',30.000,'','BALANCE BROUGHT FORWARD',20,'2017-04-24 15:59:34');
 
 /*Table structure for table `employee_other_information` */
 
@@ -197,9 +207,11 @@ CREATE TABLE `employee_other_information` (
   `information_description` text,
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`otherid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_other_information` */
+
+insert  into `employee_other_information`(`otherid`,`information_type`,`information_description`,`eid`) values (1,'Special Skills and Hobbies','Graphic Design / Web Development',20),(2,'Non-Academic Distinctions / Recognition','Google Education Innovator',20),(3,'Membership in Association / Organization','Hukbong Litratista ng La Union',20);
 
 /*Table structure for table `employee_rating` */
 
@@ -209,12 +221,14 @@ CREATE TABLE `employee_rating` (
   `ratingid` bigint(20) NOT NULL AUTO_INCREMENT,
   `rating_from` date DEFAULT '0000-00-00',
   `rating_to` date DEFAULT '0000-00-00',
-  `rating` double(10,2) DEFAULT '0.00',
+  `rating_value` varchar(500) DEFAULT 'NONE',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ratingid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_rating` */
+
+insert  into `employee_rating`(`ratingid`,`rating_from`,`rating_to`,`rating_value`,`eid`) values (1,'2016-01-01','2016-12-31','Very Satisfactory',20),(2,'2017-04-02','2017-04-02',NULL,20);
 
 /*Table structure for table `employee_service_record` */
 
@@ -233,9 +247,11 @@ CREATE TABLE `employee_service_record` (
   `service_separation` varchar(500) DEFAULT 'NONE',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`servicerecordid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_service_record` */
+
+insert  into `employee_service_record`(`servicerecordid`,`service_from`,`service_to`,`service_position`,`service_status`,`service_salary`,`service_station`,`service_branch`,`service_leave`,`service_separation`,`eid`) values (1,'2010-01-01','2015-12-31','INSTRUCTOR I','PERMANENT',150000.00,'DMMMSU-SLUC COLLEGE OF COMPUTER SCIENCE','PRIVATE','NONE','NONE',20);
 
 /*Table structure for table `employee_training` */
 
@@ -251,9 +267,11 @@ CREATE TABLE `employee_training` (
   `training_by` varchar(500) DEFAULT 'NONE',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`trainingid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_training` */
+
+insert  into `employee_training`(`trainingid`,`training_title`,`training_from`,`training_to`,`training_hours`,`training_type`,`training_by`,`eid`) values (1,'Training Title','2015-01-01','2015-01-05',5.00,'PRIVATE','GOOGLE',20);
 
 /*Table structure for table `employee_travel` */
 
@@ -267,9 +285,11 @@ CREATE TABLE `employee_travel` (
   `travel_description` text,
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`authtravelid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_travel` */
+
+insert  into `employee_travel`(`authtravelid`,`travel_from`,`travel_to`,`travel_location`,`travel_description`,`eid`) values (1,'2017-04-01','2017-04-02','Dagupan, Pangasinan','HEI Monitoring',20),(3,'2017-04-01','2017-04-02','san fernando','san fernando',20);
 
 /*Table structure for table `employee_travel_eid` */
 
@@ -280,9 +300,11 @@ CREATE TABLE `employee_travel_eid` (
   `authtravelid` bigint(20) DEFAULT NULL,
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`travelemployeeid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_travel_eid` */
+
+insert  into `employee_travel_eid`(`travelemployeeid`,`authtravelid`,`eid`) values (1,1,20),(2,1,21);
 
 /*Table structure for table `settings_position_designation` */
 
@@ -292,11 +314,11 @@ CREATE TABLE `settings_position_designation` (
   `positionid` bigint(20) NOT NULL AUTO_INCREMENT,
   `position_designation` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`positionid`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `settings_position_designation` */
 
-insert  into `settings_position_designation`(`positionid`,`position_designation`) values (1,'OJT'),(2,'PTS III'),(3,'GUARD'),(4,'JOB ORDER'),(5,'ADMINISTRATIVE AIDE III'),(6,'ADMINISTRATIVE AIDE IV'),(7,'ADMINISTRATIVE ASSISTANT III'),(8,'EDUCATION PROGRAM SPECIALIST II'),(9,'ADMINISTRATIVE AIDE VI'),(10,'EDUCATION SUPERVISOR II'),(11,'ADMINISTRATIVE OFFICE III'),(12,'CHIEF ADMINISTRATIVE OFFICE'),(13,'SUPERVISING EDUCATION PROGRAM SPECIALIST'),(14,'DIRECTOR IV');
+insert  into `settings_position_designation`(`positionid`,`position_designation`) values (1,'OJT'),(2,'PTS III'),(3,'GUARD'),(4,'JOB ORDER'),(5,'ADMINISTRATIVE AIDE III'),(6,'ADMINISTRATIVE AIDE IV'),(7,'ADMINISTRATIVE ASSISTANT III'),(8,'EDUCATION PROGRAM SPECIALIST II'),(9,'ADMINISTRATIVE AIDE VI'),(10,'EDUCATION SUPERVISOR II'),(12,'CHIEF ADMINISTRATIVE OFFICE'),(13,'SUPERVISING EDUCATION PROGRAM SPECIALIST'),(14,'DIRECTOR IV'),(15,'ADMINISTRATIVE OFFICER III');
 
 /*Table structure for table `users` */
 
