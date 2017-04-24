@@ -206,5 +206,208 @@ class Employees extends CI_Controller
 		
 	}
 	
+	public function upload_attachment(){
+		//$fileid = 456;
+		$fileid = $this->input->post('fileid');
+		//$form_value = 
+		 //$newfilename = $fileid."jpg";
+         $config['upload_path']   = './uploads/'; 
+         $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+         $config['max_size']      = 2048; 
+         $config['max_width']     = 2048; 
+         $config['max_height']    = 2048;  
+         $config['overwrite']    = true;  
+         $config['file_name']    = $fileid.".jpg";  
+         $this->load->library('upload', $config);
+			
+         if ( ! $this->upload->do_upload('profileimage')) {
+            $error = array('error' => $this->upload->display_errors()); 
+            $this->load->view('upload_form', $error); 
+			//show_404();
+         }
+			
+         else { 
+            $data = array('upload_data' => $this->upload->data()); 
+            //$this->load->view('upload_success', $data); 
+			//header('Location:profile/'.$eid);
+         } 
+		
+	}
+	
+	
+	
+	/* educational background*/
+	public function saveeduc(){
+		$eid = $this->input->post('eid');
+		$level = $this->input->post('level');
+		$nameofschool = $this->input->post('nameofschool');
+		$basiceducation = $this->input->post('basiceducation');
+		$period_from = $this->input->post('period_from');
+		$period_to = $this->input->post('period_to');
+		$highest_level = $this->input->post('highest_level');
+		$year_graduated = $this->input->post('year_graduated');
+		$scholar_received = $this->input->post('scholar_received');
+		
+		$this->employees_model->saveeduc($eid,$level,$nameofschool,$basiceducation,$period_from,$period_to,$highest_level,$year_graduated,$scholar_received);
+	}
+	
+	public function deleteeduc(){
+		$educbackgroundid = $this->input->post('educbackgroundid');
+		$this->db->delete('employee_educational_background', array('educbackgroundid' => $educbackgroundid));
+		
+	}
+	/*career service*/
+	public function savecareer(){
+		$eid = $this->input->post('eid');
+		$career_description = $this->input->post('career_description');
+		$career_rating = $this->input->post('career_rating');
+		$career_date = $this->input->post('career_date');
+		$career_place = $this->input->post('career_place');
+		$career_number = $this->input->post('career_number');
+		$career_validity = $this->input->post('career_validity');
+		
+		
+		$this->employees_model->savecareer($eid,$career_description,$career_rating,$career_date,$career_place,$career_number,$career_validity,$eid);
+	}
+	
+	public function deletecareer(){
+		$civilserviceid = $this->input->post('civilserviceid');
+		$this->db->delete('employee_career_service', array('civilserviceid' => $civilserviceid));
+		
+	}
+	
+	/* work/service record */
+
+	public function savework(){
+		$eid = $this->input->post('eid');
+		$service_from = $this->input->post('service_from');
+		$service_to = $this->input->post('service_to');
+		$service_position = $this->input->post('service_position');
+		$service_status = $this->input->post('service_status');
+		$service_salary = $this->input->post('service_salary');
+		$service_station = $this->input->post('service_station');
+		$service_branch = $this->input->post('service_branch');
+		$service_leave = $this->input->post('service_leave');
+		$service_separation = $this->input->post('service_separation');
+		
+		
+		$this->employees_model->savework($eid,$service_from,$service_to,$service_position,$service_status,$service_salary,$service_station,$service_branch,$service_separation,$service_leave);
+	}
+	
+	public function deletework(){
+		$servicerecordid = $this->input->post('servicerecordid');
+		$this->db->delete('employee_service_record', array('servicerecordid' => $servicerecordid));
+		
+	}
+	
+	/* training record */
+
+	public function savetraining(){
+		$eid = $this->input->post('eid');
+		$training_title = $this->input->post('training_title');
+		$training_from = $this->input->post('training_from');
+		$training_to = $this->input->post('training_to');
+		$training_hours = $this->input->post('training_hours');
+		$training_type = $this->input->post('training_type');
+		$training_by = $this->input->post('training_by');
+
+		
+		
+		$this->employees_model->savetraining($eid,$training_title,$training_from,$training_to,$training_hours,$training_type,$training_by);
+	}
+	
+	public function deletetraining(){
+		$trainingid = $this->input->post('trainingid');
+		$this->db->delete('employee_training', array('trainingid' => $trainingid));
+		
+	}
+	
+/* award record */
+
+	public function saveaward(){
+		$eid = $this->input->post('eid');
+		$award_date = $this->input->post('award_date');
+		$award_department = $this->input->post('award_department');
+		$award_description = $this->input->post('award_description');
+		
+		
+		
+		$this->employees_model->saveaward($eid,$award_date,$award_department,$award_description);
+	}
+	
+	public function deleteaward(){
+		$awardid = $this->input->post('awardid');
+		$this->db->delete('employee_award', array('awardid' => $awardid));
+		
+	}
+	/* award record */
+
+	public function saveother(){
+		$eid = $this->input->post('eid');
+		$information_type = $this->input->post('information_type');
+		$information_description = $this->input->post('information_description');
+		
+		
+		$this->employees_model->saveother($eid,$information_type,$information_description);
+	}
+	
+	public function deleteother(){
+		$otherid = $this->input->post('otherid');
+		$this->db->delete('employee_other_information', array('otherid' => $otherid));
+		
+	}
+
+	public function savefile(){
+		$eid = $this->input->post('eid');
+		$file_document_type = $this->input->post('file_document_type');
+		$file_description = $this->input->post('file_description');
+		$file_date = $this->input->post('file_date');
+		
+		
+		$this->employees_model->savefile($eid,$file_document_type,$file_description,$file_date);
+	}
+	
+	public function deletefile(){
+		$filesid = $this->input->post('filesid');
+		$this->db->delete('employee_files', array('filesid' => $filesid));
+		
+	}
+	public function saverating(){
+		$eid = $this->input->post('eid');
+		$rating_from = $this->input->post('rating_from');
+		$rating_to = $this->input->post('rating_to');
+		$rating = $this->input->post('rating');
+		
+		
+		$this->employees_model->saverating($eid,$rating_from,$rating_to,$rating);
+	}
+	
+	public function deleterating(){
+		$ratingid = $this->input->post('ratingid');
+		$this->db->delete('employee_rating', array('ratingid' => $ratingid));
+		
+	}
+	public function saveleavecredit(){
+		$eid = $this->input->post('eid');
+		$leave_from = $this->input->post('leave_from');
+		$leave_to = $this->input->post('leave_to');
+		$leave_particular = $this->input->post('leave_particular');
+		$leave_earned = $this->input->post('leave_earned');
+		$leave_absences = $this->input->post('leave_absences');
+		$leave_abswop = $this->input->post('leave_abswop');
+		$sick_earned = $this->input->post('sick_earned');
+		$sick_abswp = $this->input->post('sick_abswp');
+		$sick_abswop = $this->input->post('sick_abswop');
+		$sick_action = $this->input->post('sick_action');
+		
+		
+		$this->employees_model->saveleavecredit($eid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action);
+	}
+	
+	public function deleteleavecredit(){
+		$leavecreditsid = $this->input->post('leavecreditsid');
+		$this->db->delete('employee_leave_credits', array('leavecreditsid' => $leavecreditsid));
+		
+	}
 
 }

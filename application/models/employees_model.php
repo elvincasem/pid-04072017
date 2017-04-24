@@ -161,6 +161,90 @@ class Employees_model extends CI_Model
 		
 	}
 	
+	public function saveeduc($eid,$level,$nameofschool,$basiceducation,$period_from,$period_to,$highest_level,$year_graduated,$scholar_received)
+	{
+		
+		$sql = "INSERT INTO employee_educational_background (level,name_of_school,basic_education,period_from,period_to,highest_level,year_graduated,scholar_received,eid) VALUES (".$this->db->escape($level).",".$this->db->escape($nameofschool).",".$this->db->escape($basiceducation).",".$this->db->escape($period_from).",".$this->db->escape($period_to).",".$this->db->escape($highest_level).",".$this->db->escape($year_graduated).",".$this->db->escape($scholar_received).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function savecareer($eid,$career_description,$career_rating,$career_date,$career_place,$career_number,$career_validity,$eid)
+	{
+		
+		$sql = "INSERT INTO employee_career_service(career_description,career_rating,career_date,career_place,career_number,career_validity,eid) VALUES (".$this->db->escape($career_description).",".$this->db->escape($career_rating).",".$this->db->escape($career_date).",".$this->db->escape($career_place).",".$this->db->escape($career_number).",".$this->db->escape($career_validity).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function savework($eid,$service_from,$service_to,$service_position,$service_status,$service_salary,$service_station,$service_branch,$service_separation,$service_leave)
+	{
+		
+		$sql = "INSERT INTO employee_service_record(service_from,service_to,service_position,service_status,service_salary,service_station,service_branch,service_leave,service_separation,eid) VALUES (".$this->db->escape($service_from).",".$this->db->escape($service_to).",".$this->db->escape($service_position).",".$this->db->escape($service_status).",".$this->db->escape($service_salary).",".$this->db->escape($service_station).",".$this->db->escape($service_branch).",".$this->db->escape($service_leave).",".$this->db->escape($service_separation).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function savetraining($eid,$training_title,$training_from,$training_to,$training_hours,$training_type,$training_by)
+	{
+		
+		$sql = "INSERT INTO employee_training(training_title,training_from,training_to,training_hours,training_type,training_by,eid) VALUES (".$this->db->escape($training_title).",".$this->db->escape($training_from).",".$this->db->escape($training_to).",".$this->db->escape($training_hours).",".$this->db->escape($training_type).",".$this->db->escape($training_by).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function saveaward($eid,$award_date,$award_department,$award_description)
+	{
+		
+		$sql = "INSERT INTO employee_award(award_date,award_department,award_description,eid) VALUES (".$this->db->escape($award_date).",".$this->db->escape($award_department).",".$this->db->escape($award_description).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
+	public function saveother($eid,$information_type,$information_description)
+	{
+		
+		$sql = "INSERT INTO employee_other_information(information_type,information_description,eid) VALUES (".$this->db->escape($information_type).",".$this->db->escape($information_description).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
+	public function savefile($eid,$file_document_type,$file_description,$file_date)
+	{
+		
+		$sql = "INSERT INTO employee_files(file_document_type,file_description,file_date,eid) VALUES (".$this->db->escape($file_document_type).",".$this->db->escape($file_description).",".$this->db->escape($file_date).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function saverating($eid,$rating_from,$rating_to,$rating)
+	{
+		
+		$sql = "INSERT INTO employee_rating(rating_from,rating_to,rating_value,eid) VALUES (".$this->db->escape($rating_from).",".$this->db->escape($rating_to).",".$this->db->escape($rating).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	public function saveleavecredit($eid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action)
+	{
+		
+		$sql = "INSERT INTO employee_leave_credits(leave_from,leave_to,leave_particular,leave_earned,leave_absences,leave_abswop,sick_earned,sick_abswp,sick_abswop,sick_action,eid) VALUES (".$this->db->escape($leave_from).",".$this->db->escape($leave_to).",".$this->db->escape($leave_particular).",".$this->db->escape($leave_earned).",".$this->db->escape($leave_absences).",".$this->db->escape($leave_abswop).",".$this->db->escape($sick_earned).",".$this->db->escape($sick_abswp).",".$this->db->escape($sick_abswop).",".$this->db->escape($sick_action).",".$this->db->escape($eid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
 	
 }
 

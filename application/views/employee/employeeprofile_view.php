@@ -1,6 +1,6 @@
 
 <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
-	
+			 <input type="hidden" id="eid" name="eid" value="<?php echo $eid;?>">
 	
 	<!--rightsidebar here-->
 	<?php //$this->load->view('rightsidebar_view'); ?>
@@ -99,8 +99,8 @@
                                         </div>
                                         <ul class="nav nav-tabs" data-toggle="tabs">
 											
-                                            <li class="active"><a href="#profile-gallery">Personal Information</a></li>
-                                           <li><a href="#familybackground">Family Background</a></li>
+                                            <li class="active"><a href="#profile-gallery"><i class="fa fa-user"></i> Personal Information</a></li>
+                                           <li><a href="#familybackground"><i class="fa fa-users"></i> Family Background</a></li>
 										  
                                         </ul>
                                     </div>
@@ -178,7 +178,7 @@
 								if($employee_profile['civil_status']=="SINGLE"){
 									$civils = "checked='checked'";
 									$civilm = "";
-								}elseif($employee_profile['civil_status']=="SINGLE"){
+								}elseif($employee_profile['civil_status']=="MARRIED"){
 									$civilm = "checked='checked'";
 									$civils = "";
 								}else{
@@ -431,12 +431,12 @@
                                             <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
                                         <ul class="nav nav-tabs" data-toggle="tabs">
-                                            <li class="active"><a href="#block-tabs-home">PDS Related Files</a></li>
-                                            <li><a href="#block-tabs-profile">201 Files</a></li>
-											<li><a href="#rating">Rating</a></li>
-											<li><a href="#leave-credits">Leave Credits</a></li>
-                                            <li><a href="#request-approvals">Request/Approvals</a></li>
-                                            <li><a href="#authority-to-travel">Authority to Travel</a></li>
+                                            <li class="active"><a href="#block-tabs-home"><i class="fa fa-file-pdf-o"></i> PDS Related Files</a></li>
+                                            <li><a href="#block-tabs-profile"><i class="fa fa-paperclip"></i> 201 Files</a></li>
+											<li><a href="#rating"><i class="fa fa-percent"></i> Rating</a></li>
+											<li><a href="#leave-credits"><i class="fa fa-calendar-plus-o"></i> Leave Credits</a></li>
+                                            <li><a href="#request-approvals"><i class="fa fa-calendar-check-o"></i> Request/Approvals</a></li>
+                                            <li><a href="#authority-to-travel"><i class="fa fa-automobile"></i> Authority to Travel</a></li>
                                             <li class="hidden"><a href="#daily-time-record">Daily Time Record</a></li>
                                             <li class="hidden"><a href="#block-tabs-settings" data-toggle="tooltip" title="Settings"><i class="gi gi-settings"></i></a></li>
                                         </ul>
@@ -475,7 +475,7 @@
 										echo "<td>".$background['year_graduated']."</td>";
 										echo "<td>".$background['scholar_received']."</td>";
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <button onclick='deleteeduc(".$background['educbackgroundid'].")' class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -515,7 +515,7 @@
 										
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times' onclick='deletecareer(".$careerservice['civilserviceid'].");'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -563,7 +563,7 @@
 										
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletework(".$servicerecord['servicerecordid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -601,7 +601,7 @@
 										echo "<td>".$training['training_type']."</td>";
 										echo "<td>".$training['training_by']."</td>";
 
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletetraining(".$training['trainingid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -633,7 +633,7 @@
 										echo "<td>".$award['award_department']."</td>";
 										echo "<td>".$award['award_description']."</td>";
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteaward(".$award['awardid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -667,7 +667,7 @@
 										echo "<td>".$others['information_type']."</td>";
 										echo "<td>".$others['information_description']."</td>";
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteother(".$others['otherid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -706,10 +706,10 @@
 										echo "<td>".$files['file_document_type']."</td>";
 										echo "<td>".$files['file_description']."</td>";
 										echo "<td>".mdate('%F %d, %Y',strtotime($files['file_date']))."</td>";
-										echo "<td><a href='#'>".$files['file_name']."</a></td>";
+										//echo "<td><a href='#'>".$files['file_name']."</a></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
 										
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletefile(".$files['filesid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -859,10 +859,10 @@
 										echo "<tr>";
 										
 										echo "<td>".mdate('%F %d, %Y',strtotime($rating['rating_from']))." - ".mdate('%F %d, %Y',strtotime($rating['rating_to']))."</td>";
-										echo "<td>".$rating['rating']."</td>";
+										echo "<td>".$rating['rating_value']."</td>";
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil' disabled></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleterating(".$rating['ratingid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -983,46 +983,49 @@
 						<div class="modal-body">
 						<input type="hidden" id="spaymentid">
 						<label class="col-md-3 control-label" for="state-normal">Level</label>
-						<div class="col-md-3">
-								<select class="form-control" id="semester">
-									<option value="Tertiary">Tertiary</option>
-									<option value="Secondary">Secondary</option>
+						<div class="col-md-6">
+								<select class="form-control" id="level">
+									<option value="ELEMENTARY">ELEMENTARY</option>
+									<option value="SECONDARY">SECONDARY</option>
+									<option value="VOCATIONAL / TRADE COURSE">VOCATIONAL / TRADE COURSE</option>
+									<option value="COLLEGE">COLLEGE</option>
+									<option value="GRADUATE STUDIES">GRADUATE STUDIES</option>
 								</select>
 						</div>
 						<div class="row"></div>
 						 <label class="col-md-3 control-label" for="state-normal">Name of School</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="nameofschool">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Basic Education/ Degree/ Course</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="basiceducation">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Period of Attendance</label>
 							<div class="col-md-9">
-							   <div class="input-group input-daterange" data-date-format="mm/dd/yyyy">
-									<input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+									<input type="text" id="period_from" name="example-daterange1" class="form-control" placeholder="From">
 									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-									<input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+									<input type="text" id="period_to" name="example-daterange2" class="form-control" placeholder="To">
 								</div>
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Highest Level/ Units Earned</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="highest_level">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Year Graduated</label>
 							<div class="col-md-3">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="year_graduated">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Scholarship/ Academic Honors Received</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="scholar_received">
 							</div>
 						
 							
@@ -1030,9 +1033,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveeduc();" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="closeeducbutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1055,33 +1058,33 @@
 						
 						 <label class="col-md-12 control-label" for="state-normal">Career Service/ Ra 1080 (Board/ Bar) Under Special Laws/CES/CSEE/Barangay Eligibility / Driver's License</label>
 							<div class="col-md-12">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="career_description">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Rating</label>
 							<div class="col-md-3">
-							   <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="number" name="state-normal" class="form-control" id="career_rating">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Date Of Examination / Conferment</label>
 							<div class="col-md-8">
-							   <input type="text" id="example-datepicker" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   <input type="text" id="career_date" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Place Of Examination / Conferment</label>
 							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="career_place">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">License Number</label>
 							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="career_number">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Date of Validity</label>
 							<div class="col-md-8">
-							   <input type="text" id="example-datepicker" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   <input type="text" id="career_validity" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							</div>
 						
 							
@@ -1089,9 +1092,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savecareer();" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="careerclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1114,41 +1117,46 @@
 						
 						 <label class="col-md-3 control-label" for="state-normal">Inclusive Dates</label>
 							<div class="col-md-9">
-							   <div class="input-group input-daterange" data-date-format="mm/dd/yyyy">
-									<input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+									<input type="text" id="service_from" name="example-daterange1" class="form-control" placeholder="From">
 									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-									<input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+									<input type="text" id="service_to" name="example-daterange2" class="form-control" placeholder="To">
 								</div>
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Position/Designation</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="service_position">
+							</div>
+						<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Status</label>
+							<div class="col-md-9">
+							   <input type="text" name="state-normal" class="form-control" id="service_status">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Salary/Job/Pay Grade</label>
 							<div class="col-md-9">
-							   <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="number" name="state-normal" class="form-control" id="service_salary">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Station/Place of Assignment</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="service_station">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Branch</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="service_branch">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Leave w/o Pay</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="service_leave">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Separation Date / Cause</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="service_separation">
 							</div>
 						
 						
@@ -1157,9 +1165,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savework();" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="workclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1178,37 +1186,37 @@
 							<h3 class="modal-title"><strong>TRAINING</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
+						
 						
 						 <label class="col-md-12 control-label" for="state-normal">Title Of Learning And Development Interventions/Training Programs</label>
 							<div class="col-md-12">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="training_title">
 							</div>
 							
 						 <label class="col-md-4 control-label" for="state-normal">Inclusive Dates Of Attendance</label>
 							<div class="col-md-8">
-							   <div class="input-group input-daterange" data-date-format="mm/dd/yyyy">
-									<input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+									<input type="text" id="training_from" name="example-daterange1" class="form-control" placeholder="From">
 									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-									<input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+									<input type="text" id="training_to" name="example-daterange2" class="form-control" placeholder="To">
 								</div>
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Number of Hours</label>
 							<div class="col-md-4">
-							   <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="number" name="state-normal" class="form-control" id="training_hours">
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Type of LD( Managerial/ Supervisory/Technical/etc)</label>
 							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="training_type">
 							</div>
 						
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Conducted/ Sponsored By</label>
 							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="training_by">
 							</div>
 						
 						
@@ -1218,9 +1226,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" id="savebutton" onclick="savetraining();">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="trainingclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1239,24 +1247,21 @@
 							<h3 class="modal-title"><strong>AWARD/S RECEIVED</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
-						
-						
-							
+													
 						 <label class="col-md-4 control-label" for="state-normal">Award Date</label>
 							<div class="col-md-8">
-							   <input type="text" id="example-datepicker" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   <input type="text" id="award_date" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Department/ Agency/ Office/Company</label>
 							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+							   <input type="text" name="state-normal" class="form-control" id="award_department">
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Description</label>
 							<div class="col-md-8">
-								<textarea class="form-control" name="state-normal"  ></textarea>
+								<textarea class="form-control" name="state-normal"  id="award_description"></textarea>
 							   
 							</div>
 							
@@ -1269,9 +1274,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" id="savebutton"  onclick="saveaward();">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="awardclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1296,10 +1301,10 @@
 							
 						 <label class="col-md-4 control-label" for="state-normal">Information Type</label>
 							<div class="col-md-8">
-							  <select class="form-control">
-								<option>Special Skills and Hobbies</option>
-								<option>Non-Academic Distinctions / Recognition</option>
-								<option>Membership In Association/Organization</option>
+							  <select class="form-control" id="information_type">
+								<option value="SPECIAL SKILLS AND HOBBIES">SPECIAL SKILLS AND HOBBIES</option>
+								<option value="NON-ACADEMIC DISTINCTIONS / RECOGNITION">NON-ACADEMIC DISTINCTIONS / RECOGNITION</option>
+								<option value="MEMBERSHIP IN ASSOCIATION / ORGANIZATION">MEMBERSHIP IN ASSOCIATION / ORGANIZATION</option>
 							  </select>
 							</div>
 						
@@ -1307,7 +1312,7 @@
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Description</label>
 							<div class="col-md-8">
-								<textarea class="form-control" name="state-normal"  ></textarea>
+								<textarea class="form-control" name="state-normal"  id="information_description"></textarea>
 							   
 							</div>
 							
@@ -1320,9 +1325,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveother();" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="otherclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1347,10 +1352,20 @@
 							
 						 <label class="col-md-4 control-label" for="state-normal">Document Type</label>
 							<div class="col-md-8">
-							  <select class="form-control">
-								<option>Special Skills and Hobbies</option>
-								<option>Non-Academic Distinctions / Recognition</option>
-								<option>Membership In Association/Organization</option>
+							  <select class="form-control" id="file_document_type">
+								<option value="CSC FORM 212">CSC FORM 212 (Personal Data Sheet)</option>
+								<option value="CS Form 33">CS Form 33 (Appointment Form)</option>
+								<option value="POSITION DESCRIPTION FORM">POSITION DESCRIPTION FORM</option>
+								<option value="NEURO-PSYCHIATRIC EXAMINATION">NEURO-PSYCHIATRIC EXAMINATION</option>
+								<option value="LICENSES">LICENSES</option>
+								<option value="PERFORMANCE EVALUATION DOCUMENTS">PERFORMANCE EVALUATION DOCUMENTS</option>
+								<option value="SPECIAL ORDER">SPECIAL ORDER</option>
+								<option value="DISCIPLINARY ACTION">DISCIPLINARY ACTION</option>
+								<option value="SERVICE CONTRACT">SERVICE CONTRACT</option>
+								<option value="MEDICAL CERTIFICATE">MEDICAL CERTIFICATE</option>
+								<option value="NBI CLEARANCE">NBI CLEARANCE</option>
+								<option value="OTHER DOCUMENT">OTHER DOCUMENT</option>
+								
 							  </select>
 							</div>
 						
@@ -1358,23 +1373,18 @@
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Description</label>
 							<div class="col-md-8">
-								<textarea class="form-control" name="state-normal"  ></textarea>
+								<textarea class="form-control" name="state-normal" id="file_description" ></textarea>
 							   
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Date</label>
 							<div class="col-md-8">
-								<input type="text" id="paymentdate" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+								<input type="text" id="file_date" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							   
 							</div>
 							
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">File Attachment</label>
-							<div class="col-md-8">
-								<input type = "file" name = "assetimage" id = "assetimage" size = "10" class="col-md-8" /> 
-							   
-							</div>
+					
 							
 						
 						
@@ -1385,9 +1395,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savefile();" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="fileclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1405,22 +1415,22 @@
 							<h3 class="modal-title"><strong>Performance Rating</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
-						
-						
-							
-						 
+							 
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Rating Period</label>
 							<div class="col-md-8">
-								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment" placeholder="2016-2017">
+								<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+									<input type="text" id="rating_from" name="example-daterange1" class="form-control" placeholder="From">
+									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
+									<input type="text" id="rating_to" name="example-daterange2" class="form-control" placeholder="To">
+								</div>
 							   
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Rating</label>
 							<div class="col-md-8">
-								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+								 <input type="text" name="state-normal" class="form-control" id="rating_value">
 							   
 							</div>
 							
@@ -1431,9 +1441,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saverating();" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="ratingclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1459,79 +1469,64 @@
 						 <label class="col-md-4 control-label" for="state-normal">Period</label>
 							<div class="col-md-8">
 									<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
-                                                    <input type="text" id="example-daterange1" name="example-daterange1" class="form-control" placeholder="From">
+                                                    <input type="text" id="leave_from" name="example-daterange1" class="form-control" placeholder="From">
                                                     <span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-                                                    <input type="text" id="example-daterange2" name="example-daterange2" class="form-control" placeholder="To">
+                                                    <input type="text" id="leave_to" name="example-daterange2" class="form-control" placeholder="To">
                                                 </div>
 							</div> 
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Particular</label>
 							<div class="col-md-8">
-								<textarea class="form-control" name="state-normal"  ></textarea>
+								<textarea class="form-control" name="state-normal"  id="leave_particular"></textarea>
 							   
 							</div>
 							
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Earned</label>
 							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+								 <input type="number" name="state-normal" class="form-control" id="leave_earned">
 							   
 							</div>
 						
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Absences Undertime w/ Pay</label>
 							<div class="col-md-8">
-								<input type="text" id="paymentdate" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+								<input type="text" id="leave_absences" name="example-datepicker3" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							   
 							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Balance</label>
-							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
-							   
-							</div>
+						
 						
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.</label>
 							<div class="col-md-8">
-								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
+								 <input type="text" name="state-normal" class="form-control" id="leave_abswop">
 							   
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Earned</label>
 							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+								 <input type="number" name="state-normal" class="form-control" id="sick_earned">
 							   
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">ABS.UND.W/P.</label>
 							<div class="col-md-8">
-								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
-							   
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Balance</label>
-							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
-							   
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.</label>
-							<div class="col-md-8">
-								 <input type="text" name="state-normal" class="form-control" id="fundclusterpayment">
-							   
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Total Leave Credits Earned</label>
-							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="fundclusterpayment">
+								 <input type="text" name="state-normal" class="form-control" id="sick_abswp">
 							   
 							</div>
 						
 						<div class="row"></div>
+							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.</label>
+							<div class="col-md-8">
+								 <input type="text" name="state-normal" class="form-control" id="sick_abswop">
+							   
+							</div>
+						\
+						
+						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Date & Action Taken on Appln for Leave</label>
 							<div class="col-md-8">
-								<textarea class="form-control" name="state-normal"  ></textarea>
+								<textarea class="form-control" name="state-normal"  id="sick_action"></textarea>
 							   
 							</div>
 							
@@ -1542,9 +1537,9 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" >Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveleavecredit()" id="savebutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="leavecreditclosebutton">Close</button>
 						</div>
 					</div>
 				</div>

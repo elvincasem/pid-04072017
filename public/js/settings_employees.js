@@ -61,14 +61,14 @@ function updateemployee(id){
 	var dateofbirth = document.getElementById("dateofbirth").value;
 	var placeofbirth = document.getElementById("placeofbirth").value;
 	if(document.getElementById("genderm").checked==true){
-		var gender = "Male";
+		var gender = "MALE";
 	}if(document.getElementById("genderf").checked==true){
-		var gender = "Female";
+		var gender = "FEMALE";
 	}
 	if(document.getElementById("civilstatuss").checked==true){
-		var civilstatus = "Single";
+		var civilstatus = "SINGLE";
 	}if(document.getElementById("civilstatusm").checked==true){
-		var civilstatus = "Married";
+		var civilstatus = "MARRIED";
 	}
 	var citizenship = document.getElementById("citizenship").value;
 	var height = document.getElementById("height").value;
@@ -233,3 +233,619 @@ function uploadprofile(){
 	
 }
 
+
+/*  educational background */
+
+function saveeduc(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var level = document.getElementById("level").value;
+	var nameofschool = document.getElementById("nameofschool").value;
+	var basiceducation = document.getElementById("basiceducation").value;
+	var period_from = document.getElementById("period_from").value;
+	var period_to = document.getElementById("period_to").value;
+	var highest_level = document.getElementById("highest_level").value;
+	var year_graduated = document.getElementById("year_graduated").value;
+	var scholar_received = document.getElementById("scholar_received").value;
+	
+	$.ajax({
+		url: '../saveeduc',
+		type: 'post',
+		data: {eid: eid,level:level,nameofschool:nameofschool,basiceducation:basiceducation,period_from:period_from,period_to:period_to,highest_level:highest_level,year_graduated:year_graduated,scholar_received:scholar_received},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Educational Background Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("closeeducbutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+
+
+function deleteeduc(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteeduc',
+                    type: 'post',
+                    data: {educbackgroundid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+/* save career */
+
+function savecareer(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var career_description = document.getElementById("career_description").value;
+	var career_rating = document.getElementById("career_rating").value;
+	var career_date = document.getElementById("career_date").value;
+	var career_place = document.getElementById("career_place").value;
+	var career_number = document.getElementById("career_number").value;
+	var career_validity = document.getElementById("career_validity").value;
+	
+	
+	$.ajax({
+		url: '../savecareer',
+		type: 'post',
+		data: {eid: eid,career_description:career_description,career_rating:career_rating,career_date:career_date,career_place:career_place,career_number:career_number,career_validity:career_validity},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Educational Background Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("careerclosebutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deletecareer(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deletecareer',
+                    type: 'post',
+                    data: {civilserviceid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+/* save work */
+
+function savework(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var service_from = document.getElementById("service_from").value;
+	var service_to = document.getElementById("service_to").value;
+	var service_position = document.getElementById("service_position").value;
+	var service_status = document.getElementById("service_status").value;
+	var service_salary = document.getElementById("service_salary").value;
+	var service_station = document.getElementById("service_station").value;
+	var service_branch = document.getElementById("service_branch").value;
+	var service_leave = document.getElementById("service_leave").value;
+	var service_separation = document.getElementById("service_separation").value;
+	
+	
+	
+	$.ajax({
+		url: '../savework',
+		type: 'post',
+		data: {eid: eid,service_from:service_from,service_to:service_to,service_position:service_position,service_status:service_status,service_salary:service_salary,service_station:service_station,service_branch:service_branch,service_leave:service_leave,service_separation:service_separation},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Service Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("workclosebutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deletework(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deletework',
+                    type: 'post',
+                    data: {servicerecordid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+/* save training */
+
+function savetraining(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var training_title = document.getElementById("training_title").value;
+	var training_from = document.getElementById("training_from").value;
+	var training_to = document.getElementById("training_to").value;
+	var training_hours = document.getElementById("training_hours").value;
+	var training_type = document.getElementById("training_type").value;
+	var training_by = document.getElementById("training_by").value;
+	
+	
+	
+	
+	$.ajax({
+		url: '../savetraining',
+		type: 'post',
+		data: {eid: eid,training_title:training_title,training_from:training_from,training_to:training_to,training_hours:training_hours,training_type:training_type,training_by:training_by},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("trainingclosebutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deletetraining(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deletetraining',
+                    type: 'post',
+                    data: {trainingid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+/* save award */
+
+function saveaward(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var award_date = document.getElementById("award_date").value;
+	var award_department = document.getElementById("award_department").value;
+	var award_description = document.getElementById("award_description").value;
+
+	
+	
+	
+	
+	$.ajax({
+		url: '../saveaward',
+		type: 'post',
+		data: {eid: eid,award_date:award_date,award_department:award_department,award_description:award_description},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("awardclosebutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deleteaward(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteaward',
+                    type: 'post',
+                    data: {awardid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+/* save other */
+
+function saveother(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var information_type = document.getElementById("information_type").value;
+	var information_description = document.getElementById("information_description").value;
+	
+	
+	$.ajax({
+		url: '../saveother',
+		type: 'post',
+		data: {eid: eid,information_type:information_type,information_description:information_description},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("otherclosebutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deleteother(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteother',
+                    type: 'post',
+                    data: {otherid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+function savefile(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var file_document_type = document.getElementById("file_document_type").value;
+	var file_description = document.getElementById("file_description").value;
+	var file_date = document.getElementById("file_date").value;
+	
+	
+	$.ajax({
+		url: '../savefile',
+		type: 'post',
+		data: {eid: eid,file_document_type:file_document_type,file_description:file_description,file_date:file_date},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("fileclosebutton").click();
+			$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deletefile(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deletefile',
+                    type: 'post',
+                    data: {filesid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+function saverating(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var rating_from = document.getElementById("rating_from").value;
+	var rating_to = document.getElementById("rating_to").value;
+	var rating = document.getElementById("rating_value").value;
+	
+	
+	$.ajax({
+		url: '../saverating',
+		type: 'post',
+		data: {eid: eid,rating_from:rating_from,rating_to:rating_to,rating:rating},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("ratingclosebutton").click();
+			$('#rating').load(document.URL +  ' #rating');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deleterating(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleterating',
+                    type: 'post',
+                    data: {ratingid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#rating').load(document.URL +  ' #rating');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+function saveleavecredit(){
+	
+	$('#savebutton').prop("disabled", true);    
+	var eid = document.getElementById("eid").value;
+	var leave_from = document.getElementById("leave_from").value;
+	var leave_to = document.getElementById("leave_to").value;
+	var leave_particular = document.getElementById("leave_particular").value;
+	var leave_earned = document.getElementById("leave_earned").value;
+	var leave_absences = document.getElementById("leave_absences").value;
+	var leave_abswop = document.getElementById("leave_abswop").value;
+	var sick_earned = document.getElementById("sick_earned").value;
+	var sick_abswp = document.getElementById("sick_abswp").value;
+	var sick_abswop = document.getElementById("sick_abswop").value;
+	var sick_action = document.getElementById("sick_action").value;
+	
+	
+	$.ajax({
+		url: '../saveleavecredit',
+		type: 'post',
+		data: {eid: eid,leave_from:rating_from,leave_to:leave_to,leave_particular:leave_particular,leave_earned:leave_earned,leave_absences:leave_absences,leave_abswop:leave_abswop,sick_earned:sick_earned,sick_abswp:sick_abswp,sick_abswop:sick_abswop,sick_action:sick_action},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("leavecreditclosebutton").click();
+			$('#leave-credits').load(document.URL +  ' #leave-credits');
+			
+			
+			
+		}
+	});
+	
+}
+
+function deleteleavecredit(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteleavecredit',
+                    type: 'post',
+                    data: {leavecreditsid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#leave-credits').load(document.URL +  ' #leave-credits');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}

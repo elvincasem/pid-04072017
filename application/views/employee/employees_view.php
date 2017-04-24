@@ -100,7 +100,7 @@
                         
                         <!-- <th style="width:100px;">Delivery ID</th>-->
                         
-						<th>Name</th>
+						<th style="width:480px;">Name</th>
                         <th>Designation</th>
 						<th>Employee ID</th>
                         
@@ -113,10 +113,39 @@
 				
 				foreach ($employeeslist as $employees_list):
 				
+					$base = base_url();
+					$fileurl = $base."uploads/".$employees_list['eid'].".jpg";
+					 $ch = curl_init($fileurl);    
+					curl_setopt($ch, CURLOPT_NOBODY, true);
+					curl_exec($ch);
+					$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+					if($code == 404){
+						$status = "no";
+						$fileurl = "";
+					}else{
+						$status = "yes";
+						$fileurl = $fileurl;
+					}
+					curl_close($ch);
+				
+				
+		 
+			
+		
+				
 				echo "<tr class='odd gradeX' >";
 
 				
-				echo "<td><a href='employees/details/".$employees_list['eid']."'>".$employees_list['fname']." ".$employees_list['lname']."</a></td>";
+				echo "<td>";
+				if($status=="yes"){
+				echo "<img style='width:18%;' src='$fileurl' alt='avatar' class='img-circle img-thumbnail img-thumbnail-transparent img-thumbnail-avatar-3x push'>";
+			}else{
+				echo "<img style='width:18%;' src='".base_url()."public/img/placeholders/avatars/avatar13@2x.jpg' alt='avatar' class='img-circle img-thumbnail img-thumbnail-transparent img-thumbnail-avatar-3x push'>";
+			}
+				
+				
+				echo "<a href='employees/details/".$employees_list['eid']."'>".$employees_list['fname']." ".$employees_list['lname']."</a></td>";
 				echo "<td>".$employees_list['designation']."</td>";
 				echo "<td>".$employees_list['empNo']."</a></td>";
 				
