@@ -987,6 +987,130 @@ function deleteauth(id){
 	
 }
 
-function addemployeetolist($autid){
+function addemployeetolist(authid){
+	document.getElementById("authtravelid").value = authid
+}
+
+function addemployee(){
+	var traveleid = document.getElementById("traveleid").value;
+	var authtravelid = document.getElementById("authtravelid").value;
+	$.ajax({
+                    url: '../addemployee',
+                    type: 'post',
+                    data: {traveleid: traveleid,authtravelid:authtravelid},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record Added!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+                    }
+                });
 	
+}
+
+function removetraveleid(id){
+	
+	var r = confirm("Are your sure you want to delete this Employee?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../removetraveleid',
+                    type: 'post',
+                    data: {travelemployeeid: id},
+                    success: function(response) {
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Employee deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+function printtravel(travelid){
+	
+	//$('#update').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	//$('#saveproject').prop("disabled", true);    
+
+	
+	$.ajax({
+		url: '../printtravel',
+		type: 'post',
+		data: {travelid : travelid},
+		success: function(response) {
+			console.log(response);
+			 var data = JSON.parse(response);
+			document.getElementById("print_name").innerHTML = data.fname+" "+data.lname;
+			document.getElementById("print_position").innerHTML = data.designation;
+			document.getElementById("print_destination").innerHTML = data.travel_location;
+			document.getElementById("print_period").innerHTML = data.travel_from +" To "+data.travel_to;
+			document.getElementById("print_purpose").innerHTML = data.travel_description;
+			if(data.travel_expense=="CASH ADVANCE"){
+					document.getElementById("cash").innerHTML = "X";
+					document.getElementById("reimburse").innerHTML = "";
+			}else{
+					document.getElementById("cash").innerHTML = "";
+					document.getElementById("reimburse").innerHTML = "X";
+				
+			}
+			
+			
+			
+		} 
+	});
+	
+	$.ajax({
+		url: '../printtravel_employee',
+		type: 'post',
+		data: {travelid : travelid},
+		success: function(response) {
+			console.log(response);
+			 var data = JSON.parse(response);
+			 
+			var employeelist = "";
+			for(var ctr=0;ctr<data.length; ctr++){
+				employeelist= employeelist+  data[ctr].fname +" "+ data[ctr].lname+"<br>";
+			}
+			document.getElementById("print_othernames").innerHTML = employeelist;
+			
+			
+			
+			
+		} 
+	});
+		
+
+	
+	
+}
+
+
+function printauth(){
+	var DocumentContainer = document.getElementById('fulldetailsbody');
+	var WindowObject = window.open("", "PrintWindow",
+	"width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+	WindowObject.document.writeln(DocumentContainer.innerHTML);
+	WindowObject.document.close();
+	setTimeout(function(){
+		WindowObject.focus();
+		WindowObject.print();
+		WindowObject.close();
+	},50);
 }

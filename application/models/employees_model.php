@@ -119,7 +119,7 @@ class Employees_model extends CI_Model
 	}
 	public function getetravelemployees($travelid)
 	{
-		$sql = $this->db->query("SELECT CONCAT(employee.fname,' ',employee.lname) AS employee_name,employee.eid FROM employee_travel_eid LEFT JOIN employee ON employee_travel_eid.eid = employee.eid WHERE authtravelid=".$this->db->escape($travelid)."");
+		$sql = $this->db->query("SELECT CONCAT(employee.fname,' ',employee.lname) AS employee_name,employee.eid,travelemployeeid FROM employee_travel_eid LEFT JOIN employee ON employee_travel_eid.eid = employee.eid WHERE authtravelid=".$this->db->escape($travelid)."");
 		return $sql->result_array();
 		
 		
@@ -259,6 +259,45 @@ class Employees_model extends CI_Model
 		$sql = "INSERT INTO employee_travel(travel_from,travel_to,travel_location,travel_description,eid) VALUES (".$this->db->escape($travel_from).",".$this->db->escape($travel_to).",".$this->db->escape($travel_location).",".$this->db->escape($travel_description).",".$this->db->escape($eid).")";
 		$this->db->query($sql);
 				
+		
+		
+	}
+	public function addemployee($traveleid,$authtravelid)
+	{
+		
+		$sql = "INSERT INTO employee_travel_eid(authtravelid,eid) VALUES (".$this->db->escape($authtravelid).",".$this->db->escape($traveleid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
+	//printing modules
+	public function reportdisplay($reportmodule,$divposition)
+	{
+		$sql2 = $this->db->query("SELECT content FROM settings_report where divposition='$divposition' AND reportmodule='$reportmodule'");
+		
+		$result = $sql2->result_array();
+		return $result[0]['content'];
+		
+		
+	}
+	//printing modules
+	public function gettraveldetails($travelid)
+	{
+		$sql2 = $this->db->query("SELECT * FROM employee_travel left join employee on employee_travel.eid = employee.eid where authtravelid='$travelid' ");
+		
+		$result = $sql2->result_array();
+		return $result[0];
+		
+		
+	}
+	public function gettraveldetails_eid($travelid)
+	{
+		$sql2 = $this->db->query("SELECT * FROM employee_travel_eid left join employee on employee_travel_eid.eid = employee.eid where authtravelid='$travelid' ");
+		
+		$result = $sql2->result_array();
+		return $result;
 		
 		
 	}

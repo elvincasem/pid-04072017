@@ -787,7 +787,7 @@
 										<th>Inclusive Dates</th>
 										<th>Location</th>
 										<th>Description</th>
-										<th>Employees</th>
+										<th>Other Employees</th>
 										<th>File</th>
 										
 										
@@ -814,20 +814,29 @@
 										
 											foreach($travelemployees as $temployee):
 											
-												
+												/*
 												if($comma < $numberofemployee){
-													$employees .= "<a href='".$temployee['eid']."'>".$temployee['employee_name']."</a>, ";
+													$employees .= "<a class='btn btn-effect-ripple btn-primary' href='".$temployee['eid']."'>".$temployee['employee_name']."</a> ";
 													
-												}else{
-													$employees .= "<a href='".$temployee['eid']."'>".$temployee['employee_name']."</a>";
-												}
-												$comma++;
+												}else{*/
+													$employees .= "<span class='btn btn-primary'>".$temployee['employee_name']."</span><div class='btn-group'>
+                                                <button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='caret'></span></button>
+                                                <ul class='dropdown-menu dropdown-menu-right'>
+                                                    <li>
+                                                        <a href='#' onclick='removetraveleid(".$temployee['travelemployeeid'].")'><i class='fa fa-times'></i></button> Remove</a>
+                                                    </li>
+                                                  
+                                                </ul>
+                                            </div> ";
+													
+												/*}
+												$comma++;*/
 											endforeach;
 										
-										echo "<td>".$employees." <a href='#authority-travel-modal-employee' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='addemployeetolist(".$travel['authtravelid'].")'><i class='fa fa-user-plus'></i></a></td>";
+										echo "<td><a href='#authority-travel-modal-employee' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='addemployeetolist(".$travel['authtravelid'].")'><i class='fa fa-user-plus'></i></a> ".$employees." </td>";
 										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <a title='Print Authority' href='#modal-voucher' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='' disabled><i class='fa fa-print'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteauth(".$travel['authtravelid'].")'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <a title='Print Authority' href='#printtravel' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='printtravel(".$travel['authtravelid'].");'><i class='fa fa-print'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteauth(".$travel['authtravelid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -1717,14 +1726,14 @@
 							<h3 class="modal-title"><strong>Authority to Travel: Employees</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="text" id="authtravelid">
+						<input type="hidden" id="authtravelid">
 						<div class="row" style="margin-top:10px;"></div>
 							<label class="col-md-2 control-label" for="state-normal">Employee</label>
 							<div class="col-md-8">
-								<select id="eid" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+								<select id="traveleid" name="example-select2" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
 												<?php
 													foreach($employee_list as $elist):
-														echo "<option value='".$elist['fname']." ".$elist['lname']."'>".$elist['fname']." ".$elist['lname']."</option>";
+														echo "<option value='".$elist['eid']."'>".$elist['fname']." ".$elist['lname']."</option>";
 													endforeach;
 												?>
 												
@@ -1748,6 +1757,196 @@
 
 		</div>
 		<!-- END Regular Modal -->					
+		
+		<!-- generate Print travel modal -->
+				<!-- Regular Modal Print PR-->
+                <div id="printtravel" class="modal bg" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								
+                                
+                            </div> 
+                            <div class="modal-body" id="fulldetailsbody">
+                                
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+              <style>
+
+tr.noBorder td{
+	border:0;
+}
+
+table { page-break-inside:auto }
+   tr    { page-break-inside:avoid; page-break-after:auto }
+@media print {
+    thead { display: table-header-group; }
+    tfoot { display: table-footer-group; }
+}
+@media screen {
+    /*thead { display: block; }
+    tfoot { display: block; }*/
+}
+</style>
+
+
+<div style="text-align:center;font-weight:bold;"><?php echo $travel_header;?></div>
+<br>
+
+<table border="1" style="border:solid 1px; width:800px;">
+	
+<thead>
+		
+
+	
+	
+	
+</thead>
+	<tbody>
+			<tr style="text-align:left;font-weight:bold;">
+	<td colspan="4">Name of Official/Employee <br><div  id="print_name" style="text-align:center;margin:10px;"></div><div id="print_othernames"  style="text-align:center;margin:10px;"></div></td>
+	<td colspan="2" style="width:30%;">Position: <br><div  id="print_position" style="text-align:center; margin:10px;"></div></td>
+	</tr>
+	
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="2">Office/Station <div style="text-align:center;margin:10px;"><?php echo $travel_office;?></div></td>
+	<td colspan="2">Destination <div style="text-align:center;margin:10px;" id="print_destination">Oasis Country Resort, City of San Fernando, La Union</div></td>
+	<td colspan="2">Period of Travel:  <div style="text-align:center;margin:10px;" id="print_period">Friday, March 10, 2017</div></td>
+	</tr>
+	
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="4" valign="top">Purpose of Travel:<div style="text-align:center;" id="print_purpose">To attend a consultation meeting regarding the Regional Gov....</div></td>
+	<td colspan="2">Please Check:  <br><br><div id="rectangle"></div>Official Business<br><br><div id="rectangle"></div>Official Time Only<br></td>
+	</tr>
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="4"><div style="text-align:center;">ESTIMATED EXPENSES</div></td>
+	<style>#rectangle{
+    width:20;
+    height:20px;
+    background:white;
+	border: 1px solid;
+	float:left;
+}</style>
+	<td colspan="2" rowspan="10" valign="top">Please Check:  <br><br><div id="rectangle"><span id="cash"></span></div>Cash Advance<br><br><div id="rectangle"><span id="reimburse"></span></div>Reimbursement<br></td>
+	</tr>
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1"><div style="text-align:center;">Registration Fee</div></td>
+	<td colspan="1"><div style="text-align:center;">Transportation</div></td>
+	<td colspan="1"><div style="text-align:center;">Travel Allowance</div></td>
+	<td colspan="1"><div style="text-align:center;">Total Amount</div></td>
+	
+	</tr>
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	</tr>
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="1" style="height:30px;"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	<td colspan="1"><div style="text-align:center;"></div></td>
+	
+	</tr>
+	
+	
+	<tr style="text-align:left;font-weight:bold;">
+	<td colspan="2">RECOMMENDING APPROVAL: <div style="text-align:center;margin-top:30px;"><?php echo $travel_column1;?></div></td>
+	<td colspan="2">FUNDS AVAILABLE: <div style="text-align:center;margin-top:30px;"><?php echo $travel_column2;?></div></td>
+	<td colspan="2">APPROVED BY: <div style="text-align:center;margin-top:30px;"><?php echo $travel_column3;?></div></td>
+	</tr>
+	
+	
+	</tbody>
+	<!-- ff -->
+	<tfoot>
+
+	
+	<tfoot>
+	
+	
+	
+</table>
+
+
+
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+							
+								
+                                <button type="button" id="printpo" class="btn btn-effect-ripple btn-primary" onclick="printauth();" ><i class="fa fa-print"></i> Print</button>
+                               
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Print Modal -->			
+				
 					
 					
 					

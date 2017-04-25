@@ -95,6 +95,13 @@ class Employees extends CI_Controller
 		$data['e_travel'] = $this->employees_model->getetravel($id);
 		$data['employee_list'] = $this->employees_model->getemployeeslist($id);
 		
+		//print module settings
+		$data['travel_header'] = $this->employees_model->reportdisplay("TRAVEL","HEADER");
+		$data['travel_column1'] = $this->employees_model->reportdisplay("TRAVEL","COLUMN1");
+		$data['travel_column2'] = $this->employees_model->reportdisplay("TRAVEL","COLUMN2");
+		$data['travel_column3'] = $this->employees_model->reportdisplay("TRAVEL","COLUMN3");
+		$data['travel_office'] = $this->employees_model->reportdisplay("TRAVEL","OFFICE");
+		
 
 		$this->load->view('inc/header_view');
 		$this->load->view('employee/employeeprofile_view',$data);
@@ -456,5 +463,35 @@ class Employees extends CI_Controller
 		$this->db->delete('employee_travel', array('authtravelid' => $authtravelid));
 		
 	}
+	
+	public function addemployee(){
+		$traveleid = $this->input->post('traveleid');
+		$authtravelid = $this->input->post('authtravelid');
+		$this->employees_model->addemployee($traveleid,$authtravelid);
+		
+	}
+	
+	public function removetraveleid(){
+		$travelemployeeid = $this->input->post('travelemployeeid');
+		$this->db->delete('employee_travel_eid', array('travelemployeeid' => $travelemployeeid));
+		
+		
+	}
+	
+	public function printtravel(){
+		$travelid = $this->input->post('travelid');
+		$traveldetails = $this->employees_model->gettraveldetails($travelid);
+
+		echo json_encode($traveldetails);
+		
+	}
+	public function printtravel_employee(){
+		$travelid = $this->input->post('travelid');
+		$traveldetails = $this->employees_model->gettraveldetails_eid($travelid);
+
+		echo json_encode($traveldetails);
+		
+	}
+	
 
 }
