@@ -216,26 +216,106 @@ class Employees extends CI_Controller
 	
 	public function upload_attachment(){
 		//$fileid = 456;
-		$fileid = $this->input->post('fileid');
+		$fileid = $this->input->post('fileattachmentid');
+		$folder = $this->input->post('folder_destination');
 		//$form_value = 
 		 //$newfilename = $fileid."jpg";
-         $config['upload_path']   = './uploads/'; 
-         $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
+         $config['upload_path']   = './uploads/'.$folder.'/'; 
+         $config['allowed_types'] = 'pdf|doc|docx|gif|jpg|png|jpeg'; 
          $config['max_size']      = 2048; 
          $config['max_width']     = 2048; 
          $config['max_height']    = 2048;  
          $config['overwrite']    = true;  
-         $config['file_name']    = $fileid.".jpg";  
+         $config['file_name']    = $fileid;  
          $this->load->library('upload', $config);
 			
-         if ( ! $this->upload->do_upload('profileimage')) {
+         if ( ! $this->upload->do_upload('fileattachment')) {
             $error = array('error' => $this->upload->display_errors()); 
             $this->load->view('upload_form', $error); 
-			//show_404();
+			show_404();
          }
 			
          else { 
             $data = array('upload_data' => $this->upload->data()); 
+			
+			$filename = $this->upload->data('file_name'); 
+			
+			if($folder="201_files"){
+				$this->employees_model->update_file($fileid,$filename);
+			}
+			
+            //$this->load->view('upload_success', $data); 
+			//header('Location:profile/'.$eid);
+         } 
+		
+	}
+	
+	public function upload_attachment_appleave(){
+		//$fileid = 456;
+		$fileid = $this->input->post('fileattachmentid_appleave');
+		$folder = "request_approvals";
+		//$form_value = 
+		 //$newfilename = $fileid."jpg";
+         $config['upload_path']   = './uploads/'.$folder.'/'; 
+         $config['allowed_types'] = 'pdf|doc|docx|gif|jpg|png|jpeg'; 
+         $config['max_size']      = 2048; 
+         $config['max_width']     = 2048; 
+         $config['max_height']    = 2048;  
+         $config['overwrite']    = true;  
+         $config['file_name']    = $fileid;  
+         $this->load->library('upload', $config);
+			
+         if ( ! $this->upload->do_upload('fileattachment_appleave')) {
+            $error = array('error' => $this->upload->display_errors()); 
+            $this->load->view('upload_form', $error); 
+			show_404();
+         }
+			
+         else { 
+            $data = array('upload_data' => $this->upload->data()); 
+			
+			$filename = $this->upload->data('file_name'); 
+			
+			
+			$this->employees_model->update_file_appleave($fileid,$filename);
+			
+			
+            //$this->load->view('upload_success', $data); 
+			//header('Location:profile/'.$eid);
+         } 
+		
+	}
+	
+	public function upload_attachment_authtravel(){
+		//$fileid = 456;
+		$fileid = $this->input->post('fileattachmentid_authtravel');
+		$folder = "authority_travel";
+		//$form_value = 
+		 //$newfilename = $fileid."jpg";
+         $config['upload_path']   = './uploads/'.$folder.'/'; 
+         $config['allowed_types'] = 'pdf|doc|docx|gif|jpg|png|jpeg'; 
+         $config['max_size']      = 2048; 
+         $config['max_width']     = 2048; 
+         $config['max_height']    = 2048;  
+         $config['overwrite']    = true;  
+         $config['file_name']    = $fileid;  
+         $this->load->library('upload', $config);
+			
+         if ( ! $this->upload->do_upload('fileattachment_authtravel')) {
+            $error = array('error' => $this->upload->display_errors()); 
+            $this->load->view('upload_form', $error); 
+			show_404();
+         }
+			
+         else { 
+            $data = array('upload_data' => $this->upload->data()); 
+			
+			$filename = $this->upload->data('file_name'); 
+			
+			
+			$this->employees_model->update_file_authtravel($fileid,$filename);
+			
+			
             //$this->load->view('upload_success', $data); 
 			//header('Location:profile/'.$eid);
          } 
@@ -490,6 +570,42 @@ class Employees extends CI_Controller
 		$traveldetails = $this->employees_model->gettraveldetails_eid($travelid);
 
 		echo json_encode($traveldetails);
+		
+	}
+	
+	public function deleteuploadedfile(){
+		$filesid = $this->input->post('filesid');
+		//get filename
+		$file_name = $this->employees_model->getfilename($filesid);
+		
+		//$fileurl = base_url("uploads/201_files/" . $file_name);
+		
+		$this->load->helper("url");
+		//delete_files("uploads/201_files".$filesid.".pdf");
+		unlink("uploads/201_files/" . $file_name);
+		//$this->db->delete('employee_educational_background', array('educbackgroundid' => $educbackgroundid));
+		$this->employees_model->updatedeletefile($filesid);
+		
+		
+	}
+	public function deleteuploadedfile_appleaveid(){
+		$appleaveid = $this->input->post('appleaveid');
+		//get filename
+		$file_name = $this->employees_model->getfilename_appleaveid($appleaveid);
+		$this->load->helper("url");
+		unlink("uploads/request_approvals/" . $file_name);
+		$this->employees_model->updatedeletefile_appleave($appleaveid);
+		
+		
+	}
+	public function deleteuploadedfile_authtravel(){
+		$authtravelid = $this->input->post('authtravelid');
+		//get filename
+		$file_name = $this->employees_model->getfilename_authtravel($authtravelid);
+		$this->load->helper("url");
+		unlink("uploads/authority_travel/" . $file_name);
+		$this->employees_model->updatedeletefile_authtravel($authtravelid);
+		
 		
 	}
 	

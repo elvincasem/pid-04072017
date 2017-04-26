@@ -233,6 +233,43 @@ function uploadprofile(){
 	
 }
 
+function upload_attachment(){
+	
+	var form = document.getElementById("form_uploadfile");
+
+
+  //form.submit();
+
+	
+	//document.getElementById('form_uploadprofile').submit(function(){
+	
+			 var formData = new FormData(form);
+			 //alert(formData);
+			$.ajax({
+				url: '../upload_attachment',
+				type: 'POST',
+				data: formData,
+				async: false,
+				success: function (data) {
+					//console.log(data);
+					$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File uploaded!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					document.getElementById("fileuploadclosebutton").click();
+					$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+					//alert(data)
+					//location.reload();
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
+	
+	
+}
 
 /*  educational background */
 
@@ -1113,4 +1150,161 @@ function printauth(){
 		WindowObject.print();
 		WindowObject.close();
 	},50);
+}
+
+function openfile_201(filesid){
+	document.getElementById("fileattachmentid").value=filesid;
+}
+
+function deleteuploadedfile(filesid){
+	
+	$.ajax({
+		url: '../deleteuploadedfile',
+		type: 'post',
+		data: {filesid : filesid},
+		success: function(response) {
+			console.log(response);
+			 $.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File deleted!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					
+					$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+
+		} 
+	});
+	
+}
+
+function openfile_appleave(appleaveid){
+	document.getElementById("fileattachmentid_appleave").value=appleaveid;
+}
+
+function upload_attachment_appleave(){
+	
+	var form = document.getElementById("form_uploadfile_appleave");
+
+
+  //form.submit();
+
+	
+	//document.getElementById('form_uploadprofile').submit(function(){
+	
+			 var formData = new FormData(form);
+			 //alert(formData);
+			$.ajax({
+				url: '../upload_attachment_appleave',
+				type: 'POST',
+				data: formData,
+				async: false,
+				success: function (data) {
+					console.log(data);
+					$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File uploaded!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					document.getElementById("fileuploadclosebutton_appleave").click();
+					$('#request-approvals').load(document.URL +  ' #request-approvals');
+					//alert(data)
+					//location.reload();
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
+	
+	
+}
+
+function deleteuploadedfile_appleave(appleaveid){
+	
+	$.ajax({
+		url: '../deleteuploadedfile_appleaveid',
+		type: 'post',
+		data: {appleaveid : appleaveid},
+		success: function(response) {
+			console.log(response);
+			 $.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File deleted!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					
+					$('#request-approvals').load(document.URL +  ' #request-approvals');
+
+		} 
+	});
+	
+}
+
+/* authority to travel */
+
+function openfile_authtravel(authtravelid){
+	
+	document.getElementById("fileattachmentid_authtravel").value=authtravelid;
+}
+
+function upload_attachment_authtravel(){
+	
+	var form = document.getElementById("form_uploadfile_authtravel");
+
+
+  //form.submit();
+
+	
+	//document.getElementById('form_uploadprofile').submit(function(){
+	
+			 var formData = new FormData(form);
+			 //alert(formData);
+			$.ajax({
+				url: '../upload_attachment_authtravel',
+				type: 'POST',
+				data: formData,
+				async: false,
+				success: function (data) {
+					console.log(data);
+					$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File uploaded!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					document.getElementById("fileuploadclosebutton_authtravel").click();
+					$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+					//alert(data)
+					//location.reload();
+				},
+				cache: false,
+				contentType: false,
+				processData: false
+			});
+	
+	
+}
+
+function deleteuploadedfile_authtravel(authtravelid){
+	
+	$.ajax({
+		url: '../deleteuploadedfile_authtravel',
+		type: 'post',
+		data: {authtravelid : authtravelid},
+		success: function(response) {
+			console.log(response);
+			 $.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File deleted!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					
+					$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+
+		} 
+	});
+	
 }

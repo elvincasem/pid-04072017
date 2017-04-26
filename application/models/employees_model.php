@@ -302,6 +302,98 @@ class Employees_model extends CI_Model
 		
 	}
 	
+	public function update_file($fileid,$filename)
+	{
+		
+		$sql = "update employee_files set file_name=".$this->db->escape($filename)." where filesid=".$this->db->escape($fileid)."";
+		$this->db->query($sql);
+		
+		echo $sql;
+						
+	}
+	
+	public function updatedeletefile($filesid)
+	{
+		
+		$sql = "update employee_files set file_name='NONE' where filesid=".$this->db->escape($filesid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
+	
+	public function getfilename($filesid)
+	{
+		$sql2 = $this->db->query("SELECT file_name FROM employee_files where filesid='$filesid'");
+		
+		$result = $sql2->result_array();
+		return $result[0]['file_name'];
+		
+		
+	}
+	
+	public function update_file_appleave($appleaveid,$filename)
+	{
+		
+		$sql = "update employee_leave_application set appleave_filename=".$this->db->escape($filename)." where appleaveid=".$this->db->escape($appleaveid)."";
+		$this->db->query($sql);
+		
+		echo $sql;
+						
+	}
+	
+	public function getfilename_appleaveid($appleaveid)
+	{
+		$sql2 = $this->db->query("SELECT appleave_filename FROM employee_leave_application where appleaveid='$appleaveid'");
+		
+		$result = $sql2->result_array();
+		return $result[0]['appleave_filename'];
+		
+		
+	}
+	public function updatedeletefile_appleave($appleaveid)
+	{
+		
+		$sql = "update employee_leave_application set appleave_filename='NONE' where appleaveid=".$this->db->escape($appleaveid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
+	
+	/* authority to travel*/
+	
+	public function update_file_authtravel($authtravelid,$filename)
+	{
+		
+		$sql = "update employee_travel set travel_filename=".$this->db->escape($filename)." where authtravelid=".$this->db->escape($authtravelid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
+	
+	public function getfilename_authtravel($authtravelid)
+	{
+		$sql2 = $this->db->query("SELECT travel_filename FROM employee_travel where authtravelid='$authtravelid'");
+		
+		$result = $sql2->result_array();
+		return $result[0]['travel_filename'];
+		
+		
+	}
+	public function updatedeletefile_authtravel($authtravelid)
+	{
+		
+		$sql = "update employee_travel set travel_filename='NONE' where authtravelid=".$this->db->escape($authtravelid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
+	
+	
+	
 	
 }
 

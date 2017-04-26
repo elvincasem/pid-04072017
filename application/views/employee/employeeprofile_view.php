@@ -700,6 +700,9 @@
 								<tbody>
 								<?php
 									foreach($e_files as $files):
+									
+										$filesid = $files['filesid'];
+										$file_name = $files['file_name'];
 										echo "<tr>";
 										
 										
@@ -707,7 +710,22 @@
 										echo "<td>".$files['file_description']."</td>";
 										echo "<td>".mdate('%F %d, %Y',strtotime($files['file_date']))."</td>";
 										//echo "<td><a href='#'>".$files['file_name']."</a></td>";
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
+										
+										echo "<td>";
+											$fileurl2 = base_url();
+											$filesurl = $fileurl2."uploads/201_files/".$file_name;
+											
+											if($file_name == "NONE"){
+												echo "<a href='#upload-201' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_201(".$files['filesid'].");'><i class='fa fa-upload'></i></a>";
+											}else{
+												echo "<a href='$filesurl' class='btn btn-effect-ripple btn-default'>$file_name</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile(".$files['filesid'].")'><i class='fa fa-times'></i></button>";
+											}
+											
+											//curl_close($ch);
+										
+										
+										echo "</td>";
+										
 										
 										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletefile(".$files['filesid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
@@ -744,6 +762,8 @@
 								
 								<?php
 									foreach($e_leaveapp as $leaveapp):
+									$appleaveid = $leaveapp['appleaveid'];
+									$appleave_filename = $leaveapp['appleave_filename'];
 									
 										if($leaveapp['appleave_status']=="APPROVED"){
 											$labelstyle = "label-success";
@@ -761,8 +781,24 @@
 										echo "<td>".$leaveapp['appleave_commutation']."</td>";
 										echo "<td>".$leaveapp['appleave_recommendation']."</td>";
 										
-										echo "<td><span class='label $labelstyle'>".$leaveapp['appleave_status']."</span></td>";
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
+										echo "<td><button class='btn btn-effect-ripple $labelstyle' data-html='true' data-toggle='popover' data-content='<select class=\"form-control\"><option>PENDING</option><option>APPROVE</option><option>CANCELLED</option></select><button class=\"form-control\" id=\"statusbutton\"> </button>' data-placement='top'><span class='label $labelstyle'>".$leaveapp['appleave_status']."</span></td>";
+										//echo "<td></td>";
+										
+										echo "<td>";
+											
+											$appleave_base = base_url();
+											$appleave_fileurl = $appleave_base."uploads/request_approvals/".$appleave_filename;
+											
+											if($appleave_filename == "NONE"){
+												echo "<a href='#upload-appleave' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_appleave(".$appleaveid.");'><i class='fa fa-upload'></i></a>";
+											}else{
+												echo "<a href='$appleave_fileurl' class='btn btn-effect-ripple btn-default'>$appleave_filename</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile_appleave(".$appleaveid.")'><i class='fa fa-times'></i></button>";
+											}
+											
+											//curl_close($ch);
+										
+										
+										echo "</td>";
 										
 										
 										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil' disabled></i></a>  <a title='Print Application for Leave' href='#modal-voucher' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='' disabled><i class='fa fa-print'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteappleave(".$leaveapp['appleaveid'].");'><i class='fa fa-times'></i></button></td>";
@@ -799,7 +835,8 @@
 								<?php
 									foreach($e_travel as $travel):
 									
-										
+										$authtravel_filename = $travel['travel_filename'];
+										$authtravelid = $travel['authtravelid'];
 										
 										echo "<tr>";
 										echo "<td>".mdate('%F %d, %Y',strtotime($travel['travel_from']))." - ".mdate('%F %d, %Y',strtotime($travel['travel_to']))."</td>";
@@ -834,7 +871,23 @@
 											endforeach;
 										
 										echo "<td><a href='#authority-travel-modal-employee' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='addemployeetolist(".$travel['authtravelid'].")'><i class='fa fa-user-plus'></i></a> ".$employees." </td>";
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick=''><i class='fa fa-upload'></i></a></td>";
+										
+										
+										echo "<td>";
+											
+											$authtravel_base = base_url();
+											$authtravel_fileurl = $authtravel_base."uploads/authority_travel/".$authtravel_filename;
+											
+											if($authtravel_filename == "NONE"){
+												echo "<a href='#upload-authtravel' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_authtravel(".$authtravelid.");'><i class='fa fa-upload'></i></a>";
+											}else{
+												echo "<a href='$authtravel_fileurl' class='btn btn-effect-ripple btn-default'>$authtravel_filename</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile_authtravel(".$authtravelid.")'><i class='fa fa-times'></i></button>";
+											}
+											
+											//curl_close($ch);
+										
+										
+										echo "</td>";
 										
 										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <a title='Print Authority' href='#printtravel' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='printtravel(".$travel['authtravelid'].");'><i class='fa fa-print'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteauth(".$travel['authtravelid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
@@ -1946,8 +1999,118 @@ table { page-break-inside:auto }
                     </div>
                 </div>
                 <!-- END Print Modal -->			
-				
+	<!-- Upload 201 -->
+			<div id="upload-201" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
 					
+					
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>201 File Upload</strong></h3>
+						</div>
+						<div class="modal-body">
+						
+						 <form action="" method = "post" id="form_uploadfile" enctype="multipart/form-data">
+							<input type="hidden" id="folder_destination" name="folder_destination" value="201_files">
+							 <input type="text" id="fileattachmentid" name="fileattachmentid">
+							 
+							<input type = "file" name="fileattachment" id="fileattachment" size = "10" class="col-md-8" /> 
+							
+							<!-- <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/>  -->
+							 
+							<!--  <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button> -->
+						  
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="upload_attachment();" id="savebutton">Upload</button>
+						</form> 
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="fileuploadclosebutton">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->	
+	<!-- Upload Appleave -->
+			<div id="upload-appleave" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					
+					
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>Application for Leave File Upload</strong></h3>
+						</div>
+						<div class="modal-body">
+						
+						 <form action="" method = "post" id="form_uploadfile_appleave" enctype="multipart/form-data">
+							
+							 <input type="text" id="fileattachmentid_appleave" name="fileattachmentid_appleave">
+							 
+							<input type = "file" name="fileattachment_appleave" id="fileattachment_appleave" size = "10" class="col-md-8" /> 
+							
+							<!-- <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/>  -->
+							 
+							<!--  <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button> -->
+						  
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="upload_attachment_appleave();" id="savebutton">Upload</button>
+						</form> 
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="fileuploadclosebutton_appleave">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->		
+		
+		<!-- Upload auth travel -->
+			<div id="upload-authtravel" class="modal" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					
+					
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title"><strong>Authority to Travel File Upload</strong></h3>
+						</div>
+						<div class="modal-body">
+						
+						 <form action="" method = "post" id="form_uploadfile_authtravel" enctype="multipart/form-data">
+							
+							 <input type="text" id="fileattachmentid_authtravel" name="fileattachmentid_authtravel">
+							 
+							<input type = "file" name="fileattachment_authtravel" id="fileattachment_authtravel" size = "10" class="col-md-8" /> 
+							
+							<!-- <input type = "submit" value = "upload"  class="btn btn-effect-ripple btn-primary"/>  -->
+							 
+							<!--  <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button> -->
+						  
+							 <div class="row"><br></div>
+						
+							
+						<div class="modal-footer">
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="upload_attachment_authtravel();" id="savebutton">Upload</button>
+						</form> 
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="fileuploadclosebutton_authtravel">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+						
+
+		</div>
+		<!-- END Regular Modal -->					
 					
 					
 					

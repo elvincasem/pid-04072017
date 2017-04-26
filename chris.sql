@@ -143,11 +143,11 @@ CREATE TABLE `employee_files` (
   `file_name` varchar(500) DEFAULT 'NONE',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`filesid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_files` */
 
-insert  into `employee_files`(`filesid`,`file_document_type`,`file_description`,`file_date`,`file_name`,`eid`) values (1,'Service Contract','CONTRACT DOCUMENT','2017-04-01','sc20_123456.pdf',20),(2,'CSC FORM 212','cscs','2017-04-24','NONE',20);
+insert  into `employee_files`(`filesid`,`file_document_type`,`file_description`,`file_date`,`file_name`,`eid`) values (1,'Service Contract','CONTRACT DOCUMENT','2017-04-01','1.pdf',20),(2,'CSC FORM 212','cscs','2017-04-24','2.pdf',20),(3,'LICENSES','Professional - LTO','2017-04-26','3.pdf',20);
 
 /*Table structure for table `employee_leave_application` */
 
@@ -163,12 +163,13 @@ CREATE TABLE `employee_leave_application` (
   `appleave_recommendation` text,
   `appleave_status` varchar(500) DEFAULT 'PENDING',
   `eid` bigint(20) DEFAULT NULL,
+  `appleave_filename` varchar(500) DEFAULT 'NONE',
   PRIMARY KEY (`appleaveid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_leave_application` */
 
-insert  into `employee_leave_application`(`appleaveid`,`appleave_type`,`appleave_location`,`appleave_from`,`appleave_to`,`appleave_commutation`,`appleave_recommendation`,`appleave_status`,`eid`) values (5,'VACATION LEAVE','','0000-00-00','0000-00-00','REQUESTED','','PENDING',20);
+insert  into `employee_leave_application`(`appleaveid`,`appleave_type`,`appleave_location`,`appleave_from`,`appleave_to`,`appleave_commutation`,`appleave_recommendation`,`appleave_status`,`eid`,`appleave_filename`) values (5,'VACATION LEAVE','','0000-00-00','0000-00-00','REQUESTED','','PENDING',20,'5.pdf');
 
 /*Table structure for table `employee_leave_credits` */
 
@@ -284,12 +285,15 @@ CREATE TABLE `employee_travel` (
   `travel_location` varchar(500) DEFAULT NULL,
   `travel_description` text,
   `eid` bigint(20) DEFAULT NULL,
+  `travel_type` varchar(500) DEFAULT NULL,
+  `travel_expense` varchar(500) DEFAULT NULL,
+  `travel_filename` varchar(500) DEFAULT 'NONE',
   PRIMARY KEY (`authtravelid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_travel` */
 
-insert  into `employee_travel`(`authtravelid`,`travel_from`,`travel_to`,`travel_location`,`travel_description`,`eid`) values (1,'2017-04-01','2017-04-02','Dagupan, Pangasinan','HEI Monitoring',20),(3,'2017-04-01','2017-04-02','san fernando','san fernando',20);
+insert  into `employee_travel`(`authtravelid`,`travel_from`,`travel_to`,`travel_location`,`travel_description`,`eid`,`travel_type`,`travel_expense`,`travel_filename`) values (1,'2017-04-01','2017-04-02','Dagupan, Pangasinan','HEI Monitoring',20,'OFFICIAL BUSINESS','CASH ADVANCE','1.pdf'),(3,'2017-04-01','2017-04-02','san fernando','san fernando',20,'OFFICIAL TIME ONLY','REIMBURSEMENT','3.pdf');
 
 /*Table structure for table `employee_travel_eid` */
 
@@ -300,11 +304,11 @@ CREATE TABLE `employee_travel_eid` (
   `authtravelid` bigint(20) DEFAULT NULL,
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`travelemployeeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_travel_eid` */
 
-insert  into `employee_travel_eid`(`travelemployeeid`,`authtravelid`,`eid`) values (1,1,20),(2,1,21);
+insert  into `employee_travel_eid`(`travelemployeeid`,`authtravelid`,`eid`) values (2,1,21),(17,1,14);
 
 /*Table structure for table `settings_position_designation` */
 
@@ -319,6 +323,22 @@ CREATE TABLE `settings_position_designation` (
 /*Data for the table `settings_position_designation` */
 
 insert  into `settings_position_designation`(`positionid`,`position_designation`) values (1,'OJT'),(2,'PTS III'),(3,'GUARD'),(4,'JOB ORDER'),(5,'ADMINISTRATIVE AIDE III'),(6,'ADMINISTRATIVE AIDE IV'),(7,'ADMINISTRATIVE ASSISTANT III'),(8,'EDUCATION PROGRAM SPECIALIST II'),(9,'ADMINISTRATIVE AIDE VI'),(10,'EDUCATION SUPERVISOR II'),(12,'CHIEF ADMINISTRATIVE OFFICE'),(13,'SUPERVISING EDUCATION PROGRAM SPECIALIST'),(14,'DIRECTOR IV'),(15,'ADMINISTRATIVE OFFICER III');
+
+/*Table structure for table `settings_report` */
+
+DROP TABLE IF EXISTS `settings_report`;
+
+CREATE TABLE `settings_report` (
+  `footerid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `reportmodule` varchar(500) DEFAULT NULL,
+  `divposition` varchar(500) DEFAULT NULL,
+  `content` text,
+  PRIMARY KEY (`footerid`)
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+
+/*Data for the table `settings_report` */
+
+insert  into `settings_report`(`footerid`,`reportmodule`,`divposition`,`content`) values (1,'TRAVEL','HEADER','Republic of the Philippines<br>\r\nOFFICE OF THE PRESIDENT<br>\r\nCOMMISSION ON HIGHER EDUCATION<br>\r\nRegional Office No. I<br>\r\nCity of San Fernando, La Union'),(24,'TRAVEL','COLUMN1','NYMPHA N. BUENIO<br>\r\nChief Administrative Officer'),(25,'TRAVEL','COLUMN2','KIRZANNE INIGO<br>\r\nAccountant II'),(26,'TRAVEL','COLUMN3','DR. CHERRIE MELANIE A. DIEGO<br>\r\nDirector IV'),(27,'TRAVEL','OFFICE','CHED RO1 City of San Fernando, La Union');
 
 /*Table structure for table `users` */
 
