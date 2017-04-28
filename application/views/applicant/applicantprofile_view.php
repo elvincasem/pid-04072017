@@ -50,13 +50,6 @@
 		 
 		 <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button>
       </form> 
-										<div class="col-xs-12" style="text-align:center !important;">
-                                                <h3 class="widget-heading"><small>Unique Item No <strong>
-												
-												<input type="text" id="item_no" class="form-control" style="padding-right:20px;padding-left:20px; ">
-												</strong> </small></h3>
-                                            </div>
-											
                                             <div class="col-xs-12">
                                                 <h3 class="widget-heading"><small>Position<br> <strong>
 												
@@ -107,7 +100,7 @@
                                         <ul class="nav nav-tabs" data-toggle="tabs">
 											
                                             <li class="active"><a href="#profile-gallery"><i class="fa fa-user"></i> Personal Information</a></li>
-                                           <li><a href="#familybackground"><i class="fa fa-users"></i> Family Background</a></li>
+                                           <li class="hidden"><a href="#familybackground"><i class="fa fa-users"></i> Family Background</a></li>
 										  
                                         </ul>
                                     </div>
@@ -123,39 +116,25 @@
 										<div class="form-group">
                                             <label class="col-md-3 control-label" for="state-normal">Contact Name *</label>
 							<div class="col-md-6">
-								<input type="text" id="lastname" class="form-control" placeholder="Lastname" value="<?php echo $employee_profile['lname'];?>" >
-								<input type="text" id="firstname" class="form-control" placeholder="Firstname" value="<?php echo $employee_profile['fname'];?>" >
-								<input type="text" id="middlename" class="form-control" placeholder="Middlename" value="<?php echo $employee_profile['mname'];?>" >
-								<input type="text" id="extension" class="form-control" placeholder="Extension" value="<?php echo $employee_profile['ename'];?>" >
+								<input type="text" id="lastname" class="form-control" placeholder="Lastname" value="<?php echo $applicant_profile['lname'];?>" >
+								<input type="text" id="firstname" class="form-control" placeholder="Firstname" value="<?php echo $applicant_profile['fname'];?>" >
+								<input type="text" id="middlename" class="form-control" placeholder="Middlename" value="<?php echo $applicant_profile['mname'];?>" >
+								<input type="text" id="extension" class="form-control" placeholder="Extension" value="<?php echo $applicant_profile['ename'];?>" >
 							</div>
                                         </div>
 								<div class="row"></div>		
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="state-normal">Date of Birth</label>
-							<div class="col-md-8">
-								<input type="text" id="dateofbirth"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $employee_profile['dob'];?>" >
-								
-							</div>
-						</div>
 						
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="state-normal">Place of Birth</label>
-							<div class="col-md-8">
-								<input type="text" id="placeofbirth" class="form-control" placeholder="" value="<?php echo $employee_profile['pob'];?>" >
-								
-							</div>
-						</div>
 						
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Sex</label>
 							
 							<?php
 							
-								if($employee_profile['gender']=="FEMALE"){
+								if($applicant_profile['gender']=="FEMALE"){
 									$selectedf = "checked='checked'";
 									$selectedm = "";
 								}
-								elseif($employee_profile['gender']=="FEMALE"){
+								elseif($applicant_profile['gender']=="FEMALE"){
 									$selectedm = "checked='checked'";
 									$selectedf = "";
 								}
@@ -182,10 +161,10 @@
 						
 							<?php
 							
-								if($employee_profile['civil_status']=="SINGLE"){
+								if($applicant_profile['civil_status']=="SINGLE"){
 									$civils = "checked='checked'";
 									$civilm = "";
-								}elseif($employee_profile['civil_status']=="MARRIED"){
+								}elseif($applicant_profile['civil_status']=="MARRIED"){
 									$civilm = "checked='checked'";
 									$civils = "";
 								}else{
@@ -207,38 +186,11 @@
 							</div>
 						</div>
 						<div class="row"></div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="state-normal">Citizenship</label>
-							<div class="col-md-8">
-								<input type="text" id="citizenship" class="form-control" placeholder="" value="<?php echo $employee_profile['citizenship'];?>" >
-								
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-md-3 control-label" for="state-normal">Heigth(m)</label>
-							<div class="col-md-2">
-								<input type="text" id="height" class="form-control" placeholder="" value="<?php echo $employee_profile['height'];?>">
-								
-							</div>
-							<label class="col-sm-1 control-label" for="state-normal">Weight (kg)</label>
-							<div class="col-md-2">
-								<input type="text" id="weight" class="form-control" placeholder="" value="<?php echo $employee_profile['weight'];?>" >
-								
-							</div>
-						</div>
 						
-						<div class="form-group">
-							<label class="col-md-1 control-label" for="state-normal">Blood Type</label>
-							<div class="col-md-2">
-								<input type="text" id="bloodtype" class="form-control" placeholder="" value="<?php echo $employee_profile['blood_type'];?>" >
-								
-							</div>
-						</div>
-						<div class="row"></div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Mobile Number</label>
 							<div class="col-md-8">
-								<input type="text" id="mobileno" class="form-control" placeholder="" value="<?php echo $employee_profile['mobile_number'];?>" >
+								<input type="text" id="mobileno" class="form-control" placeholder="" value="<?php echo $applicant_profile['mobile_number'];?>" >
 								
 							</div>
 						</div>
@@ -246,7 +198,7 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Email</label>
 							<div class="col-md-8">
-								<input type="text" id="email" class="form-control" placeholder="" value="<?php echo $employee_profile['email_address'];?>" >
+								<input type="text" id="email" class="form-control" placeholder="" value="<?php echo $applicant_profile['email_address'];?>" >
 								
 							</div>
 						</div>
@@ -255,19 +207,19 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="state-normal">Address</label>
 							<div class="col-md-2">
-								<input type="text" id="barangay" class="form-control" placeholder="Barangay" value="<?php echo $employee_profile['a_barangay'];?>" >
+								<input type="text" id="barangay" class="form-control" placeholder="Barangay" value="<?php echo $applicant_profile['a_barangay'];?>" >
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="towncity" class="form-control" placeholder="Town/City" value="<?php echo $employee_profile['a_towncity'];?>" >
+								<input type="text" id="towncity" class="form-control" placeholder="Town/City" value="<?php echo $applicant_profile['a_towncity'];?>" >
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="province" class="form-control" placeholder="Province" value="<?php echo $employee_profile['a_province'];?>" >
+								<input type="text" id="province" class="form-control" placeholder="Province" value="<?php echo $applicant_profile['a_province'];?>" >
 								
 							</div>
 							<div class="col-md-2">
-								<input type="text" id="zipcode" class="form-control" placeholder="Zip Code" value="<?php echo $employee_profile['a_zipcode'];?>" >
+								<input type="text" id="zipcode" class="form-control" placeholder="Zip Code" value="<?php echo $applicant_profile['a_zipcode'];?>" >
 								
 							</div>
 						</div>
@@ -280,12 +232,6 @@
 							<div class="form-group">			
 							
 							
-							<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Date Hired</label>
-							<div class="col-md-4">
-								<input type="text" id="datehired"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $employee_profile['date_hired'];?>" >
-								
-							</div>
 							
 							<div class="row"></div>
 				<div class="form-group">
@@ -311,105 +257,7 @@
                                             <div class="block-full">
                                                 
 				<div class="row">
-			<div class="form-group">
-						<label class="col-md-3 control-label" for="state-normal">Spouse's Name</label>
-							<div class="col-md-3">
-								<input type="text" id="spouse_lname" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['spouse_lname'];?>">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="spouse_fname" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['spouse_fname'];?>">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="spouse_mname" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['spouse_mname'];?>">
-								
-							</div>
-							
-							<label class="col-md-3 control-label" for="state-normal">Father's Name</label>
-							<div class="col-md-3">
-								<input type="text" id="father_lname" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['father_lname'];?>">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="father_fname" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['father_fname'];?>">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="father_mname" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['father_mname'];?>">
-								
-							</div>
-							
-							<label class="col-md-3 control-label" for="state-normal">Mother's Maiden Name</label>
-							<div class="col-md-3">
-								<input type="text" id="mother_lname" class="form-control" placeholder="lastname" value="<?php echo $employee_profile['mother_lname'];?>">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="mother_fname" class="form-control" placeholder="firstname" value="<?php echo $employee_profile['mother_fname'];?>">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="mother_mname" class="form-control"  placeholder="middlename" value="<?php echo $employee_profile['mother_mname'];?>">
-								
-							</div>
-							<div class="row"></div>
-							<div class="col-md-8">
-								<button type="button" class="btn btn-primary" onclick="updateemployeefamily(<?php echo $eid;?>)">Update</button>
-								
-							</div>
-							<h4 class="sub-header"></h4>
-							
-							<label class="col-md-3 control-label" for="state-normal">Name of Children</label>
-							<div class="col-md-4">
-								<input type="text" id="children_name" class="form-control" placeholder="fullname">
-								
-							</div>
-							<div class="col-md-3">
-								<input type="text" id="children_dob"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="Birthdate: yyyy-mm-dd">
-								
-								
-							</div>
-							<div class="col-md-2">
-								<button type="button" class="btn btn-primary" onclick="addchildren(<?php echo $eid;?>)">Add</button>
-								
-							</div>
-							
-							<div class="row">&nbsp;<br></div>
-							<div class="row">&nbsp;<br></div>
-							<div class="row"></div>
-							
-							<div class="col-md-11" id="children_table">
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Name</th>
-										<th>Birthdate</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								
-								<?php
-									foreach($e_children as $childlist):
-										echo "<tr>";
-										echo "<td>".$childlist['children_name']."</td>";
-										echo "<td>".$childlist['children_bdate']."</td>";
-										echo "<td><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletechildren(".$childlist['childrenid'].")'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-									
-								</tbody>
-							</table>
-								
-							</div>
-							
-			</div>
+		
 						
 			</div><!-- end row -->
                                             </div>
@@ -439,13 +287,7 @@
                                         </div>
                                         <ul class="nav nav-tabs" data-toggle="tabs">
                                             <li class="active"><a href="#block-tabs-home"><i class="fa fa-file-pdf-o"></i> PDS Related Files</a></li>
-                                            <li><a href="#block-tabs-profile"><i class="fa fa-paperclip"></i> 201 Files</a></li>
-											<li><a href="#rating"><i class="fa fa-percent"></i> Rating</a></li>
-											<li><a href="#leave-credits"><i class="fa fa-calendar-plus-o"></i> Leave Credits</a></li>
-                                            <li><a href="#request-approvals"><i class="fa fa-calendar-check-o"></i> Request/Approvals</a></li>
-                                            <li><a href="#authority-to-travel"><i class="fa fa-automobile"></i> Authority to Travel</a></li>
-                                            <li class="hidden"><a href="#daily-time-record">Daily Time Record</a></li>
-                                            <li class="hidden"><a href="#block-tabs-settings" data-toggle="tooltip" title="Settings"><i class="gi gi-settings"></i></a></li>
+                                           
                                         </ul>
                                     </div>
                                     <!-- END Block Tabs Title -->

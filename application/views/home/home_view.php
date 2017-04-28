@@ -17,7 +17,7 @@
                         <!-- First Row -->
                         <div class="row">
                             <!-- Simple Stats Widgets -->
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-3 hidden">
                                 <a href="#" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background">
@@ -36,7 +36,7 @@
                             </div>
 							
 							
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-3 hidden">
                                 <a href="javascript:void(0)" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-success">
@@ -52,7 +52,7 @@
                                 </a>
                             </div>
 							
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-3 hidden">
                                 <a href="javascript:void(0)" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-warning">
@@ -68,7 +68,7 @@
                                 </a>
                             </div>
 							
-                            <div class="col-sm-6 col-lg-3">
+                            <div class="col-sm-6 col-lg-3 hidden">
                                 <a href="javascript:void(0)" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-danger">
@@ -112,11 +112,11 @@
 					<div class="row">
 					
 						<div class="widget">
-		<div class="widget-content border-bottom">
+		<div class="widget-content border-bottom hidden">
 			<span class="pull-right text-muted"></span>
                                         Request per Month
 			</div>
-			<div class="widget-content border-bottom themed-background-muted">
+			<div class="widget-content border-bottom themed-background-muted hidden">
 				<input type="hidden" id="chartvalues" value='<?php echo$dashboardchart;?>'>
 				<input type="hidden" value="<?php echo date('Y');?>" id="currentyear">
 						<!-- Partial Responsive Block -->

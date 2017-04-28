@@ -31,11 +31,11 @@
                                         </li>
 										
 										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Request/Approval</a>
+                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Request/Approval</a>
                                         </li>
 
 										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Rating</a>
+                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Rating</a>
                                         </li>
 
 									</ul>
@@ -46,7 +46,7 @@
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-ruble sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Applicants</span></a>
                                     <ul>
 										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Applicants</a>
+                                            <a href="<?=base_url()?>applicants" class="<?php echo $aprclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Applicants</a>
                                         </li>
 
 									</ul>

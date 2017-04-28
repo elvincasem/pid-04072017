@@ -12,6 +12,105 @@ MySQL - 5.6.17 : Database - chris
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*Table structure for table `applicant` */
+
+DROP TABLE IF EXISTS `applicant`;
+
+CREATE TABLE `applicant` (
+  `applicantid` int(11) NOT NULL AUTO_INCREMENT,
+  `lname` varchar(80) NOT NULL,
+  `fname` varchar(80) NOT NULL,
+  `mname` varchar(80) NOT NULL,
+  `ename` varbinary(100) DEFAULT 'NONE',
+  `age` int(11) DEFAULT '0',
+  `dob` date DEFAULT '0000-00-00',
+  `pob` varchar(500) DEFAULT 'NONE',
+  `gender` varchar(300) DEFAULT 'NONE',
+  `civil_status` varchar(300) DEFAULT 'NONE',
+  `citizenship` varchar(500) DEFAULT 'NONE',
+  `height` varchar(500) DEFAULT '0',
+  `weight` varchar(500) DEFAULT '0',
+  `blood_type` varchar(500) DEFAULT 'NONE',
+  `mobile_number` varchar(500) DEFAULT 'NONE',
+  `email_address` varchar(500) DEFAULT 'NONE',
+  `a_barangay` varchar(500) DEFAULT NULL,
+  `a_towncity` varchar(500) DEFAULT NULL,
+  `a_province` varchar(500) DEFAULT NULL,
+  `a_zipcode` varchar(500) DEFAULT 'NONE',
+  `applicant_type` varchar(500) DEFAULT NULL,
+  `applicant_note` text,
+  PRIMARY KEY (`applicantid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `applicant` */
+
+insert  into `applicant`(`applicantid`,`lname`,`fname`,`mname`,`ename`,`age`,`dob`,`pob`,`gender`,`civil_status`,`citizenship`,`height`,`weight`,`blood_type`,`mobile_number`,`email_address`,`a_barangay`,`a_towncity`,`a_province`,`a_zipcode`,`applicant_type`,`applicant_note`) values (1,'PADILLA','JESSA JANELLE','S','NONE',20,'0000-00-00','NONE','FEMALE','NONE','NONE','0','0','NONE','NONE','NONE','','MANGALDAN','PANGASINAN','','NON-SUPERVISORY',NULL),(2,'ABARABAR','PAOLAH','P','NONE',21,'0000-00-00','NONE','FEMALE','NONE','NONE','0','0','NONE','NONE','NONE',NULL,'BUNGALLON','PANGASINAN','NONE','NON-SUPERVISORY',NULL);
+
+/*Table structure for table `applicant_education` */
+
+DROP TABLE IF EXISTS `applicant_education`;
+
+CREATE TABLE `applicant_education` (
+  `applicanteducid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `applicantid` bigint(20) DEFAULT NULL,
+  `educ_description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`applicanteducid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `applicant_education` */
+
+/*Table structure for table `applicant_eligibility` */
+
+DROP TABLE IF EXISTS `applicant_eligibility`;
+
+CREATE TABLE `applicant_eligibility` (
+  `applicanteligibilityid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `applicantid` bigint(20) DEFAULT NULL,
+  `eligibility_description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`applicanteligibilityid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `applicant_eligibility` */
+
+/*Table structure for table `applicant_skill` */
+
+DROP TABLE IF EXISTS `applicant_skill`;
+
+CREATE TABLE `applicant_skill` (
+  `applicantskillid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `applicantid` bigint(20) DEFAULT NULL,
+  `skill_description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`applicantskillid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `applicant_skill` */
+
+/*Table structure for table `applicant_training` */
+
+DROP TABLE IF EXISTS `applicant_training`;
+
+CREATE TABLE `applicant_training` (
+  `applicanttrainingid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `applicantid` bigint(20) DEFAULT NULL,
+  `training_description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`applicanttrainingid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `applicant_training` */
+
+/*Table structure for table `applicant_work` */
+
+DROP TABLE IF EXISTS `applicant_work`;
+
+CREATE TABLE `applicant_work` (
+  `applicantworkid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `applicantid` bigint(20) DEFAULT NULL,
+  `work_description` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`applicantworkid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `applicant_work` */
+
 /*Table structure for table `employee` */
 
 DROP TABLE IF EXISTS `employee`;
@@ -143,11 +242,11 @@ CREATE TABLE `employee_files` (
   `file_name` varchar(500) DEFAULT 'NONE',
   `eid` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`filesid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `employee_files` */
 
-insert  into `employee_files`(`filesid`,`file_document_type`,`file_description`,`file_date`,`file_name`,`eid`) values (1,'Service Contract','CONTRACT DOCUMENT','2017-04-01','1.pdf',20),(2,'CSC FORM 212','cscs','2017-04-24','2.pdf',20),(3,'LICENSES','Professional - LTO','2017-04-26','3.pdf',20);
+insert  into `employee_files`(`filesid`,`file_document_type`,`file_description`,`file_date`,`file_name`,`eid`) values (1,'Service Contract','CONTRACT DOCUMENT','2017-04-01','1.pdf',20),(2,'CSC FORM 212','cscs','2017-04-24','2.pdf',20),(3,'LICENSES','Professional - LTO','2017-04-26','3.pdf',20),(4,'LICENSES','dsd','0000-00-00','NONE',20);
 
 /*Table structure for table `employee_leave_application` */
 
@@ -356,7 +455,7 @@ CREATE TABLE `users` (
 
 /*Data for the table `users` */
 
-insert  into `users`(`uid`,`username`,`password`,`name`,`usertype`,`status`) values (1,'admin','21232f297a57a5a743894a0e4a801fc3','Admin','admin','1'),(5,'lynnette','5f4dcc3b5aa765d61d8327deb882cf99','Lynnette','admin','1'),(6,'elvin','e77b6b04e50421f5d6e122e2b1df7d39','Elvin Casem','staff','');
+insert  into `users`(`uid`,`username`,`password`,`name`,`usertype`,`status`) values (1,'admin','5405c8c54b6c704f4e7d0fdd943c047d','Admin','admin','1'),(5,'lynnette','5f4dcc3b5aa765d61d8327deb882cf99','Lynnette','admin','1'),(6,'elvin','e77b6b04e50421f5d6e122e2b1df7d39','Elvin Casem','staff','');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
