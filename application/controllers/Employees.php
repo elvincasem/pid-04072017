@@ -13,25 +13,16 @@ class Employees extends CI_Controller
 		 $this->data = array(
             'title' => 'Settings',
 			'employeesclass' => 'active',
-			'purchasesclass' => '',
-			'aprclass' => '',
-			'prclass' => '',
-			'poclass' => '',
-			'receiveclass' => '',
+			'applicantclass' => '',
+			'applicantsubclass' => '',
+						
 			'usersclass' => '',
 			'userssubclass' => '',
 			'reportsclass' => '',
-			'assetmanagementclass' => '',
-			'recevingassetsclass' => '',
-			'assetclass' => '',
-			'propertyclass' => '',
-			'supplymanagementclass' => '',
+			
 			'settingsclass' => '',
-			'requisitionclass' => '',
-			'equipmentclass' => '',
-			'itemsclass' => '',
-			'suppliersclass' => '',
-			'employeesclass' => 'active',
+			
+			
 			'inventoryclass' => '',
 			'subnavtitle' => 'Employees',
 			'typeahead' => '1',
@@ -94,6 +85,8 @@ class Employees extends CI_Controller
 		$data['e_leaveapp'] = $this->employees_model->geteleaveapp($id);
 		$data['e_travel'] = $this->employees_model->getetravel($id);
 		$data['employee_list'] = $this->employees_model->getemployeeslist($id);
+		$data['settings_salary'] = $this->employees_model->getsettingssalary();
+		
 		
 		//print module settings
 		$data['travel_header'] = $this->employees_model->reportdisplay("TRAVEL","HEADER");
@@ -153,6 +146,18 @@ class Employees extends CI_Controller
 		$this->employees_model->updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired);
 		//$this->employees_model->updateemployee($eid,$lastname);
 	}
+	public function updateemployee2(){
+		$eid = $this->input->post('eid');
+		$designation = $this->input->post('designation');
+		$salary = $this->input->post('salary');
+		$item_no = $this->input->post('item_no');
+		
+
+
+		$this->employees_model->updateemployee2($eid,$designation,$salary,$item_no);
+		//$this->employees_model->updateemployee($eid,$lastname);
+	}
+	
 	public function updateemployeefamily(){
 		$eid = $this->input->post('eid');
 		$spouse_lname = $this->input->post('spouse_lname');

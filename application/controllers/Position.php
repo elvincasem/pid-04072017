@@ -11,28 +11,16 @@ class Position extends CI_Controller
 		//view module
 		 $this->data = array(
             'title' => 'Position/Designation List',
-			'purchasesclass' => '',
-			'aprclass' => '',
-			'prclass' => '',
-			'poclass' => '',
-			'receiveclass' => '',
-			'usersclass' => '',
-			'userssubclass' => '',
-			'reportsclass' => '',
-			'assetmanagementclass' => '',
-			'recevingassetsclass' => '',
-			'assetclass' => '',
-			'propertyclass' => '',
-			'supplymanagementclass' => '',
-			'settingsclass' => 'active',
-			'requisitionclass' => '',
-			'equipmentclass' => '',
-			'itemsclass' => '',
-			'suppliersclass' => '',
-			'employeesclass' => '',
-			'inventoryclass' => '',
 			'subnavtitle' => 'Position List',
 			'typeahead' => '1',
+			
+			'employeesclass' => '',
+			'applicantclass' => '',
+			'applicantsubclass' => '',
+			'settingsclass' => 'active',
+			'employeesclass' => '',
+
+			
 			
 			);
 		//javascript module

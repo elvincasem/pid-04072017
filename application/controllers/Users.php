@@ -8,27 +8,13 @@ class Users extends CI_Controller
 		$this->load->model('users_model');
 		 $this->data = array(
             'title' => 'Purchases',
-			'purchasesclass' => '',
-			'aprclass' => '',
-			'prclass' => '',
-			'poclass' => '',
-			'receiveclass' => '',
-			'usersclass' => 'active',
-			'userssubclass' => 'active',
-			'reportsclass' => '',
-			'assetmanagementclass' => '',
-			'recevingassetsclass' => '',
-			'assetclass' => '',
-			'propertyclass' => '',
-			'supplymanagementclass' => '',
-			'settingsclass' => 'active',
-			'requisitionclass' => '',
-			'equipmentclass' => '',
-			'itemsclass' => '',
-			'suppliersclass' => '',
+			'subnavtitle' => 'Users',
 			'employeesclass' => '',
-			'inventoryclass' => '',
-			'subnavtitle' => 'Users'
+			'applicantclass' => '',
+			'applicantsubclass' => '',
+			'settingsclass' => 'active',
+			'employeesclass' => ''
+			
 			);
 			
 		//javascript module

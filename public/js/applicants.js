@@ -1,39 +1,46 @@
-function saveemployee(){
+function saveapplicant(){
 	
-	$('#savebutton').prop("disabled", true);    
-	var empno = document.getElementById("empno").value;
+	    
+	
 	var lname = document.getElementById("lname").value;
 	var fname = document.getElementById("fname").value;
 	var mname = document.getElementById("mname").value;
 	var extension = document.getElementById("extension").value;
-	var designation = document.getElementById("designation").value;
+	var applicanttype = document.getElementById("applicanttype").value;
 	
-	$.ajax({
-		url: 'employees/saveemployee',
-		type: 'post',
-		data: {empno: empno,lname:lname,fname:fname,mname:mname,extension:extension,designation:designation},
-		success: function(response) {
-			//console.log(response);
-			//location.reload();
-			var lastid = JSON.parse(response);
-			window.location.href = "employees/details/"+lastid;
-			
-		}
-	});
+	if(fname!="" && lname!=""){
+		
+	
+		$.ajax({
+			url: 'applicants/saveapplicant',
+			type: 'post',
+			data: {lname:lname,fname:fname,mname:mname,extension:extension,applicanttype:applicanttype},
+			success: function(response) {
+				$('#savebutton').prop("disabled", true);
+				//console.log(response);
+				//location.reload();
+				var lastid = JSON.parse(response);
+				window.location.href = "applicants/details/"+lastid;
+				
+			}
+		});
+	}else{
+		alert("Firstname or Lastname must not be blank.");
+	}
 	
 }
 
-function deleteemployee(id){
+function deleteapplicant(id){
 	
-	var r = confirm("Are your sure you want to delete this employee?");
+	var r = confirm("Are your sure you want to delete this applicant?");
     if (r == true) {
         //alert ("You pressed OK!");
 		var person = prompt("Please enter Administrator Password");
 		if (person =='superadmin') {
 		$.ajax({
-                    url: 'employees/deleteemployee',
+                    url: 'applicants/deleteapplicant',
                     type: 'post',
-                    data: {eid: id},
+                    data: {applicantid: id},
                     success: function(response) {
 						console.log(response);
 						location.reload();
@@ -51,15 +58,14 @@ function deleteemployee(id){
 	
 }
 
-function updateemployee(id){
+function updateapplicant(id){
 	
 	//$('#savebutton').prop("disabled", true);    
 	var lastname = document.getElementById("lastname").value;
 	var firstname = document.getElementById("firstname").value;
 	var middlename = document.getElementById("middlename").value;
 	var extension = document.getElementById("extension").value;
-	var dateofbirth = document.getElementById("dateofbirth").value;
-	var placeofbirth = document.getElementById("placeofbirth").value;
+	
 	if(document.getElementById("genderm").checked==true){
 		var gender = "MALE";
 	}if(document.getElementById("genderf").checked==true){
@@ -70,25 +76,23 @@ function updateemployee(id){
 	}if(document.getElementById("civilstatusm").checked==true){
 		var civilstatus = "MARRIED";
 	}
-	var citizenship = document.getElementById("citizenship").value;
-	var height = document.getElementById("height").value;
-	var weight = document.getElementById("weight").value;
-	var bloodtype = document.getElementById("bloodtype").value;
+	
 	var mobileno = document.getElementById("mobileno").value;
 	var email = document.getElementById("email").value;
 	var barangay = document.getElementById("barangay").value;
 	var towncity = document.getElementById("towncity").value;
 	var province = document.getElementById("province").value;
 	var zipcode = document.getElementById("zipcode").value;
-	var datehired = document.getElementById("datehired").value;
+	var dateapplication = document.getElementById("dateapplication").value;
+	var age = document.getElementById("age").value;
 	
 	
 
 	
 	$.ajax({
-		url: '../updateemployee',
+		url: '../updateapplicant',
 		type: 'post',
-		data: {eid:id,lastname:lastname,firstname:firstname,middlename:middlename,extension:extension,dateofbirth:dateofbirth,placeofbirth:placeofbirth,gender:gender,civilstatus:civilstatus,citizenship:citizenship,height:height,weight:weight,bloodtype:bloodtype,mobileno:mobileno,email:email,barangay:barangay,towncity:towncity,province:province,zipcode:zipcode,datehired:datehired},
+		data: {applicantid:id,lastname:lastname,firstname:firstname,middlename:middlename,extension:extension,gender:gender,civilstatus:civilstatus,mobileno:mobileno,email:email,barangay:barangay,towncity:towncity,province:province,zipcode:zipcode,dateapplication:dateapplication,age:age},
 		success: function(response) {
 			console.log(response);
 			
@@ -108,39 +112,6 @@ function updateemployee(id){
 	
 }
 
-function updateemployee2(id){
-	
-	//$('#savebutton').prop("disabled", true);    
-	
-	var designation = document.getElementById("designation").value;
-	var salary = document.getElementById("salary").value;
-	var item_no = document.getElementById("item_no").value;
-	
-	
-
-	
-	$.ajax({
-		url: '../updateemployee2',
-		type: 'post',
-		data: {eid:id,designation:designation,salary:salary,item_no:item_no},
-		success: function(response) {
-			console.log(response);
-			
-			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Basic info updated!</p>', {
-				type: 'success',
-				delay: 3000,
-				allow_dismiss: true,
-				offset: {from: 'top', amount: 20}
-			});
-			
-			//location.reload();
-			//var lastid = JSON.parse(response);
-			//window.location.href = "employees/details/"+lastid;
-			
-		}
-	});
-	
-}
 function updateemployeefamily(id){
 	
 	//$('#savebutton').prop("disabled", true);    
@@ -308,21 +279,15 @@ function upload_attachment(){
 
 function saveeduc(){
 	
-	$('#savebutton').prop("disabled", true);    
-	var eid = document.getElementById("eid").value;
-	var level = document.getElementById("level").value;
-	var nameofschool = document.getElementById("nameofschool").value;
-	var basiceducation = document.getElementById("basiceducation").value;
-	var period_from = document.getElementById("period_from").value;
-	var period_to = document.getElementById("period_to").value;
-	var highest_level = document.getElementById("highest_level").value;
-	var year_graduated = document.getElementById("year_graduated").value;
-	var scholar_received = document.getElementById("scholar_received").value;
+	
+	var applicantid = document.getElementById("applicantid").value;
+	var educ_description = document.getElementById("educ_description").value;
+	
 	
 	$.ajax({
 		url: '../saveeduc',
 		type: 'post',
-		data: {eid: eid,level:level,nameofschool:nameofschool,basiceducation:basiceducation,period_from:period_from,period_to:period_to,highest_level:highest_level,year_graduated:year_graduated,scholar_received:scholar_received},
+		data: {applicantid: applicantid,educ_description:educ_description},
 		success: function(response) {
 			console.log(response);
 			//location.reload();
@@ -332,6 +297,7 @@ function saveeduc(){
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}
 			});
+			document.getElementById("educ_description").value ="";
 			document.getElementById("closeeducbutton").click();
 			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
 			
@@ -376,31 +342,27 @@ function deleteeduc(id){
 }
 /* save career */
 
-function savecareer(){
+function savetraining(){
 	
-	$('#savebutton').prop("disabled", true);    
-	var eid = document.getElementById("eid").value;
-	var career_description = document.getElementById("career_description").value;
-	var career_rating = document.getElementById("career_rating").value;
-	var career_date = document.getElementById("career_date").value;
-	var career_place = document.getElementById("career_place").value;
-	var career_number = document.getElementById("career_number").value;
-	var career_validity = document.getElementById("career_validity").value;
+	
+	var applicantid = document.getElementById("applicantid").value;
+	var training_description = document.getElementById("training_description").value;
 	
 	
 	$.ajax({
-		url: '../savecareer',
+		url: '../savetraining',
 		type: 'post',
-		data: {eid: eid,career_description:career_description,career_rating:career_rating,career_date:career_date,career_place:career_place,career_number:career_number,career_validity:career_validity},
+		data: {applicantid: applicantid,training_description:training_description},
 		success: function(response) {
 			console.log(response);
 			//location.reload();
-			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Educational Background Added!</p>', {
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Information Added!</p>', {
 				type: 'success',
 				delay: 3000,
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}
 			});
+			document.getElementById("training_description").value = "";
 			document.getElementById("careerclosebutton").click();
 			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
 			
@@ -447,24 +409,16 @@ function deletecareer(id){
 
 function savework(){
 	
-	$('#savebutton').prop("disabled", true);    
-	var eid = document.getElementById("eid").value;
-	var service_from = document.getElementById("service_from").value;
-	var service_to = document.getElementById("service_to").value;
-	var service_position = document.getElementById("service_position").value;
-	var service_status = document.getElementById("service_status").value;
-	var service_salary = document.getElementById("service_salary").value;
-	var service_station = document.getElementById("service_station").value;
-	var service_branch = document.getElementById("service_branch").value;
-	var service_leave = document.getElementById("service_leave").value;
-	var service_separation = document.getElementById("service_separation").value;
+	  
+	var applicantid = document.getElementById("applicantid").value;
+	var work_description = document.getElementById("work_description").value;
 	
 	
 	
 	$.ajax({
 		url: '../savework',
 		type: 'post',
-		data: {eid: eid,service_from:service_from,service_to:service_to,service_position:service_position,service_status:service_status,service_salary:service_salary,service_station:service_station,service_branch:service_branch,service_leave:service_leave,service_separation:service_separation},
+		data: {applicantid: applicantid,work_description:work_description},
 		success: function(response) {
 			console.log(response);
 			//location.reload();
@@ -474,6 +428,7 @@ function savework(){
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}
 			});
+			document.getElementById("work_description").value = "";
 			document.getElementById("workclosebutton").click();
 			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
 			
@@ -494,8 +449,9 @@ function deletework(id){
 		$.ajax({
                     url: '../deletework',
                     type: 'post',
-                    data: {servicerecordid: id},
+                    data: {applicantworkid: id},
                     success: function(response) {
+						console.log(response);
 						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
 							type: 'success',
 							delay: 3000,
@@ -516,35 +472,28 @@ function deletework(id){
 	
 }
 
-/* save training */
-
-function savetraining(){
+function saveskill(){
 	
-	$('#savebutton').prop("disabled", true);    
-	var eid = document.getElementById("eid").value;
-	var training_title = document.getElementById("training_title").value;
-	var training_from = document.getElementById("training_from").value;
-	var training_to = document.getElementById("training_to").value;
-	var training_hours = document.getElementById("training_hours").value;
-	var training_type = document.getElementById("training_type").value;
-	var training_by = document.getElementById("training_by").value;
-	
+	  
+	var applicantid = document.getElementById("applicantid").value;
+	var skill_description = document.getElementById("skill_description").value;
 	
 	
 	
 	$.ajax({
-		url: '../savetraining',
+		url: '../saveskill',
 		type: 'post',
-		data: {eid: eid,training_title:training_title,training_from:training_from,training_to:training_to,training_hours:training_hours,training_type:training_type,training_by:training_by},
+		data: {applicantid: applicantid,skill_description:skill_description},
 		success: function(response) {
 			console.log(response);
 			//location.reload();
-			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Service Record Added!</p>', {
 				type: 'success',
 				delay: 3000,
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}
 			});
+			document.getElementById("skill_description").value = "";
 			document.getElementById("trainingclosebutton").click();
 			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
 			
@@ -552,6 +501,104 @@ function savetraining(){
 			
 		}
 	});
+	
+}
+
+function deleteskill(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteskill',
+                    type: 'post',
+                    data: {applicantskillid: id},
+                    success: function(response) {
+						console.log(response);
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
+	
+}
+
+
+function saveeligibility(){
+	
+	  
+	var applicantid = document.getElementById("applicantid").value;
+	var eligibility_description = document.getElementById("eligibility_description").value;
+	
+	
+	
+	$.ajax({
+		url: '../saveeligibility',
+		type: 'post',
+		data: {applicantid: applicantid,eligibility_description:eligibility_description},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Service Record Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("eligibility_description").value = "";
+			document.getElementById("eligibilityclosebutton").click();
+			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+			
+			
+			
+		}
+	});
+	
+}
+function deleteeligibility(id){
+	
+	var r = confirm("Are your sure you want to delete this Information?");
+    if (r == true) {
+        //alert ("You pressed OK!");
+		//var person = prompt("Please enter Administrator Password");
+		//if (person =='superadmin') {
+		$.ajax({
+                    url: '../deleteeligibility',
+                    type: 'post',
+                    data: {applicanteligibilityid: id},
+                    success: function(response) {
+						console.log(response);
+						$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Record deleted!</p>', {
+							type: 'success',
+							delay: 3000,
+							allow_dismiss: true,
+							offset: {from: 'top', amount: 20}
+						});
+						$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+                    }
+                });
+		//}else{
+			//alert("Invalid Password");
+		//}
+		
+    } if(r == false) {
+        //txt = "You pressed Cancel!";
+		
+    }
 	
 }
 
@@ -1341,3 +1388,282 @@ function deleteuploadedfile_authtravel(authtravelid){
 	});
 	
 }
+
+
+//edit parts
+function addeduc(){
+	$('#updateeducbutton').prop("disabled",true);
+	  
+	$('#savebutton').prop("disabled", false);    
+	document.getElementById("educ_description").value = ""
+}
+function updateeduc(educid){
+	
+	$('#updateeducbutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#savebutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../geteduc',
+		type: 'post',
+		data: {educid : educid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("applicanteducid").value = data.applicanteducid;
+			document.getElementById("educ_description").value = data.educ_description;
+						
+			
+			
+		} 
+	});
+	
+	
+	
+	
+}
+
+function saveupdateeduc(){
+	
+	    
+	
+	var applicanteducid = document.getElementById("applicanteducid").value;
+	var educ_description = document.getElementById("educ_description").value;
+	
+		$.ajax({
+			url: '../saveupdateeduc',
+			type: 'post',
+			data: {applicanteducid:applicanteducid,educ_description:educ_description},
+			success: function(response) {
+				$('#savebutton').prop("disabled", true);
+				//console.log(response);
+				$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+				document.getElementById("closeeducbutton").click();
+				//var lastid = JSON.parse(response);
+				//window.location.href = "applicants/details/"+lastid;
+				
+			}
+		});
+
+}
+
+function updatetraining(applicanttrainingid){
+	
+	$('#updatebuttontraining').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#savebuttontraining').prop("disabled", true);    
+
+	$.ajax({
+		url: '../gettraining',
+		type: 'post',
+		data: {applicanttrainingid : applicanttrainingid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("applicanttrainingid").value = data.applicanttrainingid;
+			document.getElementById("training_description").value = data.training_description;
+						
+			
+			
+		} 
+	});
+	
+	
+	
+	
+}
+
+function saveupdatetraining(){
+	
+	    
+	
+	var applicanttrainingid = document.getElementById("applicanttrainingid").value;
+	var training_description = document.getElementById("training_description").value;
+	
+		$.ajax({
+			url: '../saveupdatetraining',
+			type: 'post',
+			data: {applicanttrainingid:applicanttrainingid,training_description:training_description},
+			success: function(response) {
+				$('#savebutton').prop("disabled", true);
+				//console.log(response);
+				$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+				document.getElementById("trainingclosebutton").click();
+				//var lastid = JSON.parse(response);
+				//window.location.href = "applicants/details/"+lastid;
+				
+			}
+		});
+
+}
+
+
+function updatework(applicantworkid){
+	
+	$('#updateworkbutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#saveworkbutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../getworkdetails',
+		type: 'post',
+		data: {applicantworkid : applicantworkid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("applicantworkid").value = data.applicantworkid;
+			document.getElementById("work_description").value = data.work_description;
+						
+			
+			
+		} 
+	});
+	
+	
+	
+	
+}
+
+function saveupdatework(){
+	
+	    
+	
+	var applicantworkid = document.getElementById("applicantworkid").value;
+	var work_description = document.getElementById("work_description").value;
+	
+		$.ajax({
+			url: '../saveupdatework',
+			type: 'post',
+			data: {applicantworkid:applicantworkid,work_description:work_description},
+			success: function(response) {
+				$('#savebutton').prop("disabled", true);
+				//console.log(response);
+				$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+				document.getElementById("workclosebutton").click();
+				//var lastid = JSON.parse(response);
+				//window.location.href = "applicants/details/"+lastid;
+				
+			}
+		});
+
+}
+
+
+function updateskill(applicantskillid){
+	
+	$('#updateskillbutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#saveskillbutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../getskilldetails',
+		type: 'post',
+		data: {applicantskillid : applicantskillid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("applicantskillid").value = data.applicantskillid;
+			document.getElementById("skill_description").value = data.skill_description;
+						
+			
+			
+		} 
+	});
+		
+}
+
+function saveupdateskill(){
+	
+	    
+	
+	var applicantskillid = document.getElementById("applicantskillid").value;
+	var skill_description = document.getElementById("skill_description").value;
+	
+		$.ajax({
+			url: '../saveupdateskill',
+			type: 'post',
+			data: {applicantskillid:applicantskillid,skill_description:skill_description},
+			success: function(response) {
+				$('#savebutton').prop("disabled", true);
+				//console.log(response);
+				$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+				document.getElementById("skillclosebutton").click();
+				//var lastid = JSON.parse(response);
+				//window.location.href = "applicants/details/"+lastid;
+				
+			}
+		});
+
+}
+
+function updateeligibility(applicanteligibilityid){
+	
+	$('#updateeligibilitybutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#saveeligibilitybutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../geteligibilitydetails',
+		type: 'post',
+		data: {applicanteligibilityid : applicanteligibilityid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("applicanteligibilityid").value = data.applicanteligibilityid;
+			document.getElementById("eligibility_description").value = data.eligibility_description;
+						
+			
+			
+		} 
+	});
+		
+}
+
+function saveupdateeligibility(){
+	
+	    
+	
+	var applicanteligibilityid = document.getElementById("applicanteligibilityid").value;
+	var eligibility_description = document.getElementById("eligibility_description").value;
+	
+		$.ajax({
+			url: '../saveupdateeligibility',
+			type: 'post',
+			data: {applicanteligibilityid:applicanteligibilityid,eligibility_description:eligibility_description},
+			success: function(response) {
+				$('#saveeligibilitybutton').prop("disabled", true);
+				//console.log(response);
+				$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
+				document.getElementById("eligibilityclosebutton").click();
+				//var lastid = JSON.parse(response);
+				//window.location.href = "applicants/details/"+lastid;
+				
+			}
+		});
+
+}
+
+function addtrainingbutton(){
+	$('#savebuttontraining').prop("disabled",false);
+	  
+	$('#updatebuttontraining').prop("disabled", true);    
+	document.getElementById("training_description").value = ""
+}
+function addworkbutton(){
+	$('#saveworkbutton').prop("disabled",false);
+	$('#updateworkbutton').prop("disabled", true);    
+	document.getElementById("work_description").value = ""
+}
+
+function addskillbutton(){
+	$('#saveskillbutton').prop("disabled",false);
+	$('#updateskillbutton').prop("disabled", true);    
+	document.getElementById("skill_description").value = ""
+}
+function addeligibilitybutton(){
+	$('#saveeligibilitybutton').prop("disabled",false);
+	$('#updateeligibilitybutton').prop("disabled", true);    
+	document.getElementById("eligibility_description").value = ""
+}
+
+

@@ -1,6 +1,6 @@
 
 <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
-			 <input type="hidden" id="eid" name="eid" value="<?php echo $eid;?>">
+			 <input type="hidden" id="applicantid" name="applicantid" value="<?php echo $applicantid;?>">
 	
 	<!--rightsidebar here-->
 	<?php //$this->load->view('rightsidebar_view'); ?>
@@ -40,7 +40,7 @@
 										
 			<?php //echo form_open_multipart('employees/uploadprofile');?> 
 	   <form action="" method = "post" id="form_uploadprofile" enctype="multipart/form-data">
-		 <input type="hidden" id="fileid" name="fileid" value="<?php echo $eid;?>">
+		 <input type="hidden" id="fileid" name="fileid" value="<?php echo $applicantid;?>">
 		 
 		 
 		 
@@ -51,29 +51,12 @@
 		 <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button>
       </form> 
                                             <div class="col-xs-12">
-                                                <h3 class="widget-heading"><small>Position<br> <strong>
+                                                <h3 class="widget-heading"><small>Applicant Type<br> <strong>
 												
-												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
-													<?php
-														echo "<option value='".$employee_profile['designation']."'>".$employee_profile['designation']."</option>";
-													?>
-													<?php
-														foreach($position_designation as $posdes):
-															echo "<option value='".$posdes['position_designation']."'>".$posdes['position_designation']."</option>";
-														endforeach;
-													
-													?>
-												</select>
+												<input type="text" style="text-align:center;"  class="form-control" value="<?php echo $applicant_profile['applicant_type'];?>">
 												</strong> </small></h3>
                                             </div>
-                                            <div class="col-xs-12">
-                                                <h3 class="widget-heading"><small>Salary (Monthly): <strong>
-												
-												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
-													<option>SG 18 Step 1 (35,693.00)</option>
-												</select>
-												</strong> </small></h3>
-                                            </div>
+                                            
                                         </div>
 										
 										
@@ -134,7 +117,7 @@
 									$selectedf = "checked='checked'";
 									$selectedm = "";
 								}
-								elseif($applicant_profile['gender']=="FEMALE"){
+								elseif($applicant_profile['gender']=="MALE"){
 									$selectedm = "checked='checked'";
 									$selectedf = "";
 								}
@@ -222,6 +205,21 @@
 								<input type="text" id="zipcode" class="form-control" placeholder="Zip Code" value="<?php echo $applicant_profile['a_zipcode'];?>" >
 								
 							</div>
+							
+							<label class="col-md-3 control-label" for="state-normal">Date of Application</label>
+							<div class="col-md-4">
+								<input type="text" id="dateapplication"  class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" value="<?php echo $applicant_profile['dateofapplication'];?>" >
+								
+							</div>
+							
+						</div>
+						<div class="row"></div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="state-normal">Age</label>
+							<div class="col-md-2">
+								<input type="number" id="age" class="form-control" placeholder="" value="<?php echo $applicant_profile['age'];?>" >
+								
+							</div>
 						</div>
 						
 						
@@ -240,7 +238,7 @@
 							
 				</div>
 							<div class="col-md-8">
-								<button type="button" class="btn btn-primary" onclick="updateemployee(<?php echo $eid;?>)">update</button>
+								<button type="button" class="btn btn-primary" onclick="updateapplicant(<?php echo $applicantid;?>)">update</button>
 								
 							</div>
 							</div>
@@ -286,7 +284,7 @@
                                             <a href="javascript:void(0)" class="btn btn-effect-ripple btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
                                         <ul class="nav nav-tabs" data-toggle="tabs">
-                                            <li class="active"><a href="#block-tabs-home"><i class="fa fa-file-pdf-o"></i> PDS Related Files</a></li>
+                                            <li class="active"><a href="#block-tabs-home"><i class="fa fa-file-pdf-o"></i> Other Information</a></li>
                                            
                                         </ul>
                                     </div>
@@ -295,36 +293,25 @@
 			<!-- Tabs Content -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="block-tabs-home">
-					<h4><b>EDUCATIONAL BACKGROUND</b></h4> <a href="#educational-background" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>EDUCATIONAL QUALIFICATION/SCHOOL</b></h4> <a href="#educational-background" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addeduc();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Level</th>
-										<th>Name of School</th>
-										<th>Basic Education/Degree/Course</th>
-										<th>Period of Attendance</th>
-										<th>Highest Level/Units Earned</th>
-										<th>Year Graduated</th>
-										<th>Scholarship/Academic Honors Received</th>
+										<th>Description</th>
+										
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-									foreach($e_background as $background):
+									foreach($a_education as $education):
 										echo "<tr>";
-										echo "<td>".$background['level']."</td>";
-										echo "<td>".$background['name_of_school']."</td>";
-										echo "<td>".$background['basic_education']."</td>";
-										echo "<td>".$background['period_from']." to ".$background['period_to']."</td>";
-										echo "<td>".$background['highest_level']."</td>";
-										echo "<td>".$background['year_graduated']."</td>";
-										echo "<td>".$background['scholar_received']."</td>";
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <button onclick='deleteeduc(".$background['educbackgroundid'].")' class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td>".$education['educ_description']."</td>";
+																				
+										echo "<td><a href='#educational-background' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='updateeduc(".$education['applicanteducid'].")' ><i class='fa fa-pencil'></i></a>  <button onclick='deleteeduc(".$education['applicanteducid'].")' class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -334,37 +321,26 @@
 							</table>
 					
 					<div class="row"></div>
-					<h4><b>CIVIL SERVICE ELIGIBILITY</b></h4> <a href="#civil-service" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>RELEVANT SEMINAR/TRAINING</b></h4> <a href="#civil-service" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addtrainingbutton()">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Career Service/ Ra 1080 (Board/ Bar) Under Special Laws/CES/CSEE/Barangay Eligibility / Driver's License</th>
-										<th>Rating</th>
-										<th>Date Of Examination / Conferment</th>
-										<th>Place Of Examination / Conferment</th>
-										<th>License Number</th>
-										<th>Date of Validity</th>
-										
+										<th>Description</th>
+																				
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 								<?php
-									foreach($e_careerservice as $careerservice):
+									foreach($a_training as $training):
 										echo "<tr>";
-										echo "<td>".$careerservice['career_description']."</td>";
-										echo "<td>".$careerservice['career_rating']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($careerservice['career_date']))."</td>";
-										echo "<td>".$careerservice['career_place']."</td>";
-										echo "<td>".$careerservice['career_number']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($careerservice['career_validity']))."</td>";
+										echo "<td>".$training['training_description']."</td>";
 										
 										
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times' onclick='deletecareer(".$careerservice['civilserviceid'].");'></i></button></td>";
+										echo "<td><a href='#civil-service' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='updatetraining(".$training['applicanttrainingid'].")'><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times' onclick='deletetraining(".$training['applicanttrainingid'].");'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -374,7 +350,7 @@
 								</tbody>
 							</table>
 						<div class="row"></div>
-					<h4><b>WORK EXPERIENCE / SERVICE RECORD</b></h4> <a href="#work-experience" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+					<h4><b>WORK EXPERIENCE </b></h4> <a href="#work-experience" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addworkbutton();">Add </a>
 					
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
@@ -382,37 +358,23 @@
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Inclusive Dates</th>
-										<th>Position/Designation</th>
-										<th>Status</th>
-										<th>Salary/Job/Pay Grade</th>
+										<th>Description</th>
 										
-										<th>Station/Place of Assignment</th>
-										<th>Branch</th>
-										
-										<th>Leave w/o Pay</th>
-										<th>Separation<br>Date / Cause</th>
 										
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 								<?php
-									foreach($e_servicerecord as $servicerecord):
+									foreach($a_work as $work):
 										echo "<tr>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($servicerecord['service_from']))." ".mdate('%F %d, %Y',strtotime($servicerecord['service_to']))."</td>";
-										echo "<td>".$servicerecord['service_position']."</td>";
-										echo "<td>".$servicerecord['service_status']."</td>";
-										echo "<td>".$servicerecord['service_salary']."</td>";
-										echo "<td>".$servicerecord['service_station']."</td>";
-										echo "<td>".$servicerecord['service_branch']."</td>";
-										echo "<td>".$servicerecord['service_leave']."</td>";
-										echo "<td>".$servicerecord['service_separation']."</td>";
+										echo "<td>".$work['work_description']."</td>";
 										
 										
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletework(".$servicerecord['servicerecordid'].")'><i class='fa fa-times'></i></button></td>";
+										
+										echo "<td><a href='#work-experience' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='updatework(".$work['applicantworkid'].")' ><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletework(".$work['applicantworkid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -423,18 +385,14 @@
 					
 
 <div class="row"></div>
-					<h4><b>TRAINING</b></h4> <a href="#training" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>TALENT/SPECIAL SKILLS/ COMPETENCIES</b></h4> <a href="#training" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addskillbutton();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Title Of Learning And Development Interventions/Training Programs</th>
-										<th>Inclusive Dates Of Attendance</th>
-										<th>Number of Hours</th>
-										<th>Type of LD( Managerial/ Supervisory/Technical/etc)</th>
-										<th>Conducted/ Sponsored By</th>
+										<th>Description</th>
 										
 										
 										<th></th>
@@ -442,434 +400,46 @@
 								</thead>
 								<tbody>
 									<?php
-									foreach($e_training as $training):
+									foreach($a_skill as $skill):
 										echo "<tr>";
-										echo "<td>".$training['training_title']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($training['training_from']))." ".mdate('%F %d, %Y',strtotime($training['training_to']))."</td>";
-										echo "<td>".$training['training_hours']."</td>";
-										echo "<td>".$training['training_type']."</td>";
-										echo "<td>".$training['training_by']."</td>";
-
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletetraining(".$training['trainingid'].")'><i class='fa fa-times'></i></button></td>";
+										echo "<td>".$skill['skill_description']."</td>";
+										
+										echo "<td><a href='#training' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='updateskill(".$skill['applicantskillid'].")'><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteskill(".$skill['applicantskillid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
 								?>
 								</tbody>
 							</table>
-<div class="row"></div>
-					<h4><b>AWARD/S RECEIVED</b></h4> <a href="#awards-received" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+				<div class="row"></div>
+					<h4><b>ELIGIBILITY</b></h4> <a href="#eligibility" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addeligibilitybutton();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
 										
 										<!-- <th style="width:100px;">Delivery ID</th>-->
 										
-										<th>Award Date</th>
-										
-										<th>Department/Agency/Office/Company</th>
 										<th>Description</th>
-																				
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php
-									foreach($e_award as $award):
-										echo "<tr>";
 										
-										echo "<td>".mdate('%F %d, %Y',strtotime($award['award_date']))."</td>";
-										echo "<td>".$award['award_department']."</td>";
-										echo "<td>".$award['award_description']."</td>";
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteaward(".$award['awardid'].")'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-									
-								</tbody>
-							</table>	
-
-
-							
-							<div class="row"></div>
-					<h4><b>OTHER INFORMATION</b></h4> <a href="#other-information" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Information Type</th>
-										<th>Description</th>
-
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
-									foreach($e_others as $others):
+									foreach($a_eligibility as $eligibility):
 										echo "<tr>";
+										echo "<td>".$eligibility['eligibility_description']."</td>";
 										
-										
-										echo "<td>".$others['information_type']."</td>";
-										echo "<td>".$others['information_description']."</td>";
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteother(".$others['otherid'].")'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-									
-								</tbody>
-							</table>	
-							
-				
-				
-				</div><!-- end first tab -->
-				
-				<div class="tab-pane" id="block-tabs-profile">
-				
-				<h4><b>201 Files</b></h4> <a href="#201-files" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Document Type</th>
-										<th>Description</th>
-										<th>Date</th>
-										<th>File Attachment</th>
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php
-									foreach($e_files as $files):
-									
-										$filesid = $files['filesid'];
-										$file_name = $files['file_name'];
-										echo "<tr>";
-										
-										
-										echo "<td>".$files['file_document_type']."</td>";
-										echo "<td>".$files['file_description']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($files['file_date']))."</td>";
-										//echo "<td><a href='#'>".$files['file_name']."</a></td>";
-										
-										echo "<td>";
-											$fileurl2 = base_url();
-											$filesurl = $fileurl2."uploads/201_files/".$file_name;
-											
-											if($file_name == "NONE"){
-												echo "<a href='#upload-201' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_201(".$files['filesid'].");'><i class='fa fa-upload'></i></a>";
-											}else{
-												echo "<a href='$filesurl' class='btn btn-effect-ripple btn-default'>$file_name</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile(".$files['filesid'].")'><i class='fa fa-times'></i></button>";
-											}
-											
-											//curl_close($ch);
-										
-										
-										echo "</td>";
-										
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletefile(".$files['filesid'].")'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-									
-								</tbody>
-							</table>
-							
-				</div><!-- end second tab -->
-				
-				<div class="tab-pane" id="request-approvals">
-				
-					<h4><b>Application for Leave</b></h4> <a href="#application-for-leave-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Type of Leave</th>
-										<th>Location</th>
-										<th>Inclusive Dates</th>
-										<th>Commutation</th>
-										<th>Recommendaton</th>
-										<th>Status</th>
-										<th>File</th>
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								
-								<?php
-									foreach($e_leaveapp as $leaveapp):
-									$appleaveid = $leaveapp['appleaveid'];
-									$appleave_filename = $leaveapp['appleave_filename'];
-									
-										if($leaveapp['appleave_status']=="APPROVED"){
-											$labelstyle = "label-success";
-										}elseif($leaveapp['appleave_status']=="CANCELLED"){
-											$labelstyle = "label-default";
-										}
-										else{
-											$labelstyle = "label-danger";
-										}
-										
-										echo "<tr>";
-										echo "<td>".$leaveapp['appleave_type']."</td>";
-										echo "<td>".$leaveapp['appleave_location']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($leaveapp['appleave_from']))." - ".mdate('%F %d, %Y',strtotime($leaveapp['appleave_to']))."</td>";
-										echo "<td>".$leaveapp['appleave_commutation']."</td>";
-										echo "<td>".$leaveapp['appleave_recommendation']."</td>";
-										
-										echo "<td><button class='btn btn-effect-ripple $labelstyle' data-html='true' data-toggle='popover' data-content='<select class=\"form-control\"><option>PENDING</option><option>APPROVE</option><option>CANCELLED</option></select><button class=\"form-control\" id=\"statusbutton\"> </button>' data-placement='top'><span class='label $labelstyle'>".$leaveapp['appleave_status']."</span></td>";
-										//echo "<td></td>";
-										
-										echo "<td>";
-											
-											$appleave_base = base_url();
-											$appleave_fileurl = $appleave_base."uploads/request_approvals/".$appleave_filename;
-											
-											if($appleave_filename == "NONE"){
-												echo "<a href='#upload-appleave' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_appleave(".$appleaveid.");'><i class='fa fa-upload'></i></a>";
-											}else{
-												echo "<a href='$appleave_fileurl' class='btn btn-effect-ripple btn-default'>$appleave_filename</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile_appleave(".$appleaveid.")'><i class='fa fa-times'></i></button>";
-											}
-											
-											//curl_close($ch);
-										
-										
-										echo "</td>";
-										
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil' disabled></i></a>  <a title='Print Application for Leave' href='#modal-voucher' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='' disabled><i class='fa fa-print'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteappleave(".$leaveapp['appleaveid'].");'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-								
-									
-								</tbody>
-							</table>
-				
-				</div><!-- end fourth tab -->
-				<div class="tab-pane" id="authority-to-travel">
-					<h4><b>Authority to Travel</b></h4> <a href="#authority-travel-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>  
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Inclusive Dates</th>
-										<th>Location</th>
-										<th>Description</th>
-										<th>Other Employees</th>
-										<th>File</th>
-										
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								
-								<?php
-									foreach($e_travel as $travel):
-									
-										$authtravel_filename = $travel['travel_filename'];
-										$authtravelid = $travel['authtravelid'];
-										
-										echo "<tr>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($travel['travel_from']))." - ".mdate('%F %d, %Y',strtotime($travel['travel_to']))."</td>";
-										echo "<td>".$travel['travel_location']."</td>";
-										echo "<td>".$travel['travel_description']."</td>";
-										
-										$travelid = $travel['authtravelid'];
-										$travelemployees = $this->employees_model->getetravelemployees($travelid);
-										$numberofemployee = count($travelemployees);
-										$comma = 1;
-										$employees="";
-										
-											foreach($travelemployees as $temployee):
-											
-												/*
-												if($comma < $numberofemployee){
-													$employees .= "<a class='btn btn-effect-ripple btn-primary' href='".$temployee['eid']."'>".$temployee['employee_name']."</a> ";
-													
-												}else{*/
-													$employees .= "<span class='btn btn-primary'>".$temployee['employee_name']."</span><div class='btn-group'>
-                                                <button class='btn btn-primary dropdown-toggle' data-toggle='dropdown'><span class='caret'></span></button>
-                                                <ul class='dropdown-menu dropdown-menu-right'>
-                                                    <li>
-                                                        <a href='#' onclick='removetraveleid(".$temployee['travelemployeeid'].")'><i class='fa fa-times'></i></button> Remove</a>
-                                                    </li>
-                                                  
-                                                </ul>
-                                            </div> ";
-													
-												/*}
-												$comma++;*/
-											endforeach;
-										
-										echo "<td><a href='#authority-travel-modal-employee' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='addemployeetolist(".$travel['authtravelid'].")'><i class='fa fa-user-plus'></i></a> ".$employees." </td>";
-										
-										
-										echo "<td>";
-											
-											$authtravel_base = base_url();
-											$authtravel_fileurl = $authtravel_base."uploads/authority_travel/".$authtravel_filename;
-											
-											if($authtravel_filename == "NONE"){
-												echo "<a href='#upload-authtravel' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_authtravel(".$authtravelid.");'><i class='fa fa-upload'></i></a>";
-											}else{
-												echo "<a href='$authtravel_fileurl' class='btn btn-effect-ripple btn-default'>$authtravel_filename</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile_authtravel(".$authtravelid.")'><i class='fa fa-times'></i></button>";
-											}
-											
-											//curl_close($ch);
-										
-										
-										echo "</td>";
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <a title='Print Authority' href='#printtravel' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='printtravel(".$travel['authtravelid'].");'><i class='fa fa-print'></i></a>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteauth(".$travel['authtravelid'].")'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-								
-									
-									
-								</tbody>
-							</table>
-				
-				
-				</div><!-- end of authority to travel tab -->
-				<div class="tab-pane" id="rating">
-					<h4><b>Performance Rating</b></h4> <a href="#performance-rating" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Rating Period</th>
-										<th>Rating</th>
-										
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php
-									foreach($e_rating as $rating):
-										echo "<tr>";
-										
-										echo "<td>".mdate('%F %d, %Y',strtotime($rating['rating_from']))." - ".mdate('%F %d, %Y',strtotime($rating['rating_to']))."</td>";
-										echo "<td>".$rating['rating_value']."</td>";
-										
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick=''><i class='fa fa-pencil' disabled></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleterating(".$rating['ratingid'].")'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#eligibility' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='updateeligibility(".$eligibility['applicanteligibilityid'].")'><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteeligibility(".$eligibility['applicanteligibilityid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
 								?>
 								</tbody>
 							</table>
+ 
 				
-				
-				
-				</div>
-				<div class="tab-pane" id="leave-credits">
-						<h4><b>Leave Credits</b></h4> <a href="#leave-credits-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a title="Print Leave Credit Card" href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Period</th>
-										<th>Particular</th>
-										<th>Earned</th>
-										<th>Absences Undertime w/ Pay</th>
-										<th>Balance</th>
-										<th>ABS.UND.WOP.</th>
-										<th>Earned</th>
-										<th>ABS.UND.W/P.</th>
-										<th>Balance</th>
-										<th>ABS.UND.WOP.</th>
-										<th>Total Leave Credits Earned</th>
-										<th>Date & Action Taken on Appln for Leave</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-								<?php
-									foreach($e_leavecredits as $leavecredits):
-									
-										echo "<tr>";
-										
-										echo "<td>".mdate('%F %d, %Y',strtotime($leavecredits['leave_from']))." - ".mdate('%F %d, %Y',strtotime($leavecredits['leave_to']))."</td>";
-										echo "<td>".$leavecredits['leave_particular']."</td>";
-										echo "<td>".$leavecredits['leave_earned']."</td>";
-										echo "<td>".$leavecredits['leave_absences']."</td>";
-										echo "<td>".$leavecredits['leave_balance']."</td>";
-										echo "<td>".$leavecredits['leave_abswop']."</td>";
-										echo "<td>".$leavecredits['sick_earned']."</td>";
-										echo "<td>".$leavecredits['sick_abswp']."</td>";
-										echo "<td>".$leavecredits['sick_balance']."</td>";
-										echo "<td>".$leavecredits['sick_abswop']."</td>";
-										echo "<td>".$leavecredits['total_leave']."</td>";
-										echo "<td>".$leavecredits['sick_action']."</td>";
-										
-										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-primary notification' title='Expenses' id='notification' disabled><i class='fa fa-dollar'></i></button>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteleavecredit(".$leavecredits['leavecreditsid'].");'><i class='fa fa-times'></i></button></td>";
-										echo "</tr>";
-									endforeach;
-								
-								?>
-									
-								</tbody>
-							</table>
-							
-				</div><!-- end leave credits-->
-				<div class="tab-pane" id="daily-time-record">
-					<h4><b>Daily Time Record</b></h4> <a href="#modal-voucher" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
-							<table class="table table-striped table-bordered table-vcenter table-hover">
-								<thead>
-									<tr style="text-align:center;">
-										
-										<!-- <th style="width:100px;">Delivery ID</th>-->
-										
-										<th>Inclusive Dates</th>
-										<th>Location</th>
-										<th>Description</th>
-										<th>Employees</th>
-										
-										
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										
-										<td><button class='btn btn-primary notification' title='Expenses' id='notification'><i class='fa fa-dollar'></i></button> <button class='btn btn-danger notification' title='Delete User' id='notification'><i class='fa fa-times'></i></button></td>
-									</tr>
-								</tbody>
-							</table>
-				
-				</div> <!-- daily time record-->
-				<div class="tab-pane" id="block-tabs-settings">Settings..</div>
 			</div>
 			<!-- END Tabs Content -->
 		</div>
@@ -892,63 +462,25 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><strong>Educational Background</strong></h3>
+							<h3 class="modal-title"><strong>Educational Qualification/School</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
-						<label class="col-md-3 control-label" for="state-normal">Level</label>
-						<div class="col-md-6">
-								<select class="form-control" id="level">
-									<option value="ELEMENTARY">ELEMENTARY</option>
-									<option value="SECONDARY">SECONDARY</option>
-									<option value="VOCATIONAL / TRADE COURSE">VOCATIONAL / TRADE COURSE</option>
-									<option value="COLLEGE">COLLEGE</option>
-									<option value="GRADUATE STUDIES">GRADUATE STUDIES</option>
-								</select>
-						</div>
+						
+						<input type="hidden" id="applicanteducid">
 						<div class="row"></div>
-						 <label class="col-md-3 control-label" for="state-normal">Name of School</label>
+							<label class="col-md-3 control-label" for="state-normal">Description</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="nameofschool">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Basic Education/ Degree/ Course</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="basiceducation">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Period of Attendance</label>
-							<div class="col-md-9">
-							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
-									<input type="text" id="period_from" name="example-daterange1" class="form-control" placeholder="From">
-									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-									<input type="text" id="period_to" name="example-daterange2" class="form-control" placeholder="To">
-								</div>
-							</div>
-							
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Highest Level/ Units Earned</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="highest_level">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Year Graduated</label>
-							<div class="col-md-3">
-							   <input type="text" name="state-normal" class="form-control" id="year_graduated">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Scholarship/ Academic Honors Received</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="scholar_received">
+								<textarea  class="form-control" id="educ_description"></textarea>
+							   
 							</div>
 						
 							
-							 <div class="row"></div>
+							 <div class="row"><br></div>
 						
 							
 						<div class="modal-footer">
 							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveeduc();" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-primary" onclick="saveupdateeduc();" disabled id="updateeducbutton">update</button>
 							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="closeeducbutton">Close</button>
 						</div>
 					</div>
@@ -965,50 +497,24 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><strong>CIVIL SERVICE ELIGIBILITY</strong></h3>
+							<h3 class="modal-title"><strong>Relevant Seminar/Training</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
-						
-						 <label class="col-md-12 control-label" for="state-normal">Career Service/ Ra 1080 (Board/ Bar) Under Special Laws/CES/CSEE/Barangay Eligibility / Driver's License</label>
-							<div class="col-md-12">
-							   <input type="text" name="state-normal" class="form-control" id="career_description">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Rating</label>
-							<div class="col-md-3">
-							   <input type="number" name="state-normal" class="form-control" id="career_rating">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Date Of Examination / Conferment</label>
-							<div class="col-md-8">
-							   <input type="text" id="career_date" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
-							</div>
-							
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Place Of Examination / Conferment</label>
-							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="career_place">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">License Number</label>
-							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="career_number">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Date of Validity</label>
-							<div class="col-md-8">
-							   <input type="text" id="career_validity" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							<div class="row"></div>
+							<input type="hidden" id="applicanttrainingid">
+							<label class="col-md-3 control-label" for="state-normal">Description</label>
+							<div class="col-md-9">
+								<textarea  class="form-control" id="training_description"></textarea>
+							   
 							</div>
 						
 							
-							 <div class="row"></div>
-						
+							 <div class="row"><br></div>
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savecareer();" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="careerclosebutton">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savetraining();" id="savebuttontraining">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveupdatetraining();" id="updatebuttontraining" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="trainingclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1027,60 +533,21 @@
 							<h3 class="modal-title"><strong>WORK EXPERIENCE</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
-						
-						 <label class="col-md-3 control-label" for="state-normal">Inclusive Dates</label>
-							<div class="col-md-9">
-							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
-									<input type="text" id="service_from" name="example-daterange1" class="form-control" placeholder="From">
-									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-									<input type="text" id="service_to" name="example-daterange2" class="form-control" placeholder="To">
-								</div>
-							</div>
 						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Position/Designation</label>
+						<input type="hidden" id="applicantworkid">
+							<label class="col-md-3 control-label" for="state-normal">Description</label>
 							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="service_position">
+								<textarea  class="form-control" id="work_description"></textarea>
+							   
 							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Status</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="service_status">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Salary/Job/Pay Grade</label>
-							<div class="col-md-9">
-							   <input type="number" name="state-normal" class="form-control" id="service_salary">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Station/Place of Assignment</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="service_station">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Branch</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="service_branch">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Leave w/o Pay</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="service_leave">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-3 control-label" for="state-normal">Separation Date / Cause</label>
-							<div class="col-md-9">
-							   <input type="text" name="state-normal" class="form-control" id="service_separation">
-							</div>
-						
 						
 							
-							 <div class="row"></div>
+							 <div class="row"><br></div>
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savework();" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savework();" id="saveworkbutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveupdatework();" id="updateworkbutton" disabled>Update</button>
 							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="workclosebutton">Close</button>
 						</div>
 					</div>
@@ -1097,52 +564,26 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><strong>TRAINING</strong></h3>
+							<h3 class="modal-title"><strong>Talent/Special Skils/Competencies</strong></h3>
 						</div>
 						<div class="modal-body">
 						
-						
-						 <label class="col-md-12 control-label" for="state-normal">Title Of Learning And Development Interventions/Training Programs</label>
-							<div class="col-md-12">
-							   <input type="text" name="state-normal" class="form-control" id="training_title">
-							</div>
-							
-						 <label class="col-md-4 control-label" for="state-normal">Inclusive Dates Of Attendance</label>
-							<div class="col-md-8">
-							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
-									<input type="text" id="training_from" name="example-daterange1" class="form-control" placeholder="From">
-									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
-									<input type="text" id="training_to" name="example-daterange2" class="form-control" placeholder="To">
-								</div>
-							</div>
+						<input type="hidden" id="applicantskillid">
 						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Number of Hours</label>
-							<div class="col-md-4">
-							   <input type="number" name="state-normal" class="form-control" id="training_hours">
+							<label class="col-md-3 control-label" for="state-normal">Description</label>
+							<div class="col-md-9">
+								<textarea  class="form-control" id="skill_description"></textarea>
+							   
 							</div>
-							
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Type of LD( Managerial/ Supervisory/Technical/etc)</label>
-							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="training_type">
-							</div>
-						
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Conducted/ Sponsored By</label>
-							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="training_by">
-							</div>
-						
-						
 						
 							
-							 <div class="row"></div>
+							 <div class="row"><br></div>
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" id="savebutton" onclick="savetraining();">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="trainingclosebutton">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" id="saveskillbutton" onclick="saveskill();">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveupdateskill();" id="updateskillbutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="skillclosebutton">Close</button>
 						</div>
 					</div>
 				</div>
@@ -1153,44 +594,29 @@
 		<!-- END Regular Modal -->	
 									
 	<!-- Awards Received Modal -->
-			<div id="awards-received" class="modal" role="dialog" aria-hidden="true">
+			<div id="eligibility" class="modal" role="dialog" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><strong>AWARD/S RECEIVED</strong></h3>
+							<h3 class="modal-title"><strong>Eligibility</strong></h3>
 						</div>
 						<div class="modal-body">
-													
-						 <label class="col-md-4 control-label" for="state-normal">Award Date</label>
-							<div class="col-md-8">
-							   <input type="text" id="award_date" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
-							</div>
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Department/ Agency/ Office/Company</label>
-							<div class="col-md-8">
-							   <input type="text" name="state-normal" class="form-control" id="award_department">
-							</div>
-							
-						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Description</label>
-							<div class="col-md-8">
-								<textarea class="form-control" name="state-normal"  id="award_description"></textarea>
+						<input type="hidden" id="applicanteligibilityid">
+						 <div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Description</label>
+							<div class="col-md-9">
+								<textarea  class="form-control" id="eligibility_description"></textarea>
 							   
 							</div>
-							
-						
-						
-						
 						
 							
 							 <div class="row"><br></div>
-						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" id="savebutton"  onclick="saveaward();">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
-							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="awardclosebutton">Close</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" id="saveeligibilitybutton"  onclick="saveeligibility();">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveupdateeligibility();" id="updateeligibilitybutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="eligibilityclosebutton">Close</button>
 						</div>
 					</div>
 				</div>

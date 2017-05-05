@@ -31,22 +31,22 @@
                                         </li>
 										
 										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Request/Approval</a>
+                                            <a href="<?=base_url()?>apr" class="<?php //echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Request/Approval</a>
                                         </li>
 
 										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Rating</a>
+                                            <a href="<?=base_url()?>apr" class="<?php //echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Rating</a>
                                         </li>
 
 									</ul>
 								</li>
 								
 								<!-- Applicants -->
-                                <li class="<?php echo $purchasesclass;?>">
+                                <li class="<?php echo $applicantclass;?>">
                                     <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-ruble sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Applicants</span></a>
                                     <ul>
 										<li>
-                                            <a href="<?=base_url()?>applicants" class="<?php echo $aprclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Applicants</a>
+                                            <a href="<?=base_url()?>applicants" class="<?php echo $applicantsubclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Applicants</a>
                                         </li>
 
 									</ul>
@@ -58,12 +58,12 @@
                                     <ul>
 										
 										<li>
-                                            <a class="<?php echo $suppliersclass;?>" href="<?=base_url()?>position" ><i class="fa fa-cubes sidebar-nav-icon"></i>Position/Designation</a>
+                                            <a class="<?php //echo $suppliersclass;?>" href="<?=base_url()?>position" ><i class="fa fa-cubes sidebar-nav-icon"></i>Position/Designation</a>
                                         </li>
 									
 										
 										<li>
-                                            <a  class="<?php echo $userssubclass;?>" href="<?=base_url()?>users" ><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
+                                            <a  class="<?php //echo $userssubclass;?>" href="<?=base_url()?>users" ><i class="gi gi-user sidebar-nav-icon"></i>Users</a>
                                         </li>
 										
 										<li class="hidden<?php //echo $userssubclass;?>">

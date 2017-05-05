@@ -32,10 +32,7 @@
                             </div> 
                             <div class="modal-body">
                                 <div class="form-group">
-						<label class="col-md-3 control-label text-right">Employee Number</label>
-                        <div class="col-md-7">
-                            <input type="text" id="empno" name="state-normal" class="form-control" tabindex="0" value="">
-                        </div>	
+						
 						<div class="row"></div>
 						<label class="col-md-3 control-label text-right">Last Name</label>
                         <div class="col-md-7">
@@ -53,9 +50,12 @@
                         <div class="col-md-7">
                             <input type="text" id="extension" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
                         </div>	
-						<label class="col-md-3 control-label text-right">Designation</label>
+						<label class="col-md-3 control-label text-right">Applicant Type</label>
                         <div class="col-md-7">
-                            <input type="text" id="designation" name="state-normal" class="form-control col-xs-1" tabindex="0" value="">
+                           <select id="applicanttype" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+													<option value="SUPERVISORY">SUPERVISORY</option>
+													<option value="NON-SUPERVISORY">NON-SUPERVISORY</option>
+												</select>
                         </div>	
 						
 	
@@ -78,7 +78,7 @@
 								
                             </div>
                             <div class="modal-footer">
-							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="saveemployee();">Save Employee</button>
+							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="saveapplicant();">Save Employee</button>
 							
                                 <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
                             </div>
@@ -159,7 +159,7 @@
 				echo "<td class='center'> 
 					
 										
-					<button class='btn btn-danger notification' title='Delete User' id='notification' onClick='deleteemployee(".$applicant_list['applicantid'].")'><i class='fa fa-times'></i></button>
+					<button class='btn btn-danger notification' title='Delete User' id='notification' onClick='deleteapplicant(".$applicant_list['applicantid'].")'><i class='fa fa-times'></i></button>
 				</td>";
 				echo "</tr>";
 				

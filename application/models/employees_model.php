@@ -141,6 +141,15 @@ class Employees_model extends CI_Model
 		echo $sql;
 						
 	}
+	public function updateemployee2($eid,$designation,$salary,$item_no)
+	{
+		
+		$sql = "update employee set designation=".$this->db->escape($designation).",item_no=".$this->db->escape($item_no).", salary=".$this->db->escape($salary)." where eid=".$this->db->escape($eid)."";
+		$this->db->query($sql);
+		
+		echo $sql;
+						
+	}
 	public function updateemployeefamily($eid,$spouse_lname,$spouse_fname,$spouse_mname,$father_lname,$father_fname,$father_mname,$mother_lname,$mother_fname,$mother_mname)
 	{
 		
@@ -390,6 +399,13 @@ class Employees_model extends CI_Model
 		
 		//echo $sql;
 						
+	}
+	public function getsettingssalary()
+	{
+		$sql = $this->db->query("SELECT * from settings_salary");
+		return $sql->result_array();
+		
+		
 	}
 	
 	

@@ -12,34 +12,20 @@ class Applicants extends CI_Controller
 		//view module
 		 $this->data = array(
             'title' => 'Settings',
-			'employeesclass' => 'active',
-			'purchasesclass' => '',
-			'aprclass' => '',
-			'prclass' => '',
-			'poclass' => '',
-			'receiveclass' => '',
-			'usersclass' => '',
-			'userssubclass' => '',
-			'reportsclass' => '',
-			'assetmanagementclass' => '',
-			'recevingassetsclass' => '',
-			'assetclass' => '',
-			'propertyclass' => '',
-			'supplymanagementclass' => '',
-			'settingsclass' => '',
-			'requisitionclass' => '',
-			'equipmentclass' => '',
-			'itemsclass' => '',
-			'suppliersclass' => '',
-			'employeesclass' => 'active',
-			'inventoryclass' => '',
 			'subnavtitle' => 'Applicants',
 			'typeahead' => '1',
+			'employeesclass' => '',
+			'applicantclass' => 'active',
+			'applicantsubclass' => 'active',
+			'settingsclass' => '',
+			'employeesclass' => '',
+
+			
 			
 			);
 		//javascript module
 		$this->js = array(
-            'jsfile' => 'settings_employees.js'
+            'jsfile' => 'applicants.js'
 			);
 	}
 	
@@ -62,9 +48,31 @@ class Applicants extends CI_Controller
 		$data = $this->data;
 		$js = $this->js;
 		
+		$base = base_url();
+		$fileurl = $base."uploads/applicant/".$id.".jpg";
+		 $ch = curl_init($fileurl);    
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if($code == 404){
+            $data['status'] = "no";
+			$data['fileurl'] = "";
+        }else{
+            $data['status'] = "yes";
+			$data['fileurl'] = $fileurl;
+        }
+        curl_close($ch);
 		
-		$data['eid'] = $id;
+		
+		$data['applicantid'] = $id;
 		$data['applicant_profile'] = $this->applicant_model->getprofile($id);
+		$data['a_education'] = $this->applicant_model->geteducation($id);
+		$data['a_training'] = $this->applicant_model->gettraining($id);
+		$data['a_work'] = $this->applicant_model->getwork($id);
+		$data['a_skill'] = $this->applicant_model->getskill($id);
+		$data['a_eligibility'] = $this->applicant_model->geteligibility($id);
+
 
 
 		$this->load->view('inc/header_view');
@@ -73,48 +81,52 @@ class Applicants extends CI_Controller
 		
 	}
 	
-	public function saveemployee(){
-		$empno = $this->input->post('empno');
+	public function saveapplicant(){
+		
 		$lname = $this->input->post('lname');
 		$fname = $this->input->post('fname');
 		$mname = $this->input->post('mname');
 		$extension = $this->input->post('extension');
-		$designation = $this->input->post('designation');
+		$applicanttype = $this->input->post('applicanttype');
 		
-		$this->employees_model->saveemployee($empno,$lname,$fname,$mname,$extension,$designation);
+		$this->applicant_model->saveapplicant($lname,$fname,$mname,$extension,$applicanttype);
 	}
 	
-	public function deleteemployee(){
-		$eid = $this->input->post('eid');
-		$this->db->delete('employee', array('eid' => $eid));
+	public function deleteapplicant(){
+		$applicantid = $this->input->post('applicantid');
+		$this->db->delete('applicant', array('applicantid' => $applicantid));
+		$this->db->delete('applicant_education', array('applicantid' => $applicantid));
+		$this->db->delete('applicant_eligibility', array('applicantid' => $applicantid));
+		$this->db->delete('applicant_skill', array('applicantid' => $applicantid));
+		$this->db->delete('applicant_training', array('applicantid' => $applicantid));
+		$this->db->delete('applicant_training', array('applicantid' => $applicantid));
+		$this->db->delete('applicant_work', array('applicantid' => $applicantid));
 		
 		
 	}
 	
-	public function updateemployee(){
-		$eid = $this->input->post('eid');
+	public function updateapplicant(){
+		$applicantid = $this->input->post('applicantid');
 		$lastname = $this->input->post('lastname');
 		$firstname = $this->input->post('firstname');
 		$middlename = $this->input->post('middlename');
 		$extension = $this->input->post('extension');
-		$dateofbirth = $this->input->post('dateofbirth');
-		$placeofbirth = $this->input->post('placeofbirth');
+		
 		$gender = $this->input->post('gender');
 		$civilstatus = $this->input->post('civilstatus');
-		$citizenship = $this->input->post('citizenship');
-		$height = $this->input->post('height');
-		$weight = $this->input->post('weight');
-		$bloodtype = $this->input->post('bloodtype');
+		
+		
 		$mobileno = $this->input->post('mobileno');
 		$email = $this->input->post('email');
 		$barangay = $this->input->post('barangay');
 		$towncity = $this->input->post('towncity');
 		$province = $this->input->post('province');
 		$zipcode = $this->input->post('zipcode');
-		$datehired = $this->input->post('datehired');
+		$dateapplication = $this->input->post('dateapplication');
+		$age = $this->input->post('age');
 
 
-		$this->employees_model->updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired);
+		$this->applicant_model->updateapplicant($applicantid,$lastname,$firstname,$middlename,$extension,$gender,$civilstatus,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$dateapplication,$age);
 		//$this->employees_model->updateemployee($eid,$lastname);
 	}
 	public function updateemployeefamily(){
@@ -290,36 +302,24 @@ class Applicants extends CI_Controller
 	
 	/* educational background*/
 	public function saveeduc(){
-		$eid = $this->input->post('eid');
-		$level = $this->input->post('level');
-		$nameofschool = $this->input->post('nameofschool');
-		$basiceducation = $this->input->post('basiceducation');
-		$period_from = $this->input->post('period_from');
-		$period_to = $this->input->post('period_to');
-		$highest_level = $this->input->post('highest_level');
-		$year_graduated = $this->input->post('year_graduated');
-		$scholar_received = $this->input->post('scholar_received');
+		$applicantid = $this->input->post('applicantid');
+		$educ_description = $this->input->post('educ_description');
 		
-		$this->employees_model->saveeduc($eid,$level,$nameofschool,$basiceducation,$period_from,$period_to,$highest_level,$year_graduated,$scholar_received);
+		
+		$this->applicant_model->saveeduc($applicantid,$educ_description);
 	}
 	
 	public function deleteeduc(){
 		$educbackgroundid = $this->input->post('educbackgroundid');
-		$this->db->delete('employee_educational_background', array('educbackgroundid' => $educbackgroundid));
+		$this->db->delete('applicant_education', array('applicanteducid' => $educbackgroundid));
 		
 	}
 	/*career service*/
-	public function savecareer(){
-		$eid = $this->input->post('eid');
-		$career_description = $this->input->post('career_description');
-		$career_rating = $this->input->post('career_rating');
-		$career_date = $this->input->post('career_date');
-		$career_place = $this->input->post('career_place');
-		$career_number = $this->input->post('career_number');
-		$career_validity = $this->input->post('career_validity');
+	public function savetraining(){
+		$applicantid = $this->input->post('applicantid');
+		$training_description = $this->input->post('training_description');
 		
-		
-		$this->employees_model->savecareer($eid,$career_description,$career_rating,$career_date,$career_place,$career_number,$career_validity,$eid);
+		$this->applicant_model->savetraining($applicantid,$training_description);
 	}
 	
 	public function deletecareer(){
@@ -331,46 +331,56 @@ class Applicants extends CI_Controller
 	/* work/service record */
 
 	public function savework(){
-		$eid = $this->input->post('eid');
-		$service_from = $this->input->post('service_from');
-		$service_to = $this->input->post('service_to');
-		$service_position = $this->input->post('service_position');
-		$service_status = $this->input->post('service_status');
-		$service_salary = $this->input->post('service_salary');
-		$service_station = $this->input->post('service_station');
-		$service_branch = $this->input->post('service_branch');
-		$service_leave = $this->input->post('service_leave');
-		$service_separation = $this->input->post('service_separation');
+		$applicantid = $this->input->post('applicantid');
+		$work_description = $this->input->post('work_description');
 		
 		
-		$this->employees_model->savework($eid,$service_from,$service_to,$service_position,$service_status,$service_salary,$service_station,$service_branch,$service_separation,$service_leave);
+		$this->applicant_model->savework($applicantid,$work_description);
 	}
 	
 	public function deletework(){
-		$servicerecordid = $this->input->post('servicerecordid');
-		$this->db->delete('employee_service_record', array('servicerecordid' => $servicerecordid));
+		$applicantworkid = $this->input->post('applicantworkid');
+		$this->db->delete('applicant_work', array('applicantworkid' => $applicantworkid));
 		
+	}
+	/* work/service record */
+
+	public function saveskill(){
+		$applicantid = $this->input->post('applicantid');
+		$skill_description = $this->input->post('skill_description');
+		
+		
+		$this->applicant_model->saveskill($applicantid,$skill_description);
+	}
+	
+	public function deleteskill(){
+		$applicantskillid = $this->input->post('applicantskillid');
+		$this->db->delete('applicant_skill', array('applicantskillid' => $applicantskillid));
+		echo "deleted";
+	}
+	/* work/service record */
+
+	public function saveeligibility(){
+		$applicantid = $this->input->post('applicantid');
+		$eligibility_description = $this->input->post('eligibility_description');
+		
+		
+		$this->applicant_model->saveeligibility($applicantid,$eligibility_description);
+	}
+	
+	public function deleteeligibility(){
+		$applicanteligibilityid = $this->input->post('applicanteligibilityid');
+		$this->db->delete('applicant_eligibility', array('applicanteligibilityid' => $applicanteligibilityid));
+		//echo "deleted";
 	}
 	
 	/* training record */
 
-	public function savetraining(){
-		$eid = $this->input->post('eid');
-		$training_title = $this->input->post('training_title');
-		$training_from = $this->input->post('training_from');
-		$training_to = $this->input->post('training_to');
-		$training_hours = $this->input->post('training_hours');
-		$training_type = $this->input->post('training_type');
-		$training_by = $this->input->post('training_by');
-
-		
-		
-		$this->employees_model->savetraining($eid,$training_title,$training_from,$training_to,$training_hours,$training_type,$training_by);
-	}
+	
 	
 	public function deletetraining(){
 		$trainingid = $this->input->post('trainingid');
-		$this->db->delete('employee_training', array('trainingid' => $trainingid));
+		$this->db->delete('applicant_training', array('applicanttrainingid' => $trainingid));
 		
 	}
 	
@@ -571,6 +581,86 @@ class Applicants extends CI_Controller
 		$this->employees_model->updatedeletefile_authtravel($authtravelid);
 		
 		
+	}
+	
+	
+	//applicant
+	public function geteduc(){
+		$educid = $this->input->post('educid');
+		
+		$educdetails = $this->applicant_model->geteduc($educid);
+
+		echo json_encode($educdetails);
+		
+	}
+	
+	public function saveupdateeduc(){
+		$educ_description = $this->input->post('educ_description');
+		$applicanteducid = $this->input->post('applicanteducid');
+
+		$this->applicant_model->saveupdateeduc($applicanteducid,$educ_description);
+	}
+	
+	public function gettraining(){
+		$applicanttrainingid = $this->input->post('applicanttrainingid');
+		
+		$trainingdetails = $this->applicant_model->gettrain($applicanttrainingid);
+
+		echo json_encode($trainingdetails);
+		
+	}
+	
+	public function saveupdatetraining(){
+		$training_description = $this->input->post('training_description');
+		$applicanttrainingid = $this->input->post('applicanttrainingid');
+
+		$this->applicant_model->saveupdatetraining($applicanttrainingid,$training_description);
+	}
+	
+	public function getworkdetails(){
+		$applicantworkid = $this->input->post('applicantworkid');
+		
+		$workdetails = $this->applicant_model->getworkdetails($applicantworkid);
+
+		echo json_encode($workdetails);
+		
+	}
+	
+	public function saveupdatework(){
+		$applicantworkid = $this->input->post('applicantworkid');
+		$work_description = $this->input->post('work_description');
+
+		$this->applicant_model->saveupdatework($applicantworkid,$work_description);
+	}
+	
+	public function getskilldetails(){
+		$applicantskillid = $this->input->post('applicantskillid');
+		
+		$skilldetails = $this->applicant_model->getskilldetails($applicantskillid);
+
+		echo json_encode($skilldetails);
+		
+	}
+	
+	public function saveupdateskill(){
+		$applicantskillid = $this->input->post('applicantskillid');
+		$skill_description = $this->input->post('skill_description');
+
+		$this->applicant_model->saveupdateskill($applicantskillid,$skill_description);
+	}
+	public function geteligibilitydetails(){
+		$applicanteligibilityid = $this->input->post('applicanteligibilityid');
+		
+		$eligibilitydetails = $this->applicant_model->geteligibilitydetails($applicanteligibilityid);
+
+		echo json_encode($eligibilitydetails);
+		
+	}
+	public function saveupdateeligibility(){
+		$applicanteligibilityid = $this->input->post('applicanteligibilityid');
+		$eligibility_description = $this->input->post('eligibility_description');
+
+		$this->applicant_model->saveupdateeligibility($applicanteligibilityid,$eligibility_description);
 	}
 	
 

@@ -53,14 +53,14 @@
 										<div class="col-xs-12" style="text-align:center !important;">
                                                 <h3 class="widget-heading"><small>Unique Item No <strong>
 												
-												<input type="text" id="item_no" class="form-control" style="padding-right:20px;padding-left:20px; ">
+												<input type="text" id="item_no" class="form-control" style="padding-right:20px;padding-left:20px; " value="<?php echo $employee_profile['item_no'];?>">
 												</strong> </small></h3>
                                             </div>
 											
                                             <div class="col-xs-12">
                                                 <h3 class="widget-heading"><small>Position<br> <strong>
 												
-												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+												<select id="designation" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
 													<?php
 														echo "<option value='".$employee_profile['designation']."'>".$employee_profile['designation']."</option>";
 													?>
@@ -76,8 +76,14 @@
                                             <div class="col-xs-12">
                                                 <h3 class="widget-heading"><small>Salary (Monthly): <strong>
 												
-												<select id="aprno" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
-													<option>SG 18 Step 1 (35,693.00)</option>
+												<select id="salary" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+													<?php
+													echo "<option value='".$employee_profile['salary']."'>".$employee_profile['salary']."</option>";
+														foreach($settings_salary as $salaries):
+															echo "<option value='SG ".$salaries['salarygrade']." ".$salaries['step']." - ".number_format($salaries['amount'],2)." (".$salaries['tranche'].")'>SG ".$salaries['salarygrade']." ".$salaries['step']." - ".number_format($salaries['amount'],2)." (".$salaries['tranche'].")</option>";
+														endforeach;
+													?>
+												
 												</select>
 												</strong> </small></h3>
                                             </div>
@@ -85,7 +91,7 @@
 										
 										
 										 <div class="block full">
-											<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php //echo $scholarapplicant_profile['applicantid'];?>)">Save</button>
+											<button type="button" class="btn btn-primary" onclick="updateemployee2(<?php echo $employee_profile['eid'];?>)">Save</button>
 											
 										</div>
 										
