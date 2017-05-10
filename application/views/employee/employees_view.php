@@ -103,6 +103,7 @@
 						<th style="width:480px;">Name</th>
                         <th>Designation</th>
 						<th>Employee ID</th>
+						<th>Status</th>
                         
                         
 						<th></th>
@@ -148,6 +149,7 @@
 				echo "<a href='employees/details/".$employees_list['eid']."'>".$employees_list['fname']." ".$employees_list['lname']."</a></td>";
 				echo "<td>".$employees_list['designation']."</td>";
 				echo "<td>".$employees_list['empNo']."</a></td>";
+				echo "<td>".$employees_list['employee_status']."</a></td>";
 				
 				
 			

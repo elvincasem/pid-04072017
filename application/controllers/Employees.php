@@ -41,7 +41,35 @@ class Employees extends CI_Controller
 
 		
 		$data['employeeslist'] = $this->employees_model->getemployeeslist();
-
+//get active employee list
+		$active_employee = $this->employees_model->getactiveemployeeslist();
+				
+		foreach($active_employee as $activeemployee):
+			$balancebrought = $this->employees_model->getbalancebrought($activeemployee['eid']);
+			//if starting balance is set
+			if($balancebrought==1){
+				
+					$this->load->helper('date');
+					$now = new DateTime();
+					$now->setTimezone(new DateTimezone('Asia/Manila'));
+					$now_month = $now->format(date('m', strtotime("-1 months")));
+					
+					$first_day_last_month = $now->format(date('Y-m-d', strtotime("first day of last month")));
+					$last_day_last_month = $now->format(date('Y-m-d', strtotime("last day of last month")));
+					
+				
+					$getleave = $this->employees_model->getautoleave($activeemployee['eid'],$now_month);
+					echo $getleave;
+					if($getleave==0){
+						//insert auto leave_absences
+						$this->employees_model->insertautoleavecredit($activeemployee['eid'],$first_day_last_month,$last_day_last_month);
+					}
+				
+			}
+			
+		
+		endforeach;
+		
 		$this->load->view('inc/header_view');
 		$this->load->view('employee/employees_view',$data);
 		$this->load->view('inc/footer_view',$js);
@@ -141,9 +169,10 @@ class Employees extends CI_Controller
 		$province = $this->input->post('province');
 		$zipcode = $this->input->post('zipcode');
 		$datehired = $this->input->post('datehired');
+		$employee_status = $this->input->post('employee_status');
 
 
-		$this->employees_model->updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired);
+		$this->employees_model->updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired,$employee_status);
 		//$this->employees_model->updateemployee($eid,$lastname);
 	}
 	public function updateemployee2(){
@@ -613,6 +642,67 @@ class Employees extends CI_Controller
 		
 		
 	}
+	
+	public function leavestatusupdate(){
+		$appleaveid = $this->input->post('appleaveid');
+		$statusbutton = $this->input->post('statusbutton');
+		
+
+
+		$this->employees_model->leavestatusupdate($appleaveid,$statusbutton);
+		
+	}
+	
+	public function getauthtravel(){
+		
+
+		$authtravelid = $this->input->post('authtravelid');
+		$traveldetails = $this->employees_model->getauthtravel($authtravelid);
+
+		echo json_encode($traveldetails);
+		
+		
+	}
+	
+	public function updateauthtravel(){
+		$authtravelid = $this->input->post('authtravelid');
+		$travel_from = $this->input->post('travel_from');
+		$travel_to = $this->input->post('travel_to');
+		$travel_location = $this->input->post('travel_location');
+		$travel_description = $this->input->post('travel_description');
+		
+		$this->employees_model->updateauthtravel($authtravelid,$travel_from,$travel_to,$travel_location,$travel_description);
+		
+		
+	}
+	
+	public function getleaveapplication(){
+		
+
+		$appleaveid = $this->input->post('appleaveid');
+		$leavedetails = $this->employees_model->getleaveapplication($appleaveid);
+
+		echo json_encode($leavedetails);
+		
+		
+	}
+	
+	public function updateappleave(){
+		$appleaveid = $this->input->post('appleaveid');
+		$appleave_type = $this->input->post('appleave_type');
+		$appleave_location = $this->input->post('appleave_location');
+		$appleave_from = $this->input->post('appleave_from');
+		$appleave_to = $this->input->post('appleave_to');
+		$appleave_commutation = $this->input->post('appleave_commutation');
+		$appleave_recommendation = $this->input->post('appleave_recommendation');
+		$appleave_status = $this->input->post('appleave_status');
+		
+		
+		$this->employees_model->updateappleave($appleaveid,$appleave_type,$appleave_location,$appleave_from,$appleave_to,$appleave_commutation,$appleave_recommendation,$appleave_status);
+		
+		
+	}
+	
 	
 
 }

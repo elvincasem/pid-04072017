@@ -53,7 +53,7 @@
                                             <div class="col-xs-12">
                                                 <h3 class="widget-heading"><small>Applicant Type<br> <strong>
 												
-												<input type="text" style="text-align:center;"  class="form-control" value="<?php echo $applicant_profile['applicant_type'];?>">
+												<input type="text" style="text-align:center;" id="applicant_type" class="form-control" value="<?php echo $applicant_profile['applicant_type'];?>">
 												</strong> </small></h3>
                                             </div>
                                             
@@ -61,7 +61,7 @@
 										
 										
 										 <div class="block full">
-											<button type="button" class="btn btn-primary" onclick="saveapplicantinfo(<?php //echo $scholarapplicant_profile['applicantid'];?>)">Save</button>
+											<button type="button" class="btn btn-primary" onclick="saveapplicanttype(<?php echo $applicant_profile['applicantid'];?>)">Update</button>
 											
 										</div>
 										

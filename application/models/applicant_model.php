@@ -24,6 +24,18 @@ class Applicant_model extends CI_Model
 		echo $currentid;
 		
 	}
+	public function saveapplicant_type($applicantid,$applicanttype)
+	{
+		
+		$sql = "update applicant set applicant_type=".$this->db->escape($applicanttype)." where applicantid=".$this->db->escape($applicantid)."";
+		$this->db->query($sql);
+				
+		$sqlselect = $this->db->query("SELECT MAX(applicantid) AS lastid FROM applicant");
+		$lastidinserted = $sqlselect->result_array();
+		$currentid = $lastidinserted[0]['lastid'];
+		echo $currentid;
+		
+	}
 	
 
 	public function getprofile($id)

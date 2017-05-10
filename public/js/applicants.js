@@ -30,6 +30,35 @@ function saveapplicant(){
 	
 }
 
+function saveapplicanttype(id){
+	
+	    
+	
+	var applicant_type = document.getElementById("applicant_type").value;
+	
+	
+	
+	
+		$.ajax({
+			url: '../saveapplicant_type',
+			type: 'post',
+			data: {applicantid:id,applicant_type:applicant_type},
+			success: function(response) {
+				
+				console.log(response);
+				$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Basic info updated!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+				
+			}
+		});
+	
+	
+}
+
 function deleteapplicant(id){
 	
 	var r = confirm("Are your sure you want to delete this applicant?");
@@ -363,7 +392,7 @@ function savetraining(){
 				offset: {from: 'top', amount: 20}
 			});
 			document.getElementById("training_description").value = "";
-			document.getElementById("careerclosebutton").click();
+			document.getElementById("trainingclosebutton").click();
 			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
 			
 			
@@ -494,7 +523,7 @@ function saveskill(){
 				offset: {from: 'top', amount: 20}
 			});
 			document.getElementById("skill_description").value = "";
-			document.getElementById("trainingclosebutton").click();
+			document.getElementById("skillclosebutton").click();
 			$('#block-tabs-home').load(document.URL +  ' #block-tabs-home');
 			
 			

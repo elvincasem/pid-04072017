@@ -9,26 +9,12 @@ class Home extends CI_Controller
 		$this->load->model('dashboard_model');
 		  $this->data = array(
             'title' => 'Dashboard',
-			'purchasesclass' => '',
-			'aprclass' => '',
-			'prclass' => '',
-			'poclass' => '',
-			'receiveclass' => '',
-			'usersclass' => '',
-			'userssubclass' => '',
-			'reportsclass' => '',
-			'assetmanagementclass' => '',
-			'recevingassetsclass' => '',
-			'assetclass' => '',
-			'propertyclass' => '',
-			'supplymanagementclass' => '',
-			'settingsclass' => '',
-			'requisitionclass' => '',
-			'equipmentclass' => '',
-			'itemsclass' => '',
-			'suppliersclass' => '',
+			'typeahead' => '1',
 			'employeesclass' => '',
-			'inventoryclass' => '',
+			'applicantclass' => '',
+			'applicantsubclass' => '',
+			'settingsclass' => '',
+			'employeesclass' => '',
 			'subnavtitle' => 'Dashboard'
 			);
 			

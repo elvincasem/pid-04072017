@@ -81,6 +81,7 @@ function updateemployee(id){
 	var province = document.getElementById("province").value;
 	var zipcode = document.getElementById("zipcode").value;
 	var datehired = document.getElementById("datehired").value;
+	var employee_status = document.getElementById("employee_status").value;
 	
 	
 
@@ -88,7 +89,7 @@ function updateemployee(id){
 	$.ajax({
 		url: '../updateemployee',
 		type: 'post',
-		data: {eid:id,lastname:lastname,firstname:firstname,middlename:middlename,extension:extension,dateofbirth:dateofbirth,placeofbirth:placeofbirth,gender:gender,civilstatus:civilstatus,citizenship:citizenship,height:height,weight:weight,bloodtype:bloodtype,mobileno:mobileno,email:email,barangay:barangay,towncity:towncity,province:province,zipcode:zipcode,datehired:datehired},
+		data: {eid:id,lastname:lastname,firstname:firstname,middlename:middlename,extension:extension,dateofbirth:dateofbirth,placeofbirth:placeofbirth,gender:gender,civilstatus:civilstatus,citizenship:citizenship,height:height,weight:weight,bloodtype:bloodtype,mobileno:mobileno,email:email,barangay:barangay,towncity:towncity,province:province,zipcode:zipcode,datehired:datehired,employee_status:employee_status},
 		success: function(response) {
 			console.log(response);
 			
@@ -1340,4 +1341,196 @@ function deleteuploadedfile_authtravel(authtravelid){
 		} 
 	});
 	
+}
+
+
+function savestatus(id){
+	var statusbutton = document.getElementById("statusbutton-"+id).value;
+	
+	$.ajax({
+		url: '../leavestatusupdate',
+		type: 'post',
+		data: {appleaveid : id,statusbutton:statusbutton},
+		success: function(response) {
+			console.log(response);
+			var popupstyle = document.getElementById("statuslabel-"+id);
+			popupstyle.click();
+			
+			 $.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File Updated!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					
+					//document.getElementById("statuscolumn-"+id).innerHTML=statusbutton;					
+					$('#request-approvals').load(document.URL +  ' #request-approvals');
+
+		} 
+	});
+}
+
+
+function edittravel(authtravelid){
+	
+	$('#updateauthbutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#saveauthbutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../getauthtravel',
+		type: 'post',
+		data: {authtravelid : authtravelid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("travel_from").value = data.travel_from;
+			document.getElementById("travel_to").value = data.travel_to;
+			document.getElementById("travel_location").value = data.travel_location;
+			document.getElementById("travel_description").value = data.travel_description;
+			document.getElementById("authtravelid").value = authtravelid;
+			
+						
+			
+			
+		} 
+	});
+		
+}
+
+function addauthoritybutton(){
+	$('#saveauthbutton').prop("disabled",false);
+	$('#updateauthbutton').prop("disabled", true);    
+	document.getElementById("travel_from").value = ""
+	document.getElementById("travel_to").value = ""
+	document.getElementById("travel_location").value = ""
+	document.getElementById("travel_description").value = ""
+	document.getElementById("authtravelid").value = ""
+}
+
+function updateauthtravel(){
+	var authtravelid = document.getElementById("authtravelid").value;
+	var travel_from = document.getElementById("travel_from").value;
+	var travel_to = document.getElementById("travel_to").value;
+	var travel_location = document.getElementById("travel_location").value;
+	var travel_description = document.getElementById("travel_description").value;
+	
+	$.ajax({
+		url: '../updateauthtravel',
+		type: 'post',
+		data: {authtravelid : authtravelid,travel_from:travel_from,travel_to:travel_to,travel_location:travel_location,travel_description:travel_description},
+		success: function(response) {
+			console.log(response);
+			 $.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File Updated!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					document.getElementById("saveauthclosebutton").click();
+										
+					$('#authority-to-travel').load(document.URL +  ' #authority-to-travel');
+			
+						
+			
+			
+		} 
+	});
+		
+}
+
+function editleave(appleaveid){
+	
+	$('#updateleavebutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#saveleavebutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../getleaveapplication',
+		type: 'post',
+		data: {appleaveid : appleaveid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			var appleave_type = document.getElementById("appleave_type");
+				//supervisor.remove(0);
+				var opt = document.createElement("option");
+				opt.value = data.appleave_type;
+				opt.text = data.appleave_type;
+				opt.selected = "selected";
+				appleave_type.add(opt,  appleave_type.options[0]);
+				
+				
+			document.getElementById("appleaveid").value = appleaveid;
+			document.getElementById("appleave_location").value = data.appleave_location;
+			document.getElementById("appleave_from").value = data.appleave_from;
+			document.getElementById("appleave_to").value = data.appleave_to;
+			
+			var appleave_commutation = document.getElementById("appleave_commutation");
+				//supervisor.remove(0);
+				var opt = document.createElement("option");
+				opt.value = data.appleave_commutation;
+				opt.text = data.appleave_commutation;
+				opt.selected = "selected";
+				appleave_commutation.add(opt,  appleave_commutation.options[0]);
+				
+			document.getElementById("appleave_recommendation").value = data.appleave_recommendation;
+			
+								
+								
+			var appleave_status = document.getElementById("appleave_status");
+				//supervisor.remove(0);
+				var opt = document.createElement("option");
+				opt.value = data.appleave_status;
+				opt.text = data.appleave_status;
+				opt.selected = "selected";
+				appleave_status.add(opt,  appleave_status.options[0]);
+			
+		} 
+	});
+		
+}
+
+function addauthoritybutton(){
+	$('#saveleavebutton').prop("disabled",false);
+	$('#updateleavebutton').prop("disabled", true);    
+	document.getElementById("appleave_location").value = ""
+	document.getElementById("appleave_from").value = ""
+	document.getElementById("appleave_to").value = ""
+	document.getElementById("appleave_recommendation").value = ""
+	document.getElementById("appleaveid").value = ""
+}
+
+function updateappleave(){
+	var appleaveid = document.getElementById("appleaveid").value;
+	var appleave_type = document.getElementById("appleave_type").value;
+	var appleave_location = document.getElementById("appleave_location").value;
+	var appleave_from = document.getElementById("appleave_from").value;
+	var appleave_to = document.getElementById("appleave_to").value;
+	var appleave_commutation = document.getElementById("appleave_commutation").value;
+	var appleave_recommendation = document.getElementById("appleave_recommendation").value;
+	var appleave_status = document.getElementById("appleave_status").value;
+	
+	$.ajax({
+		url: '../updateappleave',
+		type: 'post',
+		data: {appleaveid : appleaveid,appleave_type:appleave_type,appleave_location:appleave_location,appleave_from:appleave_from,appleave_to:appleave_to,appleave_commutation:appleave_commutation,appleave_recommendation:appleave_recommendation,appleave_status:appleave_status},
+		success: function(response) {
+			console.log(response);
+			 $.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File Updated!</p>', {
+						type: 'success',
+						delay: 3000,
+						allow_dismiss: true,
+						offset: {from: 'top', amount: 20}
+					});
+					document.getElementById("appleaveclosebutton").click();
+										
+					$('#request-approvals').load(document.URL +  ' #request-approvals');
+			
+						
+			
+			
+		} 
+	});
+		
 }

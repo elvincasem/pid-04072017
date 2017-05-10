@@ -147,11 +147,11 @@
 			}
 				*/
 				
-				echo "<td><a href='applicants/details/".$applicant_list['applicantid']."'>".$applicant_list['fname']." ".$applicant_list['lname']."</a></td>";
+				echo "<td><a href='applicants/details/".$applicant_list['applicantid']."'>".$applicant_list['fname']." ".$applicant_list['mname']." ".$applicant_list['lname']."</a></td>";
 				echo "<td>".$applicant_list['gender']."</td>";
 				echo "<td>".$applicant_list['age']."</td>";
 				
-				echo "<td>".$applicant_list['a_barangay']." ".$applicant_list['a_towncity'].", ".$applicant_list['a_province'].", ".$applicant_list['a_barangay']."</td>";
+				echo "<td>".$applicant_list['a_barangay']." ".$applicant_list['a_towncity'].", ".$applicant_list['a_province']."</td>";
 				echo "<td>".$applicant_list['applicant_type']."</td>";
 				
 				

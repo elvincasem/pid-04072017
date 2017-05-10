@@ -91,6 +91,13 @@ class Applicants extends CI_Controller
 		
 		$this->applicant_model->saveapplicant($lname,$fname,$mname,$extension,$applicanttype);
 	}
+	public function saveapplicant_type(){
+		
+		$applicantid = $this->input->post('applicantid');
+		$applicant_type = $this->input->post('applicant_type');
+
+		$this->applicant_model->saveapplicant_type($applicantid,$applicant_type);
+	}
 	
 	public function deleteapplicant(){
 		$applicantid = $this->input->post('applicantid');
@@ -167,7 +174,7 @@ class Applicants extends CI_Controller
 		$fileid = $this->input->post('fileid');
 		//$form_value = 
 		 //$newfilename = $fileid."jpg";
-         $config['upload_path']   = './uploads/'; 
+         $config['upload_path']   = './uploads/applicant/'; 
          $config['allowed_types'] = 'gif|jpg|png|jpeg'; 
          $config['max_size']      = 2048; 
          $config['max_width']     = 2048; 
@@ -662,6 +669,9 @@ class Applicants extends CI_Controller
 
 		$this->applicant_model->saveupdateeligibility($applicanteligibilityid,$eligibility_description);
 	}
+	
+	
+	
 	
 
 }

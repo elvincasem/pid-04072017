@@ -12,6 +12,46 @@ class Employees_model extends CI_Model
 		
 	}
 	
+	public function getactiveemployeeslist()
+	{
+		$sql = $this->db->query("SELECT * FROM employee where employee_status = 'ACTIVE'");
+		return $sql->result_array();
+		
+		
+	}
+	public function getbalancebrought($eid)
+	{
+		$sql = $this->db->query("SELECT count(*) as gotbalance FROM employee_leave_credits where leave_particular = 'BALANCE BROUGHT FORWARD' AND eid=$eid");
+		$result =  $sql->result_array();
+		return $result[0]['gotbalance'];
+		
+		
+	}
+	public function getautoleave($eid,$now_month)
+	{
+		$sql = $this->db->query("SELECT COUNT(*) as autocount FROM employee_leave_credits WHERE DATE_FORMAT(leave_from,'%m')=$now_month AND leave_particular='E' AND eid=$eid");
+		$result = $sql->result_array();
+		return $result[0]['autocount'];
+		
+		
+	}
+	
+	public function insertautoleavecredit($eid,$first_day_last_month,$last_day_last_month)
+	{
+		
+		$sql1 = $this->db->query("SELECT leave_balance,sick_balance FROM employee_leave_credits WHERE eid=$eid order by leavecreditsid desc limit 1");
+		$result1 = $sql1->result_array();
+		$leave_balance =1.25+$result1[0]['leave_balance'];
+		$sick_balance =1.25+$result1[0]['sick_balance'];
+		
+		
+		$sql = "INSERT INTO employee_leave_credits (leave_from,leave_to,leave_particular,leave_earned,leave_balance,sick_earned,sick_balance,eid) VALUES (".$this->db->escape($first_day_last_month).",".$this->db->escape($last_day_last_month).",'E',1.25,".$leave_balance.",1.25,".$sick_balance.",".$eid.")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
 	public function saveemployee($empno,$lname,$fname,$mname,$extension,$designation)
 	{
 		
@@ -132,10 +172,10 @@ class Employees_model extends CI_Model
 		
 	}
 	
-	public function updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired)
+	public function updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired,$employee_status)
 	{
 		
-		$sql = "update employee set lname=".$this->db->escape($lastname).", fname=".$this->db->escape($firstname).", mname=".$this->db->escape($middlename).", ename=".$this->db->escape($extension).", dob=".$this->db->escape($dateofbirth).", pob=".$this->db->escape($placeofbirth).", gender=".$this->db->escape($gender).", civil_status=".$this->db->escape($civilstatus).", citizenship=".$this->db->escape($citizenship).", height=".$this->db->escape($height).", weight=".$this->db->escape($weight).", blood_type=".$this->db->escape($bloodtype).", mobile_number=".$this->db->escape($mobileno).", email_address=".$this->db->escape($email).", a_barangay=".$this->db->escape($barangay).", a_towncity=".$this->db->escape($towncity).", a_province=".$this->db->escape($province).", a_zipcode=".$this->db->escape($zipcode).", date_hired=".$this->db->escape($datehired)." where eid=".$this->db->escape($eid)."";
+		$sql = "update employee set lname=".$this->db->escape($lastname).", fname=".$this->db->escape($firstname).", mname=".$this->db->escape($middlename).", ename=".$this->db->escape($extension).", dob=".$this->db->escape($dateofbirth).", pob=".$this->db->escape($placeofbirth).", gender=".$this->db->escape($gender).", civil_status=".$this->db->escape($civilstatus).", citizenship=".$this->db->escape($citizenship).", height=".$this->db->escape($height).", weight=".$this->db->escape($weight).", blood_type=".$this->db->escape($bloodtype).", mobile_number=".$this->db->escape($mobileno).", email_address=".$this->db->escape($email).", a_barangay=".$this->db->escape($barangay).", a_towncity=".$this->db->escape($towncity).", a_province=".$this->db->escape($province).", a_zipcode=".$this->db->escape($zipcode).", date_hired=".$this->db->escape($datehired).", employee_status=".$this->db->escape($employee_status)." where eid=".$this->db->escape($eid)."";
 		$this->db->query($sql);
 		
 		echo $sql;
@@ -408,7 +448,53 @@ class Employees_model extends CI_Model
 		
 	}
 	
+	public function leavestatusupdate($appleaveid,$statusbutton)
+	{
+		
+		$sql = "update employee_leave_application set appleave_status='$statusbutton' where appleaveid=".$this->db->escape($appleaveid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
 	
+	public function getauthtravel($authtravelid)
+	{
+		$itemlist = $this->db->query("SELECT * from employee_travel where authtravelid=".$this->db->escape($authtravelid)."");
+		$singlerow = $itemlist->result_array();
+		return $singlerow[0];
+		
+		
+	}
+	
+	public function updateauthtravel($authtravelid,$travel_from,$travel_to,$travel_location,$travel_description)
+	{
+		
+		$sql = "update employee_travel set travel_from=".$this->db->escape($travel_from).",travel_to=".$this->db->escape($travel_to).",travel_location=".$this->db->escape($travel_location).",travel_description=".$this->db->escape($travel_description)." where authtravelid=".$this->db->escape($authtravelid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
+	
+	public function getleaveapplication($appleaveid)
+	{
+		$itemlist = $this->db->query("SELECT * from employee_leave_application where appleaveid=".$this->db->escape($appleaveid)."");
+		$singlerow = $itemlist->result_array();
+		return $singlerow[0];
+		
+		
+	}
+	
+	public function updateappleave($appleaveid,$appleave_type,$appleave_location,$appleave_from,$appleave_to,$appleave_commutation,$appleave_recommendation,$appleave_status)
+	{
+		
+		$sql = "update employee_leave_application set appleave_type=".$this->db->escape($appleave_type).",appleave_location=".$this->db->escape($appleave_location).",appleave_from=".$this->db->escape($appleave_from).",appleave_to=".$this->db->escape($appleave_to).",appleave_commutation=".$this->db->escape($appleave_commutation).",appleave_recommendation=".$this->db->escape($appleave_recommendation).",appleave_status=".$this->db->escape($appleave_status)." where appleaveid=".$this->db->escape($appleaveid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
 	
 	
 }
