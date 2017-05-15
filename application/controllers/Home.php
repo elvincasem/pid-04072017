@@ -15,6 +15,7 @@ class Home extends CI_Controller
 			'applicantsubclass' => '',
 			'settingsclass' => '',
 			'employeesclass' => '',
+			'reportsclass' => '',
 			'subnavtitle' => 'Dashboard'
 			);
 			

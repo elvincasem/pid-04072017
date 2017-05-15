@@ -496,6 +496,26 @@ class Employees_model extends CI_Model
 						
 	}
 	
+	public function getleavecredits($leavecreditsid)
+	{
+		$sql2 = $this->db->query("SELECT * FROM employee_leave_credits where leavecreditsid='$leavecreditsid' ");
+		
+		$result = $sql2->result_array();
+		return $result[0];
+		
+		
+	}
+	
+	public function updateleavecredit($leavecreditsid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action,$leave_balance,$sick_balance)
+	{
+		
+		$sql = "UPDATE employee_leave_credits SET leave_from=".$this->db->escape($leave_from).", leave_to=".$this->db->escape($leave_to).",leave_particular=".$this->db->escape($leave_particular).",leave_earned=".$this->db->escape($leave_earned).",leave_absences=".$this->db->escape($leave_absences).",leave_balance=".$this->db->escape($leave_balance).",leave_abswop=".$this->db->escape($leave_abswop).",sick_earned=".$this->db->escape($sick_earned).",sick_abswp=".$this->db->escape($sick_abswp).",sick_balance=".$this->db->escape($sick_balance).",sick_abswop=".$this->db->escape($sick_abswop).",sick_action=".$this->db->escape($sick_action)." where leavecreditsid=".$this->db->escape($leavecreditsid)."";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
 	
 }
 

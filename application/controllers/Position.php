@@ -17,6 +17,7 @@ class Position extends CI_Controller
 			'employeesclass' => '',
 			'applicantclass' => '',
 			'applicantsubclass' => '',
+			'reportsclass' => '',
 			'settingsclass' => 'active',
 			'employeesclass' => '',
 

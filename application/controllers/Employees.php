@@ -59,7 +59,7 @@ class Employees extends CI_Controller
 					
 				
 					$getleave = $this->employees_model->getautoleave($activeemployee['eid'],$now_month);
-					echo $getleave;
+					//echo $getleave;
 					if($getleave==0){
 						//insert auto leave_absences
 						$this->employees_model->insertautoleavecredit($activeemployee['eid'],$first_day_last_month,$last_day_last_month);
@@ -112,7 +112,7 @@ class Employees extends CI_Controller
 		$data['e_leavecredits'] = $this->employees_model->geteleavecredits($id);
 		$data['e_leaveapp'] = $this->employees_model->geteleaveapp($id);
 		$data['e_travel'] = $this->employees_model->getetravel($id);
-		$data['employee_list'] = $this->employees_model->getemployeeslist($id);
+		$data['employee_list'] = $this->employees_model->getactiveemployeeslist($id);
 		$data['settings_salary'] = $this->employees_model->getsettingssalary();
 		
 		
@@ -534,6 +534,25 @@ class Employees extends CI_Controller
 		
 	}
 	
+	public function updateleavecredit(){
+		$leavecreditsid = $this->input->post('leavecreditsid');
+		$leave_from = $this->input->post('leave_from');
+		$leave_to = $this->input->post('leave_to');
+		$leave_particular = $this->input->post('leave_particular');
+		$leave_earned = $this->input->post('leave_earned');
+		$leave_absences = $this->input->post('leave_absences');
+		$leave_abswop = $this->input->post('leave_abswop');
+		$sick_earned = $this->input->post('sick_earned');
+		$sick_abswp = $this->input->post('sick_abswp');
+		$sick_abswop = $this->input->post('sick_abswop');
+		$sick_action = $this->input->post('sick_action');
+		$leave_balance = $this->input->post('leave_balance');
+		$sick_balance = $this->input->post('sick_balance');
+		
+		
+		$this->employees_model->updateleavecredit($leavecreditsid,$leave_from,$leave_to,$leave_particular,$leave_earned,$leave_absences,$leave_abswop,$sick_earned,$sick_abswp,$sick_abswop,$sick_action,$leave_balance,$sick_balance);
+	}
+	
 	public function saveappleave(){
 		$eid = $this->input->post('eid');
 		$appleave_type = $this->input->post('appleave_type');
@@ -703,6 +722,13 @@ class Employees extends CI_Controller
 		
 	}
 	
+	public function getleavecredits(){
+		$leavecreditsid = $this->input->post('leavecreditsid');
+		$leavecreditsdetails = $this->employees_model->getleavecredits($leavecreditsid);
+
+		echo json_encode($leavecreditsdetails);
+		
+	}
 	
 
 }

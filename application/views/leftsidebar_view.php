@@ -51,6 +51,17 @@
 
 									</ul>
 								</li>
+								
+								<!-- Applicants -->
+                                <li class="<?php echo $reportsclass;?>">
+                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-ruble sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Reports</span></a>
+                                    <ul>
+										<li>
+                                            <a href="<?=base_url()?>reports/edesignation" class="<?php //echo $applicantsubclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Employee by Designation</a>
+                                        </li>
+
+									</ul>
+								</li>
                                
 								<!-- Settings-->
 								<li class="<?php echo $settingsclass;?>">

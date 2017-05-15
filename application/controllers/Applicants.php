@@ -19,7 +19,7 @@ class Applicants extends CI_Controller
 			'applicantsubclass' => 'active',
 			'settingsclass' => '',
 			'employeesclass' => '',
-
+			'reportsclass' => ''
 			
 			
 			);

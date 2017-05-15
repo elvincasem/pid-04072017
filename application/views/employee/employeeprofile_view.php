@@ -495,7 +495,7 @@
 										echo "<td>".$background['year_graduated']."</td>";
 										echo "<td>".$background['scholar_received']."</td>";
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <button onclick='deleteeduc(".$background['educbackgroundid'].")' class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='hidden btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>  <button onclick='deleteeduc(".$background['educbackgroundid'].")' class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -535,7 +535,7 @@
 										
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times' onclick='deletecareer(".$careerservice['civilserviceid'].");'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='hidden btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification'><i class='fa fa-times' onclick='deletecareer(".$careerservice['civilserviceid'].");'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -583,7 +583,7 @@
 										
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletework(".$servicerecord['servicerecordid'].")'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='hidden btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletework(".$servicerecord['servicerecordid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -621,7 +621,7 @@
 										echo "<td>".$training['training_type']."</td>";
 										echo "<td>".$training['training_by']."</td>";
 
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletetraining(".$training['trainingid'].")'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#modal-voucher' class='hidden btn btn-effect-ripple btn-primary' data-toggle='modal' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletetraining(".$training['trainingid'].")'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -824,7 +824,7 @@
 										echo "</td>";
 										
 										
-										echo "<td><a href='#application-for-leave-modal' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='editleave(".$leaveapp['appleaveid'].")'><i class='fa fa-pencil' ></i></a>  <a title='Print Application for Leave' href='#modal-voucher' class='btn btn-effect-ripple btn-success' data-toggle='modal' onclick='' disabled><i class='fa fa-print'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteappleave(".$leaveapp['appleaveid'].");'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#application-for-leave-modal' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='editleave(".$leaveapp['appleaveid'].")'><i class='fa fa-pencil' ></i></a>  <a title='Print Application for Leave' href='#modal-voucher' class='hidden btn btn-effect-ripple btn-success' data-toggle='modal' onclick='' disabled><i class='fa fa-print'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteappleave(".$leaveapp['appleaveid'].");'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 									endforeach;
 								
@@ -961,7 +961,7 @@
 				
 				</div>
 				<div class="tab-pane" id="leave-credits">
-						<h4><b>Leave Credits</b></h4> <a href="#leave-credits-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a title="Print Leave Credit Card" href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+						<h4><b>Leave Credits</b></h4> <a href="#leave-credits-modal" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addlcbutton();">Add </a> <a title="Print Leave Credit Card" href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -1005,7 +1005,7 @@
 										echo "<td>".$leavecredits['sick_action']."</td>";
 										
 										
-										echo "<td><a href='#modal-voucher' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-primary notification' title='Expenses' id='notification' disabled><i class='fa fa-dollar'></i></button>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteleavecredit(".$leavecredits['leavecreditsid'].");'><i class='fa fa-times'></i></button></td>";
+										echo "<td><a href='#leave-credits-modal' class='btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='editlc(".$leavecredits['leavecreditsid'].");'><i class='fa fa-pencil'></i></a>   <button class='hidden btn btn-primary notification' title='Expenses' id='notification' disabled><i class='fa fa-dollar'></i></button>  <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteleavecredit(".$leavecredits['leavecreditsid'].");'><i class='fa fa-times'></i></button></td>";
 										echo "</tr>";
 										
 										$vlbalance = $leavecredits['leave_balance'];
@@ -1555,7 +1555,7 @@
 							<h3 class="modal-title"><strong>Leave Credits</strong></h3>
 						</div>
 						<div class="modal-body">
-						<input type="hidden" id="spaymentid">
+						<input type="hidden" id="leavecreditsid">
 							<h4 class="sub-header">Vacation Leave</h4>
 						 <label class="col-md-4 control-label" for="state-normal">Period</label>
 							<div class="col-md-8">
@@ -1566,7 +1566,7 @@
                                                 </div>
 							</div> 
 						<div class="row"></div>
-							<label class="col-md-4 control-label" for="state-normal">Particular</label>
+							<label class="col-md-4 control-label" for="state-normal">Particular<br><small>* BALANCE BROUGHT FORWARD</small></label>
 							<div class="col-md-8">
 								<textarea class="form-control" name="state-normal"  id="leave_particular"></textarea>
 							   
@@ -1575,14 +1575,14 @@
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Earned(+)</label>
 							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="leave_earned" placeholder="0.00">
+								 <input type="number" name="state-normal" class="form-control" id="leave_earned" value="0.00">
 							   
 							</div>
 						
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">ABS.UND.W/P.(-)</label>
 							<div class="col-md-4">
-								<input type="text" id="leave_absences" class="form-control"  placeholder="0.00">
+								<input type="text" id="leave_absences" class="form-control"  value="0.00">
 							   
 							</div>
 						<div class="row"></div>
@@ -1592,14 +1592,14 @@
 							  
 							</div>
 							<div class="col-md-4">
-							 <button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveleavecredit();" id="savebutton">Re-Compute</button>
+							 <button type="button" class="btn btn-effect-ripple btn-primary" onclick="recomputevl();" id="savebutton">Re-Compute</button>
 							  
 							</div>
 						
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.</label>
 							<div class="col-md-4">
-								 <input type="text" name="state-normal" class="form-control" id="leave_abswop"  placeholder="0.00">
+								 <input type="text" name="state-normal" class="form-control" id="leave_abswop"  value="0.00">
 							   
 							</div>
 								<div class="row"></div>
@@ -1607,13 +1607,13 @@
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Earned (+)</label>
 							<div class="col-md-4">
-								 <input type="number" name="state-normal" class="form-control" id="sick_earned"  placeholder="0.00">
+								 <input type="number" name="state-normal" class="form-control" id="sick_earned"  value="0.00">
 							   
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">ABS.UND.W/P. (-)</label>
 							<div class="col-md-4">
-								 <input type="text" name="state-normal" class="form-control" id="sick_abswp"  placeholder="0.00">
+								 <input type="text" name="state-normal" class="form-control" id="sick_abswp"  value="0.00">
 							   
 							</div>
 						<div class="row"></div>
@@ -1622,11 +1622,15 @@
 								 <input type="text" name="state-normal" class="form-control" id="sick_balance" value="<?php echo $slbalance;?>">
 							   
 							</div>
+							<div class="col-md-4">
+							 <button type="button" class="btn btn-effect-ripple btn-primary" onclick="recomputesl();" id="savebutton">Re-Compute</button>
+							  
+							</div>
 						
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">ABS.UND.WOP.(-)</label>
 							<div class="col-md-4">
-								 <input type="text" name="state-normal" class="form-control" id="sick_abswop"  placeholder="0.00">
+								 <input type="text" name="state-normal" class="form-control" id="sick_abswop"  value="0.00">
 							   
 							</div>
 						
@@ -1645,8 +1649,8 @@
 						
 							
 						<div class="modal-footer">
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveleavecredit();" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="saveleavecredit();" id="savelcbutton">Save</button>
+							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updateleavecredit();" id="updatelcbutton" disabled>Update</button>
 							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="leavecreditclosebutton">Close</button>
 						</div>
 					</div>

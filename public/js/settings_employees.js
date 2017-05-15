@@ -1534,3 +1534,103 @@ function updateappleave(){
 	});
 		
 }
+
+function recomputevl(){
+	current_leave_balance = document.getElementById("leave_balance").value;
+	current_leave_earned = document.getElementById("leave_earned").value;
+	current_leave_absences = document.getElementById("leave_absences").value;
+	
+	var new_balance = parseFloat(current_leave_balance) + parseFloat(current_leave_earned) - parseFloat(current_leave_absences);
+	document.getElementById("leave_balance").value = new_balance;
+	
+}
+
+function recomputesl(){
+	current_sick_balance = document.getElementById("sick_balance").value;
+	current_sick_earned = document.getElementById("sick_earned").value;
+	current_sick_abswp = document.getElementById("sick_abswp").value;
+	
+	var new_sick_balance = parseFloat(current_sick_balance) + parseFloat(current_sick_earned) - parseFloat(current_sick_abswp);
+	document.getElementById("sick_balance").value = new_sick_balance;
+	
+}
+
+function editlc(leavecreditsid){
+	
+	$('#updatelcbutton').removeAttr("disabled");
+	//$('#updateproject').prop("disabled", false);    
+	$('#savelcbutton').prop("disabled", true);    
+
+	$.ajax({
+		url: '../getleavecredits',
+		type: 'post',
+		data: {leavecreditsid : leavecreditsid},
+		success: function(response) {
+			console.log(response);
+			var data = JSON.parse(response);
+			document.getElementById("leave_from").value = data.leave_from;
+			document.getElementById("leave_to").value = data.leave_to;
+			document.getElementById("leave_particular").value = data.leave_particular;
+			document.getElementById("leave_earned").value = data.leave_earned;
+			document.getElementById("leave_absences").value = data.leave_absences;
+			document.getElementById("leave_balance").value = data.leave_balance;
+			document.getElementById("leave_abswop").value = data.leave_abswop;
+			document.getElementById("sick_earned").value = data.sick_earned;
+			document.getElementById("sick_abswp").value = data.sick_abswp;
+			document.getElementById("sick_balance").value = data.sick_balance;
+			document.getElementById("sick_abswop").value = data.sick_abswop;
+			document.getElementById("sick_action").value = data.sick_action;
+			document.getElementById("leavecreditsid").value = data.leavecreditsid;
+			
+		} 
+	});
+		
+}
+
+function addlcbutton(){
+	
+	
+	$('#updatelcbutton').prop("disabled", true);    
+	$('#savelcbutton').prop("disabled", false);    
+}
+
+function updateleavecredit(){
+	var leavecreditsid = document.getElementById("leavecreditsid").value;
+	var leave_from = document.getElementById("leave_from").value;
+	var leave_to = document.getElementById("leave_to").value;
+	var leave_particular = document.getElementById("leave_particular").value;
+	var leave_earned = document.getElementById("leave_earned").value;
+	var leave_absences = document.getElementById("leave_absences").value;
+	var leave_abswop = document.getElementById("leave_abswop").value;
+	var sick_earned = document.getElementById("sick_earned").value;
+	var sick_abswp = document.getElementById("sick_abswp").value;
+	var sick_abswop = document.getElementById("sick_abswop").value;
+	var sick_action = document.getElementById("sick_action").value;
+	var leave_balance = document.getElementById("leave_balance").value;
+	var sick_balance = document.getElementById("sick_balance").value;
+	
+	
+	$.ajax({
+		url: '../updateleavecredit',
+		type: 'post',
+		data: {leavecreditsid: leavecreditsid,leave_from:leave_from,leave_to:leave_to,leave_particular:leave_particular,leave_earned:leave_earned,leave_absences:leave_absences,leave_abswop:leave_abswop,sick_earned:sick_earned,sick_abswp:sick_abswp,sick_abswop:sick_abswop,sick_action:sick_action,leave_balance:leave_balance,sick_balance:sick_balance},
+		success: function(response) {
+			console.log(response);
+			//location.reload();
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Leave Credit Added!</p>', {
+				type: 'success',
+				delay: 3000,
+				allow_dismiss: true,
+				offset: {from: 'top', amount: 20}
+			});
+			document.getElementById("leavecreditclosebutton").click();
+			$('#leave-credits').load(document.URL +  ' #leave-credits');
+			
+			
+			
+		}
+	});
+		
+}
+
+

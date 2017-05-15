@@ -13,6 +13,7 @@ class Users extends CI_Controller
 			'applicantclass' => '',
 			'applicantsubclass' => '',
 			'settingsclass' => 'active',
+			'reportsclass' => '',
 			'employeesclass' => ''
 			
 			);
