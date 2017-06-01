@@ -53,19 +53,20 @@ var ReadyDashboard = function() {
 
             // Get the element where we will attach the chart
             var chartClassicDash    = $('#chart-classic-dash');
-			var discipline = document.getElementById("discipline").value;
-			var noofstudent = document.getElementById("noofstudent").value;
+			//var discipline = document.getElementById("discipline").value;
+			//var noofstudent = document.getElementById("noofstudent").value;
             // Data for the chart
             //var dataEarnings        = [[1, 1900], [2, 2300], [3, 3200], [4, 2500], [5, 4200], [6, 3100], [7, 3600], [8, 2500], [9, 4600], [10, 3700], [11, 4200], [12, 5200]];
-			var dataEarnings = JSON.parse(noofstudent);
+			//var dataEarnings = JSON.parse(noofstudent);
 			 //var dataEarnings        = [[1,"28"],[2,"2"],[3,"63"],[4,"95"],[5,"24"],[6,"1"],[7,"1"],[8,"8"],[9,"14"],[10,"1"],[11,"1"],[12,"2"],[13,"6"],[14,"4"],[15,"8"],[16,"3"],[17,"5"],[18,"10"],[19,"3"]];
             //var dataSales           = [[1, 850], [2, 750], [3, 1500], [4, 900], [5, 1500], [6, 1150], [7, 1500], [8, 900], [9, 1800], [10, 1700], [11, 1900], [12, 2550]];
             //var dataTickets         = [[1, 130], [2, 330], [3, 220], [4, 350], [5, 150], [6, 275], [7, 280], [8, 380], [9, 120], [10, 330], [11, 190], [12, 410]];
 
             //var dataMonths          = [[1, 'Jan'], [2, 'Feb'], [3, 'Mar'], [4, 'Apr'], [5, 'May'], [6, 'Jun'], [7, 'Jul'], [8, 'Aug'], [9, 'Sep'], [10, 'Oct'], [11, 'Nov'], [12, 'Dec']];
-		    var dataMonths          = JSON.parse(discipline);;
+		    //var dataMonths          = JSON.parse(discipline);;
 
             // Classic Chart
+			/*
             $.plot(chartClassicDash,
                 [
                     {
@@ -85,7 +86,7 @@ var ReadyDashboard = function() {
                         data: dataTickets,
                         lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
                         points: {show: true, radius: 5}
-                    }*/
+                    }*/  /*
                 ],
                 {
                     colors: ['#5ccdde', '#454e59', '#ffffff'],
@@ -94,10 +95,11 @@ var ReadyDashboard = function() {
                     yaxis: {show: false, tickColor: '#f5f5f5', ticks: 3},
                     xaxis: {ticks: dataMonths, tickColor: '#f9f9f9'}
                 }
-            );
+            );*/
 			
 			//chart 2
 			// Get the element where we will attach the chart
+			/*
             var chartClassicDash2    = $('#chart-classic-dash2');
 			var male = document.getElementById("male").value;
 			var female = document.getElementById("female").value;
@@ -127,7 +129,7 @@ var ReadyDashboard = function() {
                         data: dataTickets,
                         lines: {show: true, fill: true, fillColor: {colors: [{opacity: .6}, {opacity: .6}]}},
                         points: {show: true, radius: 5}
-                    }*/
+                    }*//*
                 ],
                 {
                     colors: ['#5ccdde', '#454e59', '#ffffff'],
@@ -136,63 +138,9 @@ var ReadyDashboard = function() {
                     yaxis: {show: false, tickColor: '#f5f5f5', ticks: 3},
                     xaxis: {ticks: dataMonths, tickColor: '#f9f9f9'}
                 }
-            );
+            );*/
 
-            // Creating and attaching a tooltip to the classic chart
-            var previousPoint = null, ttlabel = null;
-            chartClassicDash.bind('plothover', function(event, pos, item) {
-
-                if (item) {
-                    if (previousPoint !== item.dataIndex) {
-                        previousPoint = item.dataIndex;
-
-                        $('#chart-tooltip').remove();
-                        var x = item.datapoint[0], y = item.datapoint[1];
-
-                        if (item.seriesIndex === 0) {
-                            ttlabel = '<strong>' + y + '</strong>';
-                        } else if (item.seriesIndex === 1) {
-                            ttlabel = '<strong>' + y + '</strong> sales';
-                        } else {
-                            ttlabel = '<strong>' + y + '</strong> tickets';
-                        }
-
-                        $('<div id="chart-tooltip" class="chart-tooltip">' + ttlabel + '</div>')
-                            .css({top: item.pageY - 45, left: item.pageX + 5}).appendTo("body").show();
-                    }
-                }
-                else {
-                    $('#chart-tooltip').remove();
-                    previousPoint = null;
-                }
-            });
-			
-			chartClassicDash2.bind('plothover', function(event, pos, item) {
-
-                if (item) {
-                    if (previousPoint !== item.dataIndex) {
-                        previousPoint = item.dataIndex;
-
-                        $('#chart-tooltip').remove();
-                        var x = item.datapoint[0], y = item.datapoint[1];
-
-                        if (item.seriesIndex === 0) {
-                            ttlabel = '<strong>' + y + '</strong> Female';
-                        } else if (item.seriesIndex === 1) {
-                            ttlabel = '<strong>' + y + '</strong> Male';
-                        } else {
-                            ttlabel = '<strong>' + y + '</strong> tickets';
-                        }
-
-                        $('<div id="chart-tooltip" class="chart-tooltip">' + ttlabel + '</div>')
-                            .css({top: item.pageY - 45, left: item.pageX + 5}).appendTo("body").show();
-                    }
-                }
-                else {
-                    $('#chart-tooltip').remove();
-                    previousPoint = null;
-                }
-            });
+           
 			
 			
         }

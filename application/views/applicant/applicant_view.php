@@ -85,12 +85,64 @@
                         </div>
                     </div>
                 </div>
+				
+				<!-- download Modal -->
+                <div id="downloadmodal" class="modal bg" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                           <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3 class="modal-title"><strong>Download Applicant</strong></h3>
+                                
+                            </div> 
+                            <div class="modal-body">
+                                <div class="form-group">
+						
+						<div class="row"></div>
+						
+						<label class="col-md-3 control-label text-right">Applicant Type</label>
+                        <div class="col-md-7">
+                           <select id="applicanttype_download" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+													<option value="ALL">ALL</option>
+													<option value="SUPERVISORY">SUPERVISORY</option>
+													<option value="NON-SUPERVISORY">NON-SUPERVISORY</option>
+												</select>
+                        </div>	
+						
+	
+								
+						<div class="row"></div>
+							
+					</div>
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+							<button type="button" id="savebutton" class="btn btn-effect-ripple btn-primary" onclick="downloadapplicant();">Download XLS</button>
+							
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 		
             
 	<div class="block full">
         <div class="block-title">
 		<h5>Applicants List</h5>
-			<button type="button" id="adddelivery" class="pull-right btn btn-effect-ripple btn-primary" href="#adddeliverymodal" data-toggle="modal">Add Item</button>
+			 <button type="button" id="adddelivery" class="pull-right btn btn-effect-ripple btn-primary" href="#downloadmodal" data-toggle="modal">Download </button> &nbsp;<button type="button" id="adddelivery" class="pull-right btn btn-effect-ripple btn-primary" href="#adddeliverymodal" data-toggle="modal">Add Applicant</button>
 			<?php //print_r($heidirectory);?>
         </div>
         <div class="table-responsive">

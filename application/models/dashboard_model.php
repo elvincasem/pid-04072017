@@ -4,74 +4,33 @@
 class Dashboard_model extends CI_Model
 {
 	
-	public function gettotalreq()
+	public function getapplicantcount()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalrequisition from requisition_details");
-		$resultarray = $sql->result_array();
-		return $resultarray[0];
+		$sql = $this->db->query("SELECT count(*) as totalapplicant FROM applicant");
+		$applicant = $sql->result_array();
+		return $applicant[0]['totalapplicant'];
 		
 		
 	}
-	public function gettotalproperty()
+	public function getemployeecount()
 	{
-		$sql = $this->db->query("SELECT count(*) as totalproperty from equipments");
-		$resultarray = $sql->result_array();
-		return $resultarray[0];
-		
-		
-	}
-	public function gettotalitems()
-	{
-		$sql = $this->db->query("SELECT count(*) as totalitems from items");
-		$resultarray = $sql->result_array();
-		return $resultarray[0];
-		
-		
-	}
-	public function getlowstock()
-	{
-		$sql = $this->db->query("SELECT count(*) as totallow from items where inventory_qty <5");
-		$resultarray = $sql->result_array();
-		return $resultarray[0];
+		$sql = $this->db->query("SELECT count(*) as totalemployee FROM employee where employee_status='ACTIVE'");
+		$employee = $sql->result_array();
+		return $employee[0]['totalemployee'];
 		
 		
 	}
 	
-	public function gettotalprojects()
+	public function getdesignationchart()
 	{
-
-			$result = $this->db->query("SELECT count(*) as totalproj FROM project");
-			$resultarray = $result->result_array();
-			return $resultarray[0];
-		
-	}
-	
-	public function gettotalissuecount()
-	{
-
-			$result = $this->db->query("SELECT rp_issuetype,SUM(rp_qty) AS noofqty FROM project_regular GROUP BY rp_issuetype ORDER BY noofqty desc");
+			
+			$result = $this->db->query("SELECT COUNT(*) AS VALUE, designation AS label FROM employee WHERE employee_status='ACTIVE' GROUP BY label");
 			return $result->result_array();
 			
 		
 	}
 	
-	public function getyearlychart()
-	{
-			$current_year = date('Y');
-			$result = $this->db->query("SELECT COUNT(*) AS value, MONTHNAME(requisition_date) AS label FROM requisition_details WHERE EXTRACT(YEAR FROM requisition_date)='$current_year' GROUP BY label ORDER BY EXTRACT(MONTH FROM requisition_date)");
-			return $result->result_array();
-			
-		
-	}
 	
-	public function gettotalresponsible()
-	{
-
-			$result = $this->db->query("SELECT rp_groupresponsible,COUNT(*) AS totalgroupcount FROM project_regular GROUP BY rp_groupresponsible ORDER BY totalgroupcount desc");
-			return $result->result_array();
-			
-		
-	}
 	
 	
 	

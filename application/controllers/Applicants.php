@@ -36,7 +36,7 @@ class Applicants extends CI_Controller
 
 		
 		$data['applicantlist'] = $this->applicant_model->getapplicantlist();
-
+		
 		$this->load->view('inc/header_view');
 		$this->load->view('applicant/applicant_view',$data);
 		$this->load->view('inc/footer_view',$js);
@@ -72,7 +72,7 @@ class Applicants extends CI_Controller
 		$data['a_work'] = $this->applicant_model->getwork($id);
 		$data['a_skill'] = $this->applicant_model->getskill($id);
 		$data['a_eligibility'] = $this->applicant_model->geteligibility($id);
-
+		$data['a_files'] = $this->applicant_model->getafiles($id);
 
 
 		$this->load->view('inc/header_view');
@@ -223,8 +223,8 @@ class Applicants extends CI_Controller
 			
 			$filename = $this->upload->data('file_name'); 
 			
-			if($folder="201_files"){
-				$this->employees_model->update_file($fileid,$filename);
+			if($folder="applicant_files"){
+				$this->applicant_model->update_file($fileid,$filename);
 			}
 			
             //$this->load->view('upload_success', $data); 
@@ -427,18 +427,18 @@ class Applicants extends CI_Controller
 	}
 
 	public function savefile(){
-		$eid = $this->input->post('eid');
+		$applicantid = $this->input->post('applicantid');
 		$file_document_type = $this->input->post('file_document_type');
 		$file_description = $this->input->post('file_description');
 		$file_date = $this->input->post('file_date');
 		
 		
-		$this->employees_model->savefile($eid,$file_document_type,$file_description,$file_date);
+		$this->applicant_model->savefile($applicantid,$file_document_type,$file_description,$file_date);
 	}
 	
 	public function deletefile(){
 		$filesid = $this->input->post('filesid');
-		$this->db->delete('employee_files', array('filesid' => $filesid));
+		$this->db->delete('applicant_files', array('filesid' => $filesid));
 		
 	}
 	public function saverating(){
@@ -557,15 +557,15 @@ class Applicants extends CI_Controller
 	public function deleteuploadedfile(){
 		$filesid = $this->input->post('filesid');
 		//get filename
-		$file_name = $this->employees_model->getfilename($filesid);
+		$file_name = $this->applicant_model->getfilename($filesid);
 		
 		//$fileurl = base_url("uploads/201_files/" . $file_name);
 		
 		$this->load->helper("url");
 		//delete_files("uploads/201_files".$filesid.".pdf");
-		unlink("uploads/201_files/" . $file_name);
+		unlink("uploads/applicant_files/" . $file_name);
 		//$this->db->delete('employee_educational_background', array('educbackgroundid' => $educbackgroundid));
-		$this->employees_model->updatedeletefile($filesid);
+		$this->applicant_model->updatedeletefile($filesid);
 		
 		
 	}
@@ -670,6 +670,81 @@ class Applicants extends CI_Controller
 		$this->applicant_model->saveupdateeligibility($applicanteligibilityid,$eligibility_description);
 	}
 	
+	public function downloadapplicant($applicanttype_download)
+	{
+		//$applicanttype_download = $this->input->post('applicanttype_download');
+		
+		//$designation_value = rawurldecode($designation);
+		$this->load->library('excel');
+		$this->excel->setActiveSheetIndex(0);
+		$this->excel->getActiveSheet()->setTitle('Applicant Download');
+		$this->load->database();
+		//$users = $this->userModel->get_users();
+		
+		if($applicanttype_download=="ALL"){
+			//$sql = $this->db->query("SELECT lname,fname,mname,ename,age,dob,pob,gender,civil_status,citizenship,mobile_number,email_address,a_barangay,a_towncity,a_province,a_zipcode,applicant_type,dateofapplication, GROUP_CONCAT(applicant_skill.skill_description SEPARATOR ', ') AS skills, GROUP_CONCAT(applicant_training.training_description SEPARATOR ', ') AS trainings, GROUP_CONCAT(applicant_work.work_description SEPARATOR ', ') AS workexperience, GROUP_CONCAT(applicant_eligibility.eligibility_description SEPARATOR ', ') AS eligibility, GROUP_CONCAT(applicant_education.educ_description SEPARATOR ', ') AS education FROM applicant LEFT JOIN applicant_skill ON applicant.applicantid = applicant_skill.applicantid LEFT JOIN applicant_training ON applicant.applicantid = applicant_training.applicantid LEFT JOIN applicant_work ON applicant.applicantid = applicant_work.applicantid LEFT JOIN applicant_eligibility ON applicant.applicantid = applicant_eligibility.applicantid LEFT JOIN applicant_education ON applicant.applicantid = applicant_education.applicantid");
+			$sql = $this->db->query("SELECT applicantid,lname,fname,mname,ename,age,dob,pob,gender,civil_status,citizenship,mobile_number,email_address,a_barangay,a_towncity,a_province,a_zipcode,applicant_type,dateofapplication FROM applicant");
+			
+			
+		}else{
+			$sql = $this->db->query("SELECT item_no,lname,fname,mname,ename,designation,salary,dob,pob,gender,civil_status,citizenship,mobile_number,email_address,a_barangay,a_towncity,a_province,date_hired,employee_status FROM employee WHERE designation=".$this->db->escape($applicanttype_download)."");
+		}
+		$feedbacks = $sql->result_array();
+		
+		$ctr =0;
+		foreach ($feedbacks as $currentquery):
+			$new_query[$ctr] = $currentquery;
+		
+			$result_subquery = $this->db->query("SELECT GROUP_CONCAT(applicant_skill.skill_description SEPARATOR ', ') AS skills FROM applicant_skill WHERE applicantid = '".$currentquery['applicantid']."'");
+			$subquery = $result_subquery->result_array();
+			$result_skill = $subquery[0]['skills'];
+			$new_query[$ctr]['skills'] = $result_skill;
+			
+			
+			
+			$result_training = $this->db->query("SELECT GROUP_CONCAT(applicant_training.training_description SEPARATOR ', ') AS trainings FROM applicant_training WHERE applicantid = '".$currentquery['applicantid']."'");
+			$training = $result_training->result_array();
+			$result_trainings = $training[0]['trainings'];
+			$new_query[$ctr]['trainings'] = $result_trainings;
+			
+			$result_work = $this->db->query("SELECT GROUP_CONCAT(applicant_work.work_description SEPARATOR ', ') AS workexperience FROM applicant_work WHERE applicantid = '".$currentquery['applicantid']."'");
+			$work = $result_work->result_array();
+			$result_works= $work[0]['workexperience'];
+			$new_query[$ctr]['workexperience'] = $result_works;
+
+			$result_eligibility = $this->db->query("SELECT GROUP_CONCAT(applicant_eligibility.eligibility_description SEPARATOR ', ') AS eligibility FROM applicant_eligibility WHERE applicantid = '".$currentquery['applicantid']."'");
+			$eligibility = $result_eligibility->result_array();
+			$result_eligible= $eligibility[0]['eligibility'];
+			$new_query[$ctr]['eligibility'] = $result_eligible;
+			
+			$result_education = $this->db->query("SELECT GROUP_CONCAT(applicant_education.educ_description SEPARATOR ', ') AS education FROM applicant_education WHERE applicantid = '".$currentquery['applicantid']."'");
+			$education = $result_education->result_array();
+			$result_educations= $education[0]['education'];
+			$new_query[$ctr]['education'] = $result_educations;
+			
+
+			
+			$ctr++;
+		endforeach;
+			
+		
+		//print_r($new_query);
+		
+		//$feedbacks = $sql->result_array();
+		$feedbacks = $new_query;
+		//$feedbacks = $this->db->query($sql);
+		$arrHeader = array('ID','Last Name','First Name','Middle Name','extension','age','Date of Birth','Place of birth','Gender','Civil Status','Citizenship', 'Mobile number','Email','Barangay','Town City','Province','zipcode','applicant type','Date of Application','Skills','Trainings','Work Experience','Eligibility','Education');
+		$this->excel->getActiveSheet()->fromArray($arrHeader,'2','A1');
+		//$this->excel->getActiveSheet()->setCellValueByColumnAndRow(A);
+		$this->excel->getActiveSheet()->fromArray($feedbacks,'','A2');
+		$filename='Applicant_download.xls';
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="'.$filename.'"');
+		header('Cache-Control: max-age=0');
+		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+		$objWriter->save('php://output');
+		
+	}
 	
 	
 	

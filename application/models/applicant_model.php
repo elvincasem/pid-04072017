@@ -12,6 +12,8 @@ class Applicant_model extends CI_Model
 		
 	}
 	
+	
+	
 	public function saveapplicant($lname,$fname,$mname,$extension,$applicanttype)
 	{
 		
@@ -245,6 +247,53 @@ class Applicant_model extends CI_Model
 		
 		//echo $sql;
 						
+	}
+	
+	public function getafiles($id)
+	{
+		$sql = $this->db->query("SELECT * from applicant_files where applicantid=".$this->db->escape($id)."");
+		return $sql->result_array();
+		
+		
+	}
+	public function savefile($applicantid,$file_document_type,$file_description,$file_date)
+	{
+		
+		$sql = "INSERT INTO applicant_files(file_document_type,file_description,file_date,applicantid) VALUES (".$this->db->escape($file_document_type).",".$this->db->escape($file_description).",".$this->db->escape($file_date).",".$this->db->escape($applicantid).")";
+		$this->db->query($sql);
+				
+		
+		
+	}
+	
+	public function update_file($fileid,$filename)
+	{
+		
+		$sql = "update applicant_files set file_name=".$this->db->escape($filename)." where filesid=".$this->db->escape($fileid)."";
+		$this->db->query($sql);
+		
+		echo $sql;
+						
+	}
+	
+	public function updatedeletefile($filesid)
+	{
+		
+		$sql = "update applicant_files set file_name='NONE' where filesid=".$this->db->escape($filesid)."";
+		$this->db->query($sql);
+		
+		//echo $sql;
+						
+	}
+	
+	public function getfilename($filesid)
+	{
+		$sql2 = $this->db->query("SELECT file_name FROM applicant_files where filesid='$filesid'");
+		
+		$result = $sql2->result_array();
+		return $result[0]['file_name'];
+		
+		
 	}
 	
 	

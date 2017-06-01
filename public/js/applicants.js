@@ -292,7 +292,7 @@ function upload_attachment(){
 						offset: {from: 'top', amount: 20}
 					});
 					document.getElementById("fileuploadclosebutton").click();
-					$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+					$('#other-files').load(document.URL +  ' #other-files');
 					//alert(data)
 					//location.reload();
 				},
@@ -800,7 +800,7 @@ function deleteother(id){
 function savefile(){
 	
 	$('#savebutton').prop("disabled", true);    
-	var eid = document.getElementById("eid").value;
+	var applicantid = document.getElementById("applicantid").value;
 	var file_document_type = document.getElementById("file_document_type").value;
 	var file_description = document.getElementById("file_description").value;
 	var file_date = document.getElementById("file_date").value;
@@ -809,18 +809,18 @@ function savefile(){
 	$.ajax({
 		url: '../savefile',
 		type: 'post',
-		data: {eid: eid,file_document_type:file_document_type,file_description:file_description,file_date:file_date},
+		data: {applicantid: applicantid,file_document_type:file_document_type,file_description:file_description,file_date:file_date},
 		success: function(response) {
 			console.log(response);
 			//location.reload();
-			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>Training Record Added!</p>', {
+			$.bootstrapGrowl('<h4><strong>Success!</strong></h4> <p>File Added!</p>', {
 				type: 'success',
 				delay: 3000,
 				allow_dismiss: true,
 				offset: {from: 'top', amount: 20}
 			});
 			document.getElementById("fileclosebutton").click();
-			$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+			$('#other-files').load(document.URL +  ' #other-files');
 			
 			
 			
@@ -847,7 +847,7 @@ function deletefile(id){
 							allow_dismiss: true,
 							offset: {from: 'top', amount: 20}
 						});
-						$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+						$('#other-files').load(document.URL +  ' #other-files');
                     }
                 });
 		//}else{
@@ -1280,7 +1280,7 @@ function deleteuploadedfile(filesid){
 						offset: {from: 'top', amount: 20}
 					});
 					
-					$('#block-tabs-profile').load(document.URL +  ' #block-tabs-profile');
+					$('#other-files').load(document.URL +  ' #other-files');
 
 		} 
 	});
@@ -1696,3 +1696,24 @@ function addeligibilitybutton(){
 }
 
 
+function downloadapplicant(){
+	
+	var applicanttype_download = document.getElementById("applicanttype_download").value;
+	window.location.href = 'downloadapplicant/'+applicanttype_download;
+	
+	/*$.ajax({
+		url: 'applicants/downloadapplicant/'+applicanttype_download,
+		type: 'post',
+		//data: {applicanttype_download : applicanttype_download},
+		success: function(response) {
+			//console.log(response);
+			
+						
+			
+			
+		} 
+	});
+	
+	*/
+		
+}

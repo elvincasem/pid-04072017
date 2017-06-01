@@ -41,14 +41,16 @@ class Home extends CI_Controller
 		$data = $this->data;
 		//$data['totalprojects'] = $this->dashboard_model->gettotalprojects();
 		
-		//$data['dashboardchart'] = json_encode($this->dashboard_model->getyearlychart());
+		$data['dashboardchart'] = json_encode($this->dashboard_model->getdesignationchart());
 		//$data['totalreq'] = $this->dashboard_model->gettotalreq();
 		//$data['totalproperty'] = $this->dashboard_model->gettotalproperty();
 		//$data['totalitems'] = $this->dashboard_model->gettotalitems();
 		//$data['lowstock'] = $this->dashboard_model->getlowstock();
 		
 		
+		$data['applicantcount'] = $this->dashboard_model->getapplicantcount();
 		
+		$data['employeecount'] = $this->dashboard_model->getemployeecount();
 		
 		$this->load->view('inc/header_view');
 		

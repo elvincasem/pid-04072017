@@ -17,18 +17,16 @@
                         <!-- First Row -->
                         <div class="row">
                             <!-- Simple Stats Widgets -->
-                            <div class="col-sm-6 col-lg-3 hidden">
+                            <div class="col-sm-6 col-lg-3">
                                 <a href="#" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background">
-                                            <i class="gi gi-building text-light-op"></i>
+                                            <i class="gi gi-group text-light-op"></i>
                                         </div>
                                         <h2 class="widget-heading h3">
-                                            <strong><span data-toggle="counter" data-to="<?php 
-										echo $totalproperty['totalproperty'];
-										?>"></span></strong>
+                                            <strong><span data-toggle="counter" data-to="<?php echo $applicantcount;?>"></span></strong>
                                         </h2>
-                                        <span class="text-muted">Property </span>
+                                        <span class="text-muted">Applicant</span>
                                     </div>
                                 </a>
 								
@@ -36,22 +34,20 @@
                             </div>
 							
 							
-                            <div class="col-sm-6 col-lg-3 hidden">
+                            <div class="col-sm-6 col-lg-3">
                                 <a href="javascript:void(0)" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
                                         <div class="widget-icon pull-left themed-background-success">
                                             <i class="gi gi-user text-light-op"></i>
                                         </div>
                                         <h2 class="widget-heading h3 text-success">
-                                            <strong><span data-toggle="counter" data-to="<?php 
-										echo $totalitems['totalitems'];
-										?>"></span></strong>
+                                            <strong><span data-toggle="counter" data-to="<?php echo $employeecount;?>"></span></strong>
                                         </h2>
-                                        <span class="text-muted">Office Supply</span>
+                                        <span class="text-muted">Employee</span>
                                     </div>
                                 </a>
                             </div>
-							
+						<!--	
                             <div class="col-sm-6 col-lg-3 hidden">
                                 <a href="javascript:void(0)" class="widget">
                                     <div class="widget-content widget-content-mini text-right clearfix">
@@ -60,7 +56,7 @@
                                         </div>
                                         <h2 class="widget-heading h3 text-warning">
                                             <strong><span data-toggle="counter" data-to="<?php 
-										echo $lowstock['totallow'];
+										//echo $lowstock['totallow'];
 										?>"></span></strong>
                                         </h2>
                                         <span class="text-muted">Low on Supply</span>
@@ -76,7 +72,7 @@
                                         </div>
                                         <h2 class="widget-heading h3 text-danger">
                                             <strong><span data-toggle="counter" data-to="<?php 
-										echo $totalreq['totalrequisition'];
+										//echo $totalreq['totalrequisition'];
 										?>"></span></strong>
                                         </h2>
                                         <span class="text-muted">Total Requisition</span>
@@ -108,15 +104,15 @@
 							</div>
 							 
                         </div>
-                        <!-- END First Row -->
+                       <!-- END First Row -->
 					<div class="row">
 					
 						<div class="widget">
-		<div class="widget-content border-bottom hidden">
+		<div class="widget-content border-bottom">
 			<span class="pull-right text-muted"></span>
-                                        Request per Month
+                                       Employee Designation
 			</div>
-			<div class="widget-content border-bottom themed-background-muted hidden">
+			<div class="widget-content border-bottom themed-background-muted">
 				<input type="hidden" id="chartvalues" value='<?php echo$dashboardchart;?>'>
 				<input type="hidden" value="<?php echo date('Y');?>" id="currentyear">
 						<!-- Partial Responsive Block -->
@@ -135,32 +131,53 @@
 	  
 	  //console.log(document.getElementById("chartvalues").value);
 	  var jsonvalues = JSON.parse(document.getElementById("chartvalues").value);
-	  var currentyear = document.getElementById("currentyear").value;
+	  //var currentyear = document.getElementById("currentyear").value;
 	  //var start = document.getElementById("start").value;
 	  //var end = document.getElementById("end").value;
 	  //var year = document.getElementById("year").value;
 	  //console.log(start);
 	  
     var fusioncharts = new FusionCharts({
-    type: 'column3d',
+   type: 'pie3d',
     renderAt: 'chart-container',
     width: '800',
     height: '450',
     dataFormat: 'json',
     dataSource: {
         "chart": {
-			//pareto3d
-		"caption": "Request per Month",
-            "subcaption": currentyear,
-            "xaxisname": "Month",
-            "yaxisname": "Count",
-            "numberprefix": "",
-            "theme": "fint"
-			
+		"caption": "Employee by Position",
+		"animation": "1",
+        "subCaption": "",
+        "paletteColors": "#0075c2,#1aaf5d,#f2c500,#f45b00,#8e0000",
+        "bgColor": "#ffffff",
+        "showBorder": "0",
+        "use3DLighting": "1",
+        "showShadow": "0",
+        "enableSmartLabels": "1",
+        "startingAngle": "0",
+        "showPercentValues": "1",
+        "showPercentInTooltip": "0",
+        "decimals": "1",
+        "captionFontSize": "14",
+        "subcaptionFontSize": "14",
+        "subcaptionFontBold": "0",
+        "toolTipColor": "#ffffff",
+        "toolTipBorderThickness": "1",
+        "toolTipBgColor": "#000000",
+        "toolTipBgAlpha": "80",
+        "toolTipBorderRadius": "2",
+        "toolTipPadding": "5",
+        "showHoverEffect": "1",
+        "showLegend": "1",
+        "legendBgColor": "#ffffff",
+        "legendBorderAlpha": "0",
+        "legendShadow": "0",
+        "legendItemFontSize": "10",
+        "legendItemFontColor": "#666666",
+        "useDataPlotColorForLabels": "1"
 			
         },
         "data":jsonvalues
-		 
     }
 }
 );

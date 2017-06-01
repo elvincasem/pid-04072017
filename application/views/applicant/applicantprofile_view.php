@@ -285,6 +285,7 @@
                                         </div>
                                         <ul class="nav nav-tabs" data-toggle="tabs">
                                             <li class="active"><a href="#block-tabs-home"><i class="fa fa-file-pdf-o"></i> Other Information</a></li>
+                                            <li><a href="#other-files"><i class="fa fa-file-pdf-o"></i> Other Files</a></li>
                                            
                                         </ul>
                                     </div>
@@ -442,6 +443,73 @@
 				
 			</div>
 			<!-- END Tabs Content -->
+			
+			
+			
+			<div class="tab-pane" id="other-files">
+					<h4><b>Other Files</b></h4> <a href="#201-files" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+							<table class="table table-striped table-bordered table-vcenter table-hover">
+								<thead>
+									<tr style="text-align:center;">
+										
+										<!-- <th style="width:100px;">Delivery ID</th>-->
+										
+										<th>Document Type</th>
+										<th>Description</th>
+										<th>Date</th>
+										<th>File Attachment</th>
+										
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php
+									foreach($a_files as $files):
+									
+										$filesid = $files['filesid'];
+										$file_name = $files['file_name'];
+										echo "<tr>";
+										
+										
+										echo "<td>".$files['file_document_type']."</td>";
+										echo "<td>".$files['file_description']."</td>";
+										echo "<td>".mdate('%F %d, %Y',strtotime($files['file_date']))."</td>";
+										//echo "<td><a href='#'>".$files['file_name']."</a></td>";
+										
+										echo "<td>";
+											$fileurl2 = base_url();
+											$filesurl = $fileurl2."uploads/applicant_files/".$file_name;
+											
+											if($file_name == "NONE"){
+												echo "<a href='#upload-201' class='btn btn-effect-ripple btn-default' data-toggle='modal' onclick='openfile_201(".$files['filesid'].");'><i class='fa fa-upload'></i></a>";
+											}else{
+												echo "<a href='$filesurl' class='btn btn-effect-ripple btn-default'>$file_name</a><button class='btn btn-danger notification' title='Delete' id='notification' onclick='deleteuploadedfile(".$files['filesid'].")'><i class='fa fa-times'></i></button>";
+											}
+											
+											//curl_close($ch);
+										
+										
+										echo "</td>";
+										
+										
+										echo "<td><a href='#modal-voucher' class='hidden btn btn-effect-ripple btn-primary' data-toggle='modal' onclick='' disabled><i class='fa fa-pencil'></i></a>   <button class='btn btn-danger notification' title='Delete' id='notification' onclick='deletefile(".$files['filesid'].")'><i class='fa fa-times'></i></button></td>";
+										echo "</tr>";
+									endforeach;
+								
+								?>
+									
+								</tbody>
+							</table>
+					
+					<div class="row"></div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
 		</div>
 		<!-- END Block Tabs -->
 
@@ -692,6 +760,7 @@
 							
 						 <label class="col-md-4 control-label" for="state-normal">Document Type</label>
 							<div class="col-md-8">
+							
 							  <select class="form-control" id="file_document_type">
 								<option value="CSC FORM 212">CSC FORM 212 (Personal Data Sheet)</option>
 								<option value="CS Form 33">CS Form 33 (Appointment Form)</option>
@@ -736,7 +805,7 @@
 							
 						<div class="modal-footer">
 							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="savefile();" id="savebutton">Save</button>
-							<button type="button" class="btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
+							<button type="button" class="hidden btn btn-effect-ripple btn-primary" onclick="updatepayment();" id="updatebutton" disabled>Update</button>
 							<button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal" id="fileclosebutton">Close</button>
 						</div>
 					</div>
@@ -1282,13 +1351,13 @@ table { page-break-inside:auto }
 					
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title"><strong>201 File Upload</strong></h3>
+							<h3 class="modal-title"><strong>File Upload</strong></h3>
 						</div>
 						<div class="modal-body">
 						
 						 <form action="" method = "post" id="form_uploadfile" enctype="multipart/form-data">
-							<input type="hidden" id="folder_destination" name="folder_destination" value="201_files">
-							 <input type="text" id="fileattachmentid" name="fileattachmentid">
+							<input type="hidden" id="folder_destination" name="folder_destination" value="applicant_files">
+							 <input type="hidden" id="fileattachmentid" name="fileattachmentid">
 							 
 							<input type = "file" name="fileattachment" id="fileattachment" size = "10" class="col-md-8" /> 
 							
