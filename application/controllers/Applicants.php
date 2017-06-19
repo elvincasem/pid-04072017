@@ -687,7 +687,7 @@ class Applicants extends CI_Controller
 			
 			
 		}else{
-			$sql = $this->db->query("SELECT item_no,lname,fname,mname,ename,designation,salary,dob,pob,gender,civil_status,citizenship,mobile_number,email_address,a_barangay,a_towncity,a_province,date_hired,employee_status FROM employee WHERE designation=".$this->db->escape($applicanttype_download)."");
+			$sql = $this->db->query("SELECT applicantid,lname,fname,mname,ename,age,dob,pob,gender,civil_status,citizenship,mobile_number,email_address,a_barangay,a_towncity,a_province,a_zipcode,applicant_type,dateofapplication FROM applicant where applicant_type=".$this->db->escape($applicanttype_download)."");
 		}
 		$feedbacks = $sql->result_array();
 		

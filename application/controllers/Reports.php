@@ -100,4 +100,39 @@ class Reports extends CI_Controller
 		
 	}
 	
+	public function applicanttype(){
+		
+		$data = $this->data;
+		$js = $this->js;
+
+		//$data['designation_list'] = $this->reports_model->getdesignation();
+		//$data['startdate'] = $this->reports_model->getstartdate();
+		//$data['enddate'] = $this->reports_model->getenddate();
+		$this->load->view('inc/header_view');
+		$this->load->view('reports/applicanttype_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
+	public function applicanttype_view(){
+		
+		$applicant_type=$this->input->post('applicant_type');
+		
+		
+		$data = $this->data;
+		$js = $this->js;
+
+		//$data['designation_list'] = $this->reports_model->getdesignation();
+		$data['applicant_list'] = $this->reports_model->getapplicant_list($applicant_type);
+		$data['applicant_type']=$applicant_type;
+	
+		
+		$this->load->view('inc/header_view');
+		$this->load->view('reports/applicanttype_report_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
+	
+	
 }

@@ -1699,7 +1699,7 @@ function addeligibilitybutton(){
 function downloadapplicant(){
 	
 	var applicanttype_download = document.getElementById("applicanttype_download").value;
-	window.location.href = 'downloadapplicant/'+applicanttype_download;
+	window.location.href = 'applicants/downloadapplicant/'+applicanttype_download;
 	
 	/*$.ajax({
 		url: 'applicants/downloadapplicant/'+applicanttype_download,

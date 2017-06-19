@@ -47,7 +47,7 @@
     <body>
 	 <!-- Full Background -->
         <!-- For best results use an image with a resolution of 1280x1280 pixels (prefer a blurred image for smaller file size) -->
-        <img src="<?=base_url()?>public/img/loginbg" alt="Full Background" class="full-bg animation-pulseSlow">
+        <!-- <img src="<?=base_url()?>public/img/loginbg" alt="Full Background" class="full-bg animation-pulseSlow"> -->
         <!-- END Full Background -->
         <!-- Login Container -->
         <div id="login-container">

@@ -59,6 +59,9 @@
 										<li>
                                             <a href="<?=base_url()?>reports/edesignation" class="<?php //echo $applicantsubclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Employee by Designation</a>
                                         </li>
+										<li>
+                                            <a href="<?=base_url()?>reports/applicanttype" class="<?php //echo $applicantsubclass;?>"><i class="fa fa-bank sidebar-nav-icon"></i>Applicant by Type</a>
+                                        </li>
 
 									</ul>
 								</li>

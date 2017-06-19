@@ -47,6 +47,19 @@ class Reports_model extends CI_Model
 		
 	}
 	
+	public function getapplicant_list($applicant_type)
+	{
+		if($applicant_type == "All"){
+			$sql = $this->db->query("SELECT * FROM applicant");
+		}else{
+			$sql = $this->db->query("SELECT * FROM applicant where applicant_type='$applicant_type'");
+		}
+		
+
+		return $sql->result_array();
+		
+		
+	}
 	
 	
 	
