@@ -161,7 +161,7 @@
 									$selectedf = "checked='checked'";
 									$selectedm = "";
 								}
-								elseif($employee_profile['gender']=="FEMALE"){
+								elseif($employee_profile['gender']=="MALE"){
 									$selectedm = "checked='checked'";
 									$selectedf = "";
 								}
@@ -466,7 +466,7 @@
 			<!-- Tabs Content -->
 			<div class="tab-content">
 				<div class="tab-pane active" id="block-tabs-home">
-					<h4><b>EDUCATIONAL BACKGROUND</b></h4> <a href="#educational-background" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>EDUCATIONAL BACKGROUND</b></h4> <a href="#educational-background" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addeducbutton();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">

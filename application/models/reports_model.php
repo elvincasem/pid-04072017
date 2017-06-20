@@ -47,14 +47,97 @@ class Reports_model extends CI_Model
 		
 	}
 	
-	public function getapplicant_list($applicant_type)
+	public function getapplicant_list($applicant_type,$education_keyword)
 	{
-		if($applicant_type == "All"){
-			$sql = $this->db->query("SELECT * FROM applicant");
-		}else{
-			$sql = $this->db->query("SELECT * FROM applicant where applicant_type='$applicant_type'");
+		
+		$keyword_array = explode(",", $education_keyword);
+		
+		$keyword="";
+		
+		
+		$array_length = count($keyword_array);
+		if($array_length >0){
+			$ctr = 0;
+			$keyword .=" WHERE ";
+			foreach($keyword_array as $kwarray):
+				$ctr++;
+				$keyword .= "educ_description like '%".trim($kwarray,' ')."%'";
+				
+				if($ctr < $array_length){
+					$keyword .=" OR ";
+				}
+				
+				
+			endforeach;
+			
+			
 		}
 		
+		
+	
+		
+		if($applicant_type == "All"){
+			$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword");
+			//echo "SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword";
+		}else{
+			if($keyword !=""){
+				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword AND applicant_type='$applicant_type'");
+			}else{
+				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type'");
+			}
+			
+		}
+		
+			//print_r($sql);
+
+		return $sql->result_array();
+		
+		
+	}
+	
+	
+	public function geteducational($applicantid)
+	{
+		
+		$sql = $this->db->query("SELECT * FROM applicant_education where applicantid='$applicantid'");
+
+		return $sql->result_array();
+		
+		
+	}
+	
+	public function gettraining($applicantid)
+	{
+		
+		$sql = $this->db->query("SELECT * FROM applicant_training where applicantid='$applicantid'");
+
+		return $sql->result_array();
+		
+		
+	}
+	public function getwork($applicantid)
+	{
+		
+		$sql = $this->db->query("SELECT * FROM applicant_work where applicantid='$applicantid'");
+
+		return $sql->result_array();
+		
+		
+	}
+	public function getskills($applicantid)
+	{
+		
+		$sql = $this->db->query("SELECT * FROM applicant_skill where applicantid='$applicantid'");
+
+		return $sql->result_array();
+		
+		
+	}
+	
+	public function geteligibility($applicantid)
+	{
+		
+		$sql = $this->db->query("SELECT * FROM applicant_eligibility where applicantid='$applicantid'");
 
 		return $sql->result_array();
 		

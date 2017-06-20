@@ -117,13 +117,14 @@ class Reports extends CI_Controller
 	public function applicanttype_view(){
 		
 		$applicant_type=$this->input->post('applicant_type');
+		$education_keyword=$this->input->post('education_keyword');
 		
 		
 		$data = $this->data;
 		$js = $this->js;
 
 		//$data['designation_list'] = $this->reports_model->getdesignation();
-		$data['applicant_list'] = $this->reports_model->getapplicant_list($applicant_type);
+		$data['applicant_list'] = $this->reports_model->getapplicant_list($applicant_type,$education_keyword);
 		$data['applicant_type']=$applicant_type;
 	
 		

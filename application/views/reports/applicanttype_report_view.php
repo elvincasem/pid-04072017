@@ -34,7 +34,12 @@
                                         <div class="form-group">
 										
 											<div class="row">&nbsp;</div>
-											<label class="col-md-3 control-label" for="example-daterange1">Designation</label>
+											<label class="col-md-3 control-label" for="example-daterange1">Education</label>
+											<div class="col-md-7">
+												<input type="text" class="form-control" name="education_keyword" id="education_keyword" placeholder="Keyword separated by comma (,)">
+											</div>
+											
+											<label class="col-md-3 control-label" for="example-daterange1">Application Type</label>
 											<div class="col-md-7">
 										<select id="applicant_type" name="applicant_type" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
 										<?php echo "<option value='".$applicant_type."'>".$applicant_type."</option>";?>
@@ -173,7 +178,7 @@ table { page-break-inside:auto }
 <div style="text-align:center;font-weight:bold;">MATRIX OF APPLICANTS FOR THE SUPERVISORY POSITION</div>
 <br>
 
-<table border="1" style="border:solid 1px; width:100%;">
+<table border="1" style="border:solid 1px; width:100%;font-size:12px;">
 	
 <thead>
 		
@@ -196,6 +201,11 @@ table { page-break-inside:auto }
 		<?php
 				
 				foreach ($applicant_list as $applicants):
+				$educ_list ="";
+				$training_list="";
+				$work_list="";
+				$skill_list="";
+				$eligibility_list="";
 				//$heiname = strtoupper($hei['instname']);
 				echo "<tr class='odd gradeX'>";
 				
@@ -206,13 +216,55 @@ table { page-break-inside:auto }
 				echo "<td>".$applicants['a_barangay']." ".$applicants['a_towncity']." ".$applicants['a_province']."</td>";
 				echo "<td>".$applicants['gender']."</td>";
 				echo "<td>".$applicants['age']."</td>";
-				echo "<td>"."</td>";
-				echo "<td>"."</td>";
+				
+				$educ = $this->reports_model->geteducational($applicants['applicantid']);
+				
+					foreach($educ as $educbackground):
+						$educ_list .=$educbackground['educ_description']."<br>";
+					endforeach;
+				
+				echo "<td>".$educ_list."</td>";
+				
+				$relevantraining = $this->reports_model->gettraining($applicants['applicantid']);
+				$training_list .= "<ul>";
+					foreach($relevantraining as $training):
+						$training_list .= "<li>".$training['training_description']."</li>";
+					endforeach;
+				$training_list .= "</ul>";
 				
 				
+				echo "<td>".$training_list."</td>";
 				
-				echo "<td>".mdate('%F %d, %Y',strtotime($applicants['dateofapplication']))."</td>";
-				//echo "<td>".$applicants['employee_status']."</td>";
+				$workexperience = $this->reports_model->getwork($applicants['applicantid']);
+				$work_list .= "<ul>";
+					foreach($workexperience as $workex):
+						$work_list .= "<li>".$workex['work_description']."</li>";
+					endforeach;
+				$work_list .= "</ul>";
+				
+				
+				echo "<td>".$work_list."</td>";
+				
+				$skills = $this->reports_model->getskills($applicants['applicantid']);
+				$skill_list .= "<ul>";
+					foreach($skills as $skills_list):
+						$skill_list .= "<li>".$skills_list['skill_description']."</li>";
+					endforeach;
+				$skill_list .= "</ul>";
+				
+				
+				echo "<td>".$skill_list."</td>";
+			
+			
+				$eligibility = $this->reports_model->geteligibility($applicants['applicantid']);
+				$eligibility_list .= "<ul>";
+					foreach($eligibility as $eligibilitylist):
+						$eligibility_list .= "<li>".$eligibilitylist['eligibility_description']."</li>";
+					endforeach;
+				$eligibility_list .= "</ul>";
+				
+				
+				echo "<td>".$eligibility_list."</td>";
 			
 				
 				echo "</tr>";

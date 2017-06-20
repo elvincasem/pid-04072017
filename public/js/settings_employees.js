@@ -1633,4 +1633,8 @@ function updateleavecredit(){
 		
 }
 
+function addeducbutton(){
+	$('#savebutton').prop("disabled", false);    
+	
+}
 

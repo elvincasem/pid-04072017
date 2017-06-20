@@ -34,7 +34,12 @@
                                         <div class="form-group">
 										
 											<div class="row">&nbsp;</div>
-											<label class="col-md-3 control-label" for="example-daterange1">Designation</label>
+											<label class="col-md-3 control-label" for="example-daterange1">Education</label>
+											<div class="col-md-7">
+												<input type="text" class="form-control" name="education_keyword" id="education_keyword" placeholder="Keyword separated by comma (,)">
+											</div>
+											
+											<label class="col-md-3 control-label" for="example-daterange1">Application Type</label>
 											<div class="col-md-7">
 										<select id="applicant_type" name="applicant_type" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
 										<option value="All">All</option>
