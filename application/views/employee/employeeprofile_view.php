@@ -505,7 +505,7 @@
 							</table>
 					
 					<div class="row"></div>
-					<h4><b>CIVIL SERVICE ELIGIBILITY</b></h4> <a href="#civil-service" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>CIVIL SERVICE ELIGIBILITY</b></h4> <a href="#civil-service" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addcivilservice_button();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -545,7 +545,7 @@
 								</tbody>
 							</table>
 						<div class="row"></div>
-					<h4><b>WORK EXPERIENCE / SERVICE RECORD</b></h4> <a href="#work-experience" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a> <a href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
+					<h4><b>WORK EXPERIENCE / SERVICE RECORD</b></h4> <a href="#work-experience" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addwork_button();">Add </a> <a href="#modal-voucher" class="btn btn-effect-ripple btn-success" data-toggle="modal" onclick=""><i class='fa fa-print'></i></a> 
 					
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
@@ -594,7 +594,7 @@
 					
 
 <div class="row"></div>
-					<h4><b>TRAINING</b></h4> <a href="#training" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>TRAINING</b></h4> <a href="#training" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addtraining_button();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -629,7 +629,7 @@
 								</tbody>
 							</table>
 <div class="row"></div>
-					<h4><b>AWARD/S RECEIVED</b></h4> <a href="#awards-received" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>AWARD/S RECEIVED</b></h4> <a href="#awards-received" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addaward_button();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -665,7 +665,7 @@
 
 							
 							<div class="row"></div>
-					<h4><b>OTHER INFORMATION</b></h4> <a href="#other-information" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="">Add </a>
+					<h4><b>OTHER INFORMATION</b></h4> <a href="#other-information" class="btn btn-effect-ripple btn-primary" data-toggle="modal" onclick="addotherinfo_button();">Add </a>
 							<table class="table table-striped table-bordered table-vcenter table-hover">
 								<thead>
 									<tr style="text-align:center;">
@@ -1098,7 +1098,7 @@
 						<div class="row"></div>
 							<label class="col-md-3 control-label" for="state-normal">Period of Attendance</label>
 							<div class="col-md-9">
-							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+							   <div class="input-group" data-date-format="yyyy-mm-dd">
 									<input type="text" id="period_from" name="example-daterange1" class="form-control" placeholder="From">
 									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
 									<input type="text" id="period_to" name="example-daterange2" class="form-control" placeholder="To">
@@ -1161,7 +1161,7 @@
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Date Of Examination / Conferment</label>
 							<div class="col-md-8">
-							   <input type="text" id="career_date" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   <input type="text" id="career_date" name="example-datepicker" class="form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							</div>
 							
 						<div class="row"></div>
@@ -1177,7 +1177,7 @@
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Date of Validity</label>
 							<div class="col-md-8">
-							   <input type="text" id="career_validity" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   <input type="text" id="career_validity" name="example-datepicker" class="form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							</div>
 						
 							
@@ -1210,7 +1210,7 @@
 						
 						 <label class="col-md-3 control-label" for="state-normal">Inclusive Dates</label>
 							<div class="col-md-9">
-							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+							   <div class="input-group" data-date-format="yyyy-mm-dd">
 									<input type="text" id="service_from" name="example-daterange1" class="form-control" placeholder="From">
 									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
 									<input type="text" id="service_to" name="example-daterange2" class="form-control" placeholder="To">
@@ -1288,7 +1288,7 @@
 							
 						 <label class="col-md-4 control-label" for="state-normal">Inclusive Dates Of Attendance</label>
 							<div class="col-md-8">
-							   <div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+							   <div class="input-group" data-date-format="yyyy-mm-dd">
 									<input type="text" id="training_from" name="example-daterange1" class="form-control" placeholder="From">
 									<span class="input-group-addon"><i class="fa fa-chevron-right"></i></span>
 									<input type="text" id="training_to" name="example-daterange2" class="form-control" placeholder="To">
@@ -1343,7 +1343,7 @@
 													
 						 <label class="col-md-4 control-label" for="state-normal">Award Date</label>
 							<div class="col-md-8">
-							   <input type="text" id="award_date" name="example-datepicker" class="form-control input-datepicker" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
+							   <input type="text" id="award_date" name="example-datepicker" class="form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd">
 							</div>
 						<div class="row"></div>
 							<label class="col-md-4 control-label" for="state-normal">Department/ Agency/ Office/Company</label>

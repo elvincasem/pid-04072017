@@ -1635,6 +1635,65 @@ function updateleavecredit(){
 
 function addeducbutton(){
 	$('#savebutton').prop("disabled", false);    
+	document.getElementById("nameofschool").value ="";
+	document.getElementById("basiceducation").value ="";
+	document.getElementById("period_from").value ="";
+	document.getElementById("period_to").value ="";
+	document.getElementById("highest_level").value ="";
+	document.getElementById("year_graduated").value ="";
+	document.getElementById("scholar_received").value ="";
+}
+
+function addcivilservice_button(){
+	$('#savebutton').prop("disabled", false);    
+	document.getElementById("career_description").value ="";
+	document.getElementById("career_rating").value ="";
+	document.getElementById("career_date").value ="";
+	document.getElementById("career_place").value ="";
+	document.getElementById("career_number").value ="";
+	document.getElementById("career_validity").value ="";
+	
+}
+
+function addwork_button(){
+	$('#savebutton').prop("disabled", false);    
+	document.getElementById("service_from").value ="";
+	document.getElementById("service_to").value ="";
+	document.getElementById("service_position").value ="";
+	document.getElementById("service_status").value ="";
+	document.getElementById("service_salary").value ="";
+	document.getElementById("service_station").value ="";
+	document.getElementById("service_branch").value ="";
+	document.getElementById("service_leave").value ="";
+	document.getElementById("service_separation").value ="";
+	
+}
+function addtraining_button(){
+	$('#savebutton').prop("disabled", false);    
+	document.getElementById("training_title").value ="";
+	document.getElementById("training_from").value ="";
+	document.getElementById("training_to").value ="";
+	document.getElementById("training_hours").value ="";
+	document.getElementById("training_type").value ="";
+	document.getElementById("training_by").value ="";
+	
+}
+
+function addaward_button(){
+	$('#savebutton').prop("disabled", false);    
+	document.getElementById("award_date").value ="";
+	document.getElementById("award_department").value ="";
+	document.getElementById("award_description").value ="";
+	
+	
+}
+
+function addotherinfo_button(){
+	$('#savebutton').prop("disabled", false);    
+	document.getElementById("information_type").value ="";
+	document.getElementById("information_description").value ="";
+	
+	
 	
 }
 

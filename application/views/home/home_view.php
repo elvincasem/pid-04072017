@@ -6,7 +6,15 @@
 				<?php //$this->load->view('rightsidebar_view'); ?>
 				
                 <!--main sidebar here -->
-				<?php $this->load->view('leftsidebar_view'); ?>
+				
+				<?php 
+				if($this->session->userdata('usertype')=="staff"){
+					$this->load->view('leftsidebar_view_staff');
+				}else{
+					
+					$this->load->view('leftsidebar_view'); 
+				}
+				?>
 
                 <!-- Main Container -->
                 <div id="main-container">
