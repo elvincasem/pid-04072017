@@ -301,6 +301,48 @@
 							</div>
 							
 							<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">GSIS No.</label>
+							<div class="col-md-4">
+								<input type="text" id="gsisno" class="form-control" placeholder="" value="<?php echo $employee_profile['gsisno'];?>" >
+								
+							</div>
+							
+							<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">PAG-IBIG No.</label>
+							<div class="col-md-4">
+								<input type="text" id="pagibigno" class="form-control" placeholder="" value="<?php echo $employee_profile['pagibigno'];?>" >
+								
+							</div>
+							
+							<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">PhilHealth No.</label>
+							<div class="col-md-4">
+								<input type="text" id="philhealthno" class="form-control" placeholder="" value="<?php echo $employee_profile['philhealthno'];?>" >
+								
+							</div>
+							
+							<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">SSS No.</label>
+							<div class="col-md-4">
+								<input type="text" id="sssno" class="form-control" placeholder="" value="<?php echo $employee_profile['sssno'];?>" >
+								
+							</div>
+							
+							<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">TIN No.</label>
+							<div class="col-md-4">
+								<input type="text" id="tinno" class="form-control" placeholder="" value="<?php echo $employee_profile['tinno'];?>" >
+								
+							</div>
+							
+							<div class="row"></div>
+							<label class="col-md-3 control-label" for="state-normal">Agency Employee No.</label>
+							<div class="col-md-4">
+								<input type="text" id="employeeno" class="form-control" placeholder="" value="<?php echo $employee_profile['employeeno'];?>" >
+								
+							</div>
+							
+							<div class="row"></div>
 				<div class="form-group">
 							
 								
@@ -528,10 +570,10 @@
 										echo "<tr>";
 										echo "<td>".$careerservice['career_description']."</td>";
 										echo "<td>".$careerservice['career_rating']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($careerservice['career_date']))."</td>";
+										echo "<td>".$careerservice['career_date']."</td>";
 										echo "<td>".$careerservice['career_place']."</td>";
 										echo "<td>".$careerservice['career_number']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($careerservice['career_validity']))."</td>";
+										echo "<td>".$careerservice['career_validity']."</td>";
 										
 										
 										
@@ -571,7 +613,7 @@
 								<?php
 									foreach($e_servicerecord as $servicerecord):
 										echo "<tr>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($servicerecord['service_from']))." ".mdate('%F %d, %Y',strtotime($servicerecord['service_to']))."</td>";
+										echo "<td>".$servicerecord['service_from']." - ".$servicerecord['service_to']."</td>";
 										echo "<td>".$servicerecord['service_position']."</td>";
 										echo "<td>".$servicerecord['service_status']."</td>";
 										echo "<td>".$servicerecord['service_salary']."</td>";
@@ -616,7 +658,7 @@
 									foreach($e_training as $training):
 										echo "<tr>";
 										echo "<td>".$training['training_title']."</td>";
-										echo "<td>".mdate('%F %d, %Y',strtotime($training['training_from']))." ".mdate('%F %d, %Y',strtotime($training['training_to']))."</td>";
+										echo "<td>".$training['training_from']." - ".$training['training_to']."</td>";
 										echo "<td>".$training['training_hours']."</td>";
 										echo "<td>".$training['training_type']."</td>";
 										echo "<td>".$training['training_by']."</td>";
@@ -649,7 +691,7 @@
 									foreach($e_award as $award):
 										echo "<tr>";
 										
-										echo "<td>".mdate('%F %d, %Y',strtotime($award['award_date']))."</td>";
+										echo "<td>".$award['award_date']."</td>";
 										echo "<td>".$award['award_department']."</td>";
 										echo "<td>".$award['award_description']."</td>";
 										

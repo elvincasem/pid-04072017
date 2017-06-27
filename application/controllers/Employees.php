@@ -170,9 +170,15 @@ class Employees extends CI_Controller
 		$zipcode = $this->input->post('zipcode');
 		$datehired = $this->input->post('datehired');
 		$employee_status = $this->input->post('employee_status');
+		$gsisno = $this->input->post('gsisno');
+		$pagibigno = $this->input->post('pagibigno');
+		$philhealthno = $this->input->post('philhealthno');
+		$sssno = $this->input->post('sssno');
+		$tinno = $this->input->post('tinno');
+		$employeeno = $this->input->post('employeeno');
 
 
-		$this->employees_model->updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired,$employee_status);
+		$this->employees_model->updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired,$employee_status,$gsisno,$pagibigno,$philhealthno,$sssno,$tinno,$employeeno);
 		//$this->employees_model->updateemployee($eid,$lastname);
 	}
 	public function updateemployee2(){

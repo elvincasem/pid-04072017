@@ -82,6 +82,12 @@ function updateemployee(id){
 	var zipcode = document.getElementById("zipcode").value;
 	var datehired = document.getElementById("datehired").value;
 	var employee_status = document.getElementById("employee_status").value;
+	var gsisno = document.getElementById("gsisno").value;
+	var pagibigno = document.getElementById("pagibigno").value;
+	var philhealthno = document.getElementById("philhealthno").value;
+	var sssno = document.getElementById("sssno").value;
+	var tinno = document.getElementById("tinno").value;
+	var employeeno = document.getElementById("employeeno").value;
 	
 	
 
@@ -89,7 +95,7 @@ function updateemployee(id){
 	$.ajax({
 		url: '../updateemployee',
 		type: 'post',
-		data: {eid:id,lastname:lastname,firstname:firstname,middlename:middlename,extension:extension,dateofbirth:dateofbirth,placeofbirth:placeofbirth,gender:gender,civilstatus:civilstatus,citizenship:citizenship,height:height,weight:weight,bloodtype:bloodtype,mobileno:mobileno,email:email,barangay:barangay,towncity:towncity,province:province,zipcode:zipcode,datehired:datehired,employee_status:employee_status},
+		data: {eid:id,lastname:lastname,firstname:firstname,middlename:middlename,extension:extension,dateofbirth:dateofbirth,placeofbirth:placeofbirth,gender:gender,civilstatus:civilstatus,citizenship:citizenship,height:height,weight:weight,bloodtype:bloodtype,mobileno:mobileno,email:email,barangay:barangay,towncity:towncity,province:province,zipcode:zipcode,datehired:datehired,employee_status:employee_status,gsisno:gsisno,pagibigno:pagibigno,philhealthno:philhealthno,sssno:sssno,tinno:tinno,employeeno:employeeno},
 		success: function(response) {
 			console.log(response);
 			

@@ -172,13 +172,13 @@ class Employees_model extends CI_Model
 		
 	}
 	
-	public function updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired,$employee_status)
+	public function updateemployee($eid,$lastname,$firstname,$middlename,$extension,$dateofbirth,$placeofbirth,$gender,$civilstatus,$citizenship,$height,$weight,$bloodtype,$mobileno,$email,$barangay,$towncity,$province,$zipcode,$datehired,$employee_status,$gsisno,$pagibigno,$philhealthno,$sssno,$tinno,$employeeno)
 	{
 		
-		$sql = "update employee set lname=".$this->db->escape($lastname).", fname=".$this->db->escape($firstname).", mname=".$this->db->escape($middlename).", ename=".$this->db->escape($extension).", dob=".$this->db->escape($dateofbirth).", pob=".$this->db->escape($placeofbirth).", gender=".$this->db->escape($gender).", civil_status=".$this->db->escape($civilstatus).", citizenship=".$this->db->escape($citizenship).", height=".$this->db->escape($height).", weight=".$this->db->escape($weight).", blood_type=".$this->db->escape($bloodtype).", mobile_number=".$this->db->escape($mobileno).", email_address=".$this->db->escape($email).", a_barangay=".$this->db->escape($barangay).", a_towncity=".$this->db->escape($towncity).", a_province=".$this->db->escape($province).", a_zipcode=".$this->db->escape($zipcode).", date_hired=".$this->db->escape($datehired).", employee_status=".$this->db->escape($employee_status)." where eid=".$this->db->escape($eid)."";
+		$sql = "update employee set lname=".$this->db->escape($lastname).", fname=".$this->db->escape($firstname).", mname=".$this->db->escape($middlename).", ename=".$this->db->escape($extension).", dob=".$this->db->escape($dateofbirth).", pob=".$this->db->escape($placeofbirth).", gender=".$this->db->escape($gender).", civil_status=".$this->db->escape($civilstatus).", citizenship=".$this->db->escape($citizenship).", height=".$this->db->escape($height).", weight=".$this->db->escape($weight).", blood_type=".$this->db->escape($bloodtype).", mobile_number=".$this->db->escape($mobileno).", email_address=".$this->db->escape($email).", a_barangay=".$this->db->escape($barangay).", a_towncity=".$this->db->escape($towncity).", a_province=".$this->db->escape($province).", a_zipcode=".$this->db->escape($zipcode).", date_hired=".$this->db->escape($datehired).", employee_status=".$this->db->escape($employee_status).", gsisno=".$this->db->escape($gsisno).", pagibigno=".$this->db->escape($pagibigno).", philhealthno=".$this->db->escape($philhealthno).", sssno=".$this->db->escape($sssno).", tinno=".$this->db->escape($tinno).", employeeno=".$this->db->escape($employeeno)." where eid=".$this->db->escape($eid)."";
 		$this->db->query($sql);
 		
-		echo $sql;
+		//echo $sql;
 						
 	}
 	public function updateemployee2($eid,$designation,$salary,$item_no)
