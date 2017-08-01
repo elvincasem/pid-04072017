@@ -21,6 +21,64 @@
             <!-- Partial Responsive Block -->
 			
 			 <!-- Regular Modal -->
+                <div id="employeeusermodal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+								
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title"><strong>Link Employee to User</strong></h3>
+                            </div>
+                            <div class="modal-body">
+                                
+								
+								<!-- Input States Block -->
+            <div class="block">
+                
+
+                <!-- Input States Content -->
+                <form action="#" method="post" class="form-horizontal" onsubmit="return false;">
+                    <div class="form-group">
+					<input type="hidden" id="uid_employee" name="state-normal" class="form-control" >
+                        <label class="col-md-3 control-label" for="state-normal">Username*</label>
+                        <div class="col-md-7">
+                            <input type="text" id="username_employee" name="state-normal" class="form-control" tabindex="0" disabled>
+                        </div>
+						
+						
+					
+						<label class="col-md-3 control-label" for="state-normal">Employee</label>
+                        <div class="col-md-7">
+                            <select id="elink" name="example-select" class="form-control" size="1" tabindex="0" >
+                                <?php
+									foreach($employeeslist as $elist):
+										echo "<option value='".$elist['eid']."'>".$elist['fname']." ". $elist['lname'] ."</option>";
+									endforeach;
+								?>
+                            </select>
+                        </div>
+
+                    </div>
+                    
+                </form>
+                <!-- END Input States Content -->
+            </div>
+            <!-- END Input States Block -->
+								
+								
+								
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="saveuseremployee" class="btn btn-effect-ripple btn-primary" onclick="saveemployee();">Save</button>
+								
+                                <button type="button" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Regular Modal -->
+			
+			 <!-- Regular Modal -->
                 <div id="addusermodal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -142,6 +200,7 @@
                         <th>Username</th>
 						<th>Name</th>
 						<th>Account Type</th>
+						<th>Employee</th>
 						<th></th>
                     </tr>
                 </thead>
@@ -154,6 +213,9 @@
 				echo "<td>".$users['username']."</td>";
 				echo "<td>".$users['name']."</td>";
 				echo "<td>".$users['usertype']."</td>";
+				echo "<td>
+				".$users['fname']." ".$users['lname']."
+				<button class='btn btn-primary' title='Edit User'  onClick='linkemployee(".$users['uid'].")'  data-toggle='modal' data-target='#employeeusermodal'><i class='fa fa-user'></i></button></td>";
 			
 				echo "<td class='center'> 
 					

@@ -437,6 +437,18 @@ class Functions extends CI_Controller
 		echo json_encode($projectdetail[0]);
 	}
 	
+	public function elink(){
+		$uid = $this->input->post('userid');
+		$elink = $this->input->post('elink');
+		
+		$sql = "update users set employee_eid=".$this->db->escape($elink)." where uid=".$this->db->escape($uid)."";
+		
+		//echo $sql;
+		$this->db->query($sql);
+		echo $this->db->affected_rows();
+		
+		
+	}
 	
 	
 	

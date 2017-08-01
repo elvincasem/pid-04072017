@@ -23,28 +23,12 @@
                                     <i class="fa fa-ellipsis-h"></i>
                                 </li>
 								<!-- Employee -->
-                                <li class="<?php echo $employeesclass;?>">
-                                    <a href="#" class="sidebar-nav-menu"><i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-ruble sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Employee</span></a>
-                                    <ul>
+                                
 										<li>
-                                            <a  class="<?php echo $employeesclass;?>" href="<?=base_url()?>employees" ><i class="gi gi-group sidebar-nav-icon"></i>Employees</a>
+                                            <a  class="<?php //echo $employeesclass;?>" href="<?=base_url()?>employees/details/1" ><i class="gi gi-group sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">My Account</span></a>
                                         </li>
 										
-										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php //echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Request/Approval</a>
-                                        </li>
-
-										<li>
-                                            <a href="<?=base_url()?>apr" class="<?php //echo $aprclass;?>hidden"><i class="fa fa-bank sidebar-nav-icon"></i>Rating</a>
-                                        </li>
-
-									</ul>
-								</li>
-								
-								
-								
-								
-															
+														
 										
                             </ul>
 							

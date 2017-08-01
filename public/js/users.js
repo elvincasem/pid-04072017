@@ -1262,3 +1262,42 @@ function updatepassword(){
 		
 
 }
+
+function linkemployee(uid){
+	
+	
+	$.ajax({
+		url: 'functions/getuser/'+uid,
+		type: 'post',
+		//data: {projectid : id},
+		success: function(response) {
+			//console.log(response);
+			 var data = JSON.parse(response);
+			 
+			//insert values	
+			document.getElementById("uid_employee").value = uid;
+			document.getElementById("username_employee").value = data.username;
+			
+			
+			
+		} 
+	});
+}
+
+function saveemployee(){
+	var userid = document.getElementById("uid_employee").value;
+	var elink = document.getElementById("elink").value;
+	$.ajax({
+		url: 'functions/elink/',
+		type: 'post',
+		data: {userid : userid,elink:elink},
+		success: function(response) {
+			//console.log(response);
+			 //var data = JSON.parse(response);
+			 window.location.reload();
+			
+		} 
+	});
+		
+
+}

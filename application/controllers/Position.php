@@ -28,6 +28,17 @@ class Position extends CI_Controller
 		$this->js = array(
             'jsfile' => 'settings_position.js'
 			);
+			
+		$this->load->library('session');
+		$this->session;
+		$utype = $this->session->userdata('usertype');
+		$employee_eid = $this->session->userdata('emp_eid');
+		if($utype=="staff" && $employee_eid!=$id){
+			$baseurl = base_url();
+			header('Location:'.$baseurl.'employees/details/'.$employee_eid);
+		}else{
+			//do nothing
+		}
 	}
 	
 	public function index()

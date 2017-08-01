@@ -78,8 +78,21 @@ class Employees extends CI_Controller
 	
 	public function details($id)
 	{
+		
+		
 		$data = $this->data;
 		$js = $this->js;
+		
+		$this->load->library('session');
+		$this->session;
+		$utype = $this->session->userdata('usertype');
+		$employee_eid = $this->session->userdata('emp_eid');
+		if($utype=="staff" && $employee_eid!=$id){
+			header('Location:../details/'.$employee_eid);
+		}else{
+			//do nothing
+		}
+		
 		
 		$base = base_url();
 		$fileurl = $base."uploads/".$id.".jpg";
@@ -125,7 +138,13 @@ class Employees extends CI_Controller
 		
 
 		$this->load->view('inc/header_view');
-		$this->load->view('employee/employeeprofile_view',$data);
+		if($utype=="staff"){
+			$this->load->view('employee/employeeprofile_staff_view',$data);
+		}else{
+			$this->load->view('employee/employeeprofile_view',$data);
+		}
+		
+		
 		$this->load->view('inc/footer_view',$js);
 		
 	}

@@ -49,8 +49,15 @@ class Login extends CI_Controller
 			$this->session->set_userdata('name', $info[0]['name']);
 			$this->session->set_userdata('uid', $info[0]['uid']);
 			$this->session->set_userdata('usertype', $info[0]['usertype']);
+			$this->session->set_userdata('emp_eid', $info[0]['employee_eid']);
 			//echo $this->session->userdata('name');
-			header('Location:../home');
+			
+			if($info[0]['usertype']=="staff"){
+				header('Location:../employees/details/'.$info[0]['employee_eid']);
+			}else{
+				header('Location:../home');
+			}
+			
 		}
 		//echo intval($permitarray[0]['permitno']);
 	

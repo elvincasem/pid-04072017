@@ -6,6 +6,7 @@ class Users extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('users_model');
+		$this->load->model('employees_model');
 		 $this->data = array(
             'title' => 'Purchases',
 			'subnavtitle' => 'Users',
@@ -20,8 +21,19 @@ class Users extends CI_Controller
 			
 		//javascript module
 		$this->js = array(
-            'jsfile' => ''
+            'jsfile' => 'users.js'
 			);
+		
+		$this->load->library('session');
+		$this->session;
+		$utype = $this->session->userdata('usertype');
+		$employee_eid = $this->session->userdata('emp_eid');
+		if($utype=="staff" && $employee_eid!=$id){
+			$baseurl = base_url();
+			header('Location:'.$baseurl.'employees/details/'.$employee_eid);
+		}else{
+			//do nothing
+		}
 	}
 	
 	public function index()
@@ -31,7 +43,7 @@ class Users extends CI_Controller
 		$data['page'] = "index";
 		$data['details'] =array('instname'=>"Users Directory") ;
 		$data['users_list'] = $this->users_model->get();
-		
+		$data['employeeslist'] = $this->employees_model->getemployeeslist();
 		
 		
 		
