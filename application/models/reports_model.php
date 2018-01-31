@@ -77,13 +77,13 @@ class Reports_model extends CI_Model
 	
 		
 		if($applicant_type == "All"){
-			$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword");
+			$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword GROUP BY applicant.applicantid");
 			//echo "SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword";
 		}else{
 			if($keyword !=""){
-				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword AND applicant_type='$applicant_type'");
+				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid $keyword AND applicant_type='$applicant_type' GROUP BY applicant.applicantid");
 			}else{
-				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type'");
+				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' GROUP BY applicant.applicantid");
 			}
 			
 		}
