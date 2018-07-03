@@ -7,6 +7,7 @@ function saveapplicant(){
 	var mname = document.getElementById("mname").value;
 	var extension = document.getElementById("extension").value;
 	var applicanttype = document.getElementById("applicanttype").value;
+	var position_applied = document.getElementById("position_applied").value;
 	
 	if(fname!="" && lname!=""){
 		
@@ -14,7 +15,7 @@ function saveapplicant(){
 		$.ajax({
 			url: 'applicants/saveapplicant',
 			type: 'post',
-			data: {lname:lname,fname:fname,mname:mname,extension:extension,applicanttype:applicanttype},
+			data: {lname:lname,fname:fname,mname:mname,extension:extension,applicanttype:applicanttype,position_applied:position_applied},
 			success: function(response) {
 				$('#savebutton').prop("disabled", true);
 				//console.log(response);
@@ -35,6 +36,7 @@ function saveapplicanttype(id){
 	    
 	
 	var applicant_type = document.getElementById("applicant_type").value;
+	var position_applied = document.getElementById("position_applied").value;
 	
 	
 	
@@ -42,7 +44,7 @@ function saveapplicanttype(id){
 		$.ajax({
 			url: '../saveapplicant_type',
 			type: 'post',
-			data: {applicantid:id,applicant_type:applicant_type},
+			data: {applicantid:id,applicant_type:applicant_type,position_applied:position_applied},
 			success: function(response) {
 				
 				console.log(response);

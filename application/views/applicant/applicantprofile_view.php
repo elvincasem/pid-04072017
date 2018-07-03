@@ -51,10 +51,33 @@
 		 <button type="button" class="btn btn-primary" onclick="uploadprofile()">Upload</button>
       </form> 
                                             <div class="col-xs-12">
-                                                <h3 class="widget-heading"><small>Applicant Type<br> <strong>
+                                                <h3 class="widget-heading"><small>Applicant Type<br> <strong></strong> </small></h3>
+												<select id="applicant_type" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+												<?php
+												echo "<option value='".$applicant_profile['applicant_type']."'>".$applicant_profile['applicant_type']."</option>";
 												
-												<input type="text" style="text-align:center;" id="applicant_type" class="form-control" value="<?php echo $applicant_profile['applicant_type'];?>">
-												</strong> </small></h3>
+													
+												?>
+													<option value="SUPERVISORY">SUPERVISORY</option>
+													<option value="NON-SUPERVISORY">NON-SUPERVISORY</option>
+												</select>
+												
+											
+												
+                                            </div>
+											 <div class="col-xs-12">
+                                                <h3 class="widget-heading"><small>Position Applied<br> <strong></strong> </small></h3>
+												<select id="position_applied" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+												<?php
+												echo "<option value='".$applicant_profile['position_applied']."'>".$applicant_profile['position_applied']."</option>";
+												
+													foreach($positionlist as $plist):
+														echo "<option value='".$plist['position_designation']."'>".$plist['position_designation']."</option>";
+													endforeach;
+												?>
+												</select>
+												
+												
                                             </div>
                                             
                                         </div>

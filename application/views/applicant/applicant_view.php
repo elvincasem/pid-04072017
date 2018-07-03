@@ -57,6 +57,18 @@
 													<option value="NON-SUPERVISORY">NON-SUPERVISORY</option>
 												</select>
                         </div>	
+						<label class="col-md-3 control-label text-right">Position Applied</label>
+                        <div class="col-md-9">
+                           <select id="position_applied" name="example-select2" class="select-select2" style="width: 80%;" data-placeholder="Choose one..">
+												<?php
+												
+												
+													foreach($positionlist as $plist):
+														echo "<option value='".$plist['position_designation']."'>".$plist['position_designation']."</option>";
+													endforeach;
+												?>
+												</select>
+                        </div>	
 						
 	
 								

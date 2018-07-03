@@ -187,6 +187,7 @@ table { page-break-inside:auto }
 	<td>Address</td>
 	<td>Sex</td>
 	<td>Age</td>
+	<td>Mobile</td>
 	<td>Educational Qualification/School</td>
 	<td>Relevant Seminar/Trainings</td>
 	<td>Work Experience</td>
@@ -216,6 +217,7 @@ table { page-break-inside:auto }
 				echo "<td>".$applicants['a_barangay']." ".$applicants['a_towncity']." ".$applicants['a_province']."</td>";
 				echo "<td>".$applicants['gender']."</td>";
 				echo "<td>".$applicants['age']."</td>";
+				echo "<td>".$applicants['mobile_number']."</td>";
 				
 				$educ = $this->reports_model->geteducational($applicants['applicantid']);
 				

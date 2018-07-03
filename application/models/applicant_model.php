@@ -12,12 +12,20 @@ class Applicant_model extends CI_Model
 		
 	}
 	
+	public function positionlist()
+	{
+		$query = $this->db->get('settings_position_designation');
+		return $query->result_array();
+		
+		
+	}
 	
 	
-	public function saveapplicant($lname,$fname,$mname,$extension,$applicanttype)
+	
+	public function saveapplicant($lname,$fname,$mname,$extension,$applicanttype,$position_applied)
 	{
 		
-		$sql = "INSERT INTO applicant (lname,fname,mname,ename,applicant_type) VALUES (upper(".$this->db->escape($lname)."),upper(".$this->db->escape($fname)."),upper(".$this->db->escape($mname)."),upper(".$this->db->escape($extension)."),".$this->db->escape($applicanttype).")";
+		$sql = "INSERT INTO applicant (lname,fname,mname,ename,applicant_type,position_applied) VALUES (upper(".$this->db->escape($lname)."),upper(".$this->db->escape($fname)."),upper(".$this->db->escape($mname)."),upper(".$this->db->escape($extension)."),".$this->db->escape($applicanttype).",".$this->db->escape($position_applied).")";
 		$this->db->query($sql);
 				
 		$sqlselect = $this->db->query("SELECT MAX(applicantid) AS lastid FROM applicant");
@@ -26,10 +34,10 @@ class Applicant_model extends CI_Model
 		echo $currentid;
 		
 	}
-	public function saveapplicant_type($applicantid,$applicanttype)
+	public function saveapplicant_type($applicantid,$applicanttype,$position_applied)
 	{
 		
-		$sql = "update applicant set applicant_type=".$this->db->escape($applicanttype)." where applicantid=".$this->db->escape($applicantid)."";
+		$sql = "update applicant set applicant_type=".$this->db->escape($applicanttype).", position_applied=".$this->db->escape($position_applied)." where applicantid=".$this->db->escape($applicantid)."";
 		$this->db->query($sql);
 				
 		$sqlselect = $this->db->query("SELECT MAX(applicantid) AS lastid FROM applicant");

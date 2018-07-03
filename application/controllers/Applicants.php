@@ -48,6 +48,7 @@ class Applicants extends CI_Controller
 
 		
 		$data['applicantlist'] = $this->applicant_model->getapplicantlist();
+		$data['positionlist'] = $this->applicant_model->positionlist();
 		
 		$this->load->view('inc/header_view');
 		$this->load->view('applicant/applicant_view',$data);
@@ -85,7 +86,7 @@ class Applicants extends CI_Controller
 		$data['a_skill'] = $this->applicant_model->getskill($id);
 		$data['a_eligibility'] = $this->applicant_model->geteligibility($id);
 		$data['a_files'] = $this->applicant_model->getafiles($id);
-
+		$data['positionlist'] = $this->applicant_model->positionlist();
 
 		$this->load->view('inc/header_view');
 		$this->load->view('applicant/applicantprofile_view',$data);
@@ -100,15 +101,17 @@ class Applicants extends CI_Controller
 		$mname = $this->input->post('mname');
 		$extension = $this->input->post('extension');
 		$applicanttype = $this->input->post('applicanttype');
+		$position_applied = $this->input->post('position_applied');
 		
-		$this->applicant_model->saveapplicant($lname,$fname,$mname,$extension,$applicanttype);
+		$this->applicant_model->saveapplicant($lname,$fname,$mname,$extension,$applicanttype,$position_applied);
 	}
 	public function saveapplicant_type(){
 		
 		$applicantid = $this->input->post('applicantid');
 		$applicant_type = $this->input->post('applicant_type');
+		$position_applied = $this->input->post('position_applied');
 
-		$this->applicant_model->saveapplicant_type($applicantid,$applicant_type);
+		$this->applicant_model->saveapplicant_type($applicantid,$applicant_type,$position_applied);
 	}
 	
 	public function deleteapplicant(){
