@@ -119,8 +119,26 @@ class Reports extends CI_Controller
 		//$data['designation_list'] = $this->reports_model->getdesignation();
 		//$data['startdate'] = $this->reports_model->getstartdate();
 		//$data['enddate'] = $this->reports_model->getenddate();
+		//$data['position_applied'] = $this->reports_model->getpositionlist();
+		
 		$this->load->view('inc/header_view');
 		$this->load->view('reports/applicanttype_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
+	public function positionapplied(){
+		
+		$data = $this->data;
+		$js = $this->js;
+
+		//$data['designation_list'] = $this->reports_model->getdesignation();
+		//$data['startdate'] = $this->reports_model->getstartdate();
+		//$data['enddate'] = $this->reports_model->getenddate();
+		$data['position_applied'] = $this->reports_model->getpositionlist();
+		
+		$this->load->view('inc/header_view');
+		$this->load->view('reports/positionapplied_view',$data);
 		$this->load->view('inc/footer_view',$js);
 		
 	}
@@ -129,6 +147,7 @@ class Reports extends CI_Controller
 		
 		$applicant_type=$this->input->post('applicant_type');
 		$education_keyword=$this->input->post('education_keyword');
+		//$position_applied=$this->input->post('position_applied');
 		
 		
 		$data = $this->data;
@@ -137,6 +156,7 @@ class Reports extends CI_Controller
 		//$data['designation_list'] = $this->reports_model->getdesignation();
 		$data['applicant_list'] = $this->reports_model->getapplicant_list($applicant_type,$education_keyword);
 		$data['applicant_type']=$applicant_type;
+		//$data['position_applied']=$position_applied;
 	
 		
 		$this->load->view('inc/header_view');
@@ -144,6 +164,29 @@ class Reports extends CI_Controller
 		$this->load->view('inc/footer_view',$js);
 		
 	}
+	
+	public function positionapplied_view(){
+		
+		$applicant_type=$this->input->post('applicant_type');
+		//$education_keyword=$this->input->post('education_keyword');
+		$position_applied=$this->input->post('position_applied');
+		
+		
+		$data = $this->data;
+		$js = $this->js;
+
+		//$data['designation_list'] = $this->reports_model->getdesignation();
+		$data['applicant_list'] = $this->reports_model->positionapplied_list($applicant_type,$position_applied);
+		$data['applicant_type']=$applicant_type;
+		$data['position_applied']=$position_applied;
+		$data['position_applied_list'] = $this->reports_model->getpositionlist();
+		
+		$this->load->view('inc/header_view');
+		$this->load->view('reports/positionapplied_report_view',$data);
+		$this->load->view('inc/footer_view',$js);
+		
+	}
+	
 	
 	
 	

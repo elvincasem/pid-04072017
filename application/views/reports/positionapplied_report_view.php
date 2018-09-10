@@ -29,15 +29,11 @@
                                     <!-- END Datepicker Title -->
 
                                     <!-- Datepicker Content -->
-                                   <form action="applicanttype_view" method="post" class="form-horizontal form-bordered" onsubmit="return true;">
+                                   <form action="positionapplied_view" method="post" class="form-horizontal form-bordered" onsubmit="return true;">
                                         <!-- Datepicker for Bootstrap (classes are initialized in js/app.js -> uiInit()), for extra usage examples you can check out http://eternicode.github.io/bootstrap-datepicker -->
                                         <div class="form-group">
 										
 											<div class="row">&nbsp;</div>
-											<label class="col-md-3 control-label" for="example-daterange1">Education</label>
-											<div class="col-md-7">
-												<input type="text" class="form-control" name="education_keyword" id="education_keyword" placeholder="Keyword separated by comma (,)">
-											</div>
 											
 											<label class="col-md-3 control-label" for="example-daterange1">Application Type</label>
 											<div class="col-md-7">
@@ -52,7 +48,22 @@
 										
 										</select>
 											</div>
+										<label class="col-md-3 control-label" for="example-daterange1">Position Applied</label>
+											<div class="col-md-7">
+										<select id="position_applied" name="position_applied" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+										<?php echo "<option value='".$position_applied."'>".$position_applied."</option>";?>
+										<option value="All">All</option>
+										<?php
+											foreach($position_applied_list as $positionlist):
+												echo "<option value='".$positionlist['position_designation']."'>".$positionlist['position_designation']."</option>";
+											endforeach;
 										
+										?>
+
+
+										</select>
+											</div>	
+											
 											
 											
 											
@@ -89,6 +100,7 @@
                         <th>Mobile</th>
                         <th>Email</th>
 						<th>Applicant Type</th>
+						<th>Position Applied</th>
                         <th>Date Applied</th>
                         
 						
@@ -109,6 +121,7 @@
 				echo "<td>".$applicants['mobile_number']."</td>";
 				echo "<td>".$applicants['email_address']."</td>";
 				echo "<td>".$applicants['applicant_type']."</td>";
+				echo "<td>".$applicants['position_applied']."</td>";
 				
 				
 				
@@ -174,7 +187,7 @@ table { page-break-inside:auto }
 
 <div style="text-align:center;font-weight:bold;">COMMISSION ON HIGHER EDUCATION<BR>Regional Office No. 1<br>City of San Fernando, La Union</div>
 <BR>
-<div style="text-align:center;font-weight:bold;">MATRIX OF APPLICANTS FOR THE SUPERVISORY POSITION</div>
+<div style="text-align:center;font-weight:bold;">List of Applicants</div>
 <br>
 
 <table border="1" style="border:solid 1px; width:100%;font-size:12px;">
@@ -183,6 +196,7 @@ table { page-break-inside:auto }
 		
 <tr>
 	<td>Name</td>
+	<td>Position Applied</td>
 	<td>Address</td>
 	<td>Sex</td>
 	<td>Age</td>
@@ -212,7 +226,7 @@ table { page-break-inside:auto }
 				
 				
 				echo "<td>".$applicants['fname']." ".$applicants['lname']."</td>";
-				//echo "<td>".$applicants['designation']."</td>";
+				echo "<td>".$applicants['position_applied']."</td>";
 				echo "<td>".$applicants['a_barangay']." ".$applicants['a_towncity']." ".$applicants['a_province']."</td>";
 				echo "<td>".$applicants['gender']."</td>";
 				echo "<td>".$applicants['age']."</td>";

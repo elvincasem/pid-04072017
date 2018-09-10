@@ -95,6 +95,42 @@ class Reports_model extends CI_Model
 		
 	}
 	
+	public function positionapplied_list($applicant_type,$position_applied)
+	{
+		
+		
+		
+	
+		
+		if($applicant_type == "All"){
+			
+			if($position_applied== "All"){
+				$sql = $this->db->query("SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid GROUP BY applicant.applicantid");
+				
+			}else{
+				$sql = $this->db->query("SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid where position_applied='$position_applied' GROUP BY applicant.applicantid");
+				
+			}
+		}else{
+			if($position_applied== "All"){
+			$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' GROUP BY applicant.applicantid");
+			}
+			else{
+				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' and position_applied='$position_applied' GROUP BY applicant.applicantid");
+			}
+			//}else{
+				//$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' GROUP BY applicant.applicantid");
+			//}
+			
+		}
+		
+			//print_r($sql);
+
+		return $sql->result_array();
+		
+		
+	}
+	
 	
 	public function geteducational($applicantid)
 	{
@@ -138,6 +174,16 @@ class Reports_model extends CI_Model
 	{
 		
 		$sql = $this->db->query("SELECT * FROM applicant_eligibility where applicantid='$applicantid'");
+
+		return $sql->result_array();
+		
+		
+	}
+	
+	public function getpositionlist()
+	{
+		
+		$sql = $this->db->query("SELECT * FROM settings_position_designation");
 
 		return $sql->result_array();
 		
