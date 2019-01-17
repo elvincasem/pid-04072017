@@ -7,16 +7,15 @@ class Reports_model extends CI_Model
 	
 	public function getstartdate()
 	{
-		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as startdate FROM tickets ORDER BY time_stamp ASC LIMIT 1");
+		$sql = $this->db->query("SELECT dateofapplication as startdate FROM applicant ORDER BY dateofapplication ASC LIMIT 1");
 		$getcount = $sql->result_array();
 		return $getcount[0]['startdate'];
-		
 		
 	}
 	
 	public function getenddate()
 	{
-		$sql = $this->db->query("SELECT DATE_FORMAT(time_stamp,'%Y-%m-%d') as enddate FROM tickets ORDER BY time_stamp DESC LIMIT 1");
+		$sql = $this->db->query("SELECT dateofapplication as enddate FROM applicant ORDER BY dateofapplication DESC LIMIT 1");
 		$getcount = $sql->result_array();
 		return $getcount[0]['enddate'];
 		
@@ -95,7 +94,7 @@ class Reports_model extends CI_Model
 		
 	}
 	
-	public function positionapplied_list($applicant_type,$position_applied)
+	public function positionapplied_list($applicant_type,$position_applied,$startdate,$enddate)
 	{
 		
 		
@@ -105,18 +104,24 @@ class Reports_model extends CI_Model
 		if($applicant_type == "All"){
 			
 			if($position_applied== "All"){
-				$sql = $this->db->query("SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid GROUP BY applicant.applicantid");
+				$sql = $this->db->query("SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid WHERE dateofapplication between '$startdate' AND '$enddate' GROUP BY applicant.applicantid");
+				//$sss = "SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid AND dateofapplication between $startdate AND $enddate GROUP BY applicant.applicantid";
+				
+				//print_r($sss);
 				
 			}else{
-				$sql = $this->db->query("SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid where position_applied='$position_applied' GROUP BY applicant.applicantid");
-				
+				$sql = $this->db->query("SELECT * FROM applicant left join applicant_education on applicant.applicantid = applicant_education.applicantid where position_applied='$position_applied' AND dateofapplication between '$startdate' AND '$enddate' GROUP BY applicant.applicantid");
+				//$sss = "2";
 			}
 		}else{
 			if($position_applied== "All"){
-			$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' GROUP BY applicant.applicantid");
+			$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' AND dateofapplication between '$startdate' AND '$enddate' GROUP BY applicant.applicantid");
+				//$sss = "3";
 			}
 			else{
-				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' and position_applied='$position_applied' GROUP BY applicant.applicantid");
+				$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' and position_applied='$position_applied' AND dateofapplication between '$startdate' AND '$enddate' GROUP BY applicant.applicantid");
+				
+				//$sss = "4";
 			}
 			//}else{
 				//$sql = $this->db->query("SELECT * FROM applicant_education LEFT JOIN applicant ON applicant_education.applicantid = applicant.applicantid where applicant_type='$applicant_type' GROUP BY applicant.applicantid");
@@ -125,7 +130,7 @@ class Reports_model extends CI_Model
 		}
 		
 			//print_r($sql);
-
+//print_r($sss);
 		return $sql->result_array();
 		
 		

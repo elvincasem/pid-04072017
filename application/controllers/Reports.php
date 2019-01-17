@@ -135,7 +135,10 @@ class Reports extends CI_Controller
 		//$data['designation_list'] = $this->reports_model->getdesignation();
 		//$data['startdate'] = $this->reports_model->getstartdate();
 		//$data['enddate'] = $this->reports_model->getenddate();
+		
 		$data['position_applied'] = $this->reports_model->getpositionlist();
+		$data['startdate'] = $this->reports_model->getstartdate();
+		$data['enddate'] = $this->reports_model->getenddate();
 		
 		$this->load->view('inc/header_view');
 		$this->load->view('reports/positionapplied_view',$data);
@@ -147,6 +150,7 @@ class Reports extends CI_Controller
 		
 		$applicant_type=$this->input->post('applicant_type');
 		$education_keyword=$this->input->post('education_keyword');
+		
 		//$position_applied=$this->input->post('position_applied');
 		
 		
@@ -155,7 +159,8 @@ class Reports extends CI_Controller
 
 		//$data['designation_list'] = $this->reports_model->getdesignation();
 		$data['applicant_list'] = $this->reports_model->getapplicant_list($applicant_type,$education_keyword);
-		$data['applicant_type']=$applicant_type;
+		$data['startdate']=$startdate;
+		$data['enddate']=$enddate;
 		//$data['position_applied']=$position_applied;
 	
 		
@@ -170,15 +175,18 @@ class Reports extends CI_Controller
 		$applicant_type=$this->input->post('applicant_type');
 		//$education_keyword=$this->input->post('education_keyword');
 		$position_applied=$this->input->post('position_applied');
-		
+		$startdate=$this->input->post('startdate');
+		$enddate=$this->input->post('enddate');
 		
 		$data = $this->data;
 		$js = $this->js;
 
 		//$data['designation_list'] = $this->reports_model->getdesignation();
-		$data['applicant_list'] = $this->reports_model->positionapplied_list($applicant_type,$position_applied);
+		$data['applicant_list'] = $this->reports_model->positionapplied_list($applicant_type,$position_applied,$startdate,$enddate);
 		$data['applicant_type']=$applicant_type;
 		$data['position_applied']=$position_applied;
+		$data['startdate']=$startdate;
+		$data['enddate']=$enddate;
 		$data['position_applied_list'] = $this->reports_model->getpositionlist();
 		
 		$this->load->view('inc/header_view');

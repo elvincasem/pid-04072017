@@ -59,7 +59,25 @@
 										</select>
 											</div>
 											
+										<div class="row">&nbsp;</div>
+											<label class="col-md-3 control-label" for="example-daterange1">Date of Application</label>
+											<div class="col-md-7">
 											
+											<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+											   <input type="text" id="startdate" name="startdate" class="form-control" placeholder="From" value="<?php echo $startdate;?>">
+                                                    
+                                                    <input type="text" id="enddate" name="enddate" class="form-control" placeholder="To" value="<?php echo $enddate;?>">
+													
+											</div>
+													<!--
+													
+										<select id="applicant_type" name="applicant_type" class="select-select2" style="width: 100%;" data-placeholder="Choose one..">
+										<option value="All">All</option>
+										<option value="SUPERVISORY">SUPERVISORY</option>
+										<option value="NON-SUPERVISORY">NON-SUPERVISORY</option> -->
+
+										</select>
+											</div>	
 											
 											
 											

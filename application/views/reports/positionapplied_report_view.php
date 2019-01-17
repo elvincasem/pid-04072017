@@ -63,7 +63,17 @@
 
 										</select>
 											</div>	
+										
+<div class="row">&nbsp;</div>
+											<label class="col-md-3 control-label" for="example-daterange1">Date of Application</label>
+											<div class="col-md-7">
 											
+											<div class="input-group input-daterange" data-date-format="yyyy-mm-dd">
+											   <input type="text" id="startdate" name="startdate" class="form-control" placeholder="From" value="<?php echo $startdate;?>">
+                                                    
+                                                    <input type="text" id="enddate" name="enddate" class="form-control" placeholder="To" value="<?php echo $enddate;?>">
+													
+										
 											
 											
 											
@@ -75,6 +85,8 @@
                                                
                                             </div>
                                         </div>
+																					
+</div>	
                                     </form>
                                     <!-- END Datepicker Content -->
                                 </div>
@@ -108,24 +120,25 @@
                 </thead>
                 <tbody>
 				<?php
+				//print_r($applicant_list);
 				
-				foreach ($applicant_list as $applicants):
+				foreach ($applicant_list as $applicants1):
 				//$heiname = strtoupper($hei['instname']);
 				echo "<tr class='odd gradeX'>";
 				
 				
 				
-				echo "<td>".$applicants['fname']." ".$applicants['lname']."</td>";
+				echo "<td>".$applicants1['fname']." ".$applicants1['lname']."</td>";
 				//echo "<td>".$applicants['designation']."</td>";
-				echo "<td>".$applicants['gender']."</td>";
-				echo "<td>".$applicants['mobile_number']."</td>";
-				echo "<td>".$applicants['email_address']."</td>";
-				echo "<td>".$applicants['applicant_type']."</td>";
-				echo "<td>".$applicants['position_applied']."</td>";
+				echo "<td>".$applicants1['gender']."</td>";
+				echo "<td>".$applicants1['mobile_number']."</td>";
+				echo "<td>".$applicants1['email_address']."</td>";
+				echo "<td>".$applicants1['applicant_type']."</td>";
+				echo "<td>".$applicants1['position_applied']."</td>";
 				
 				
 				
-				echo "<td>".mdate('%F %d, %Y',strtotime($applicants['dateofapplication']))."</td>";
+				echo "<td>".mdate('%F %d, %Y',strtotime($applicants1['dateofapplication']))."</td>";
 				//echo "<td>".$applicants['employee_status']."</td>";
 			
 				
