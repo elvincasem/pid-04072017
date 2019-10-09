@@ -169,6 +169,7 @@
                         <th>Age</th>
 						<th>Address</th>
 						<th>Applicant Type</th>
+						<th>Date of Application</th>
                         
                         
 						<th></th>
@@ -217,6 +218,7 @@
 				
 				echo "<td>".$applicant_list['a_barangay']." ".$applicant_list['a_towncity'].", ".$applicant_list['a_province']."</td>";
 				echo "<td>".$applicant_list['applicant_type']."</td>";
+				echo "<td>".mdate('%F %d, %Y',strtotime($applicant_list['dateofapplication']))."</td>";
 				
 				
 			
